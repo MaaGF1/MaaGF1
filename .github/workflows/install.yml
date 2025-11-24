@@ -60,7 +60,8 @@ jobs:
     strategy:
       matrix:
         os: [win]
-        arch: [aarch64, x86_64]
+        # MFAAvalonia naming convention usually uses 'x64' or 'arm64'
+        arch: [x86_64, aarch64]
       fail-fast: false
 
     steps:
@@ -69,7 +70,7 @@ jobs:
           submodules: true
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -77,17 +78,15 @@ jobs:
         shell: bash
         run: |
           python -m pip install --upgrade pip
-          # Keep requests in case configure.py needs to download OCR models
           pip install requests
 
       - name: Get MFAAvalonia release info
-        if: matrix.os != 'android'
         id: mfa_info
         shell: bash
         run: |
-          echo "Getting MaaGF1/MFAAvalonia latest release..."
+          echo "Getting SweetSmellFox/MFAAvalonia latest release..."
           
-          response=$(curl -sX GET "https://api.github.com/repos/MaaGF1/MFAAvalonia/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
+          response=$(curl -sX GET "https://api.github.com/repos/SweetSmellFox/MFAAvalonia/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
           
           tag=$(echo "$response" | jq -r '.tag_name // "unknown"')
           date=$(echo "$response" | jq -r '.published_at // "unknown"')
@@ -95,11 +94,8 @@ jobs:
           prerelease=$(echo "$response" | jq -r '.prerelease // false')
           
           echo "MFAAvalonia Info:"
-          echo "  Repository: MaaGF1/MFAAvalonia"
           echo "  Tag: $tag"
           echo "  Date: $date"
-          echo "  URL: $url"
-          echo "  Prerelease: $prerelease"
           
           # Handle empty values
           tag=${tag:-"No releases"}
@@ -112,93 +108,71 @@ jobs:
           echo "mfa_prerelease=$prerelease" >> $GITHUB_OUTPUT
 
       - name: Download MFAAvalonia
-        if: matrix.os != 'android'
         id: download_mfa
         uses: robinraju/release-downloader@v1
         with:
-          repository: MaaGF1/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
+          repository: SweetSmellFox/MFAAvalonia
+          # Matches MFAAvalonia-v1.8.0-win-x64.zip or similar
+          fileName: "MFAAvalonia-*-${{ matrix.os }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
           latest: true
           out-file-path: "deps/bin"
           extract: true
 
       - name: Clean up MFAAvalonia archive
-        if: matrix.os != 'android'
         shell: bash
         run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
-          rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
+          # Remove the zip file to prevent it from being copied by install.py if logic changes
+          find deps/bin -name "*.zip" -type f -delete
+          echo "Archive cleanup completed."
 
-      - name: Install
+      - name: Run Install Script
         shell: bash
         run: |
-          # install.py will copy contents from "deps/bin" (which now holds MFAAvalonia) to "install"
+          # install.py cleans 'install/', copies 'deps/bin' content, and adds assets
           python ./install.py ${{ needs.meta.outputs.tag }}
 
       - name: Generate Build Report and Summary
-        if: matrix.os != 'android'
         shell: bash
         run: |
           # Get build information
           BUILD_DATE=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
           
-          # Handle empty values and create proper display text
           MFA_TAG="${{ steps.mfa_info.outputs.mfa_tag }}"
           MFA_DATE="${{ steps.mfa_info.outputs.mfa_date }}"
           MFA_URL="${{ steps.mfa_info.outputs.mfa_url }}"
           MFA_PRERELEASE="${{ steps.mfa_info.outputs.mfa_prerelease }}"
 
-          # Create Job Summary for GitHub Actions page
+          # --- GitHub Step Summary ---
           cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
           # 🚀 Build Report - ${{ matrix.arch }}
           
           ## 📋 Build Information
-          
           | Component | Details |
           |-----------|---------|
           | **Build Date** | `BUILD_DATE_PLACEHOLDER` |
           | **Build Tag** | `${{ needs.meta.outputs.tag }}` |
           | **Architecture** | `${{ matrix.arch }}` |
-          | **Operating System** | `${{ matrix.os }}` |
-          | **Python Version** | `3.11` |
+          | **OS** | `${{ matrix.os }}` |
           | **Is Release** | ${{ needs.meta.outputs.is_release == 'true' && '✅ Yes' || '❌ No' }} |
           
-          ## 📦 Dependencies
-          
-          ### MFAAvalonia (UI Framework & Core)
-          
-          *MaaFramework core libraries are included within MFAAvalonia.*
-          
+          ## 📦 Dependencies (MFAAvalonia)
           | Property | Value |
           |----------|-------|
-          | **Repository** | [MaaGF1/MFAAvalonia] |
           | **Version** | MFA_VERSION_PLACEHOLDER |
           | **Release Date** | `MFA_DATE_PLACEHOLDER` |
-          | **Release Type** | MFA_PRERELEASE_PLACEHOLDER |
+          | **Type** | MFA_PRERELEASE_PLACEHOLDER |
           
-          ## 📁 Build Artifacts
-          
-          This build includes:
-          - ✅ MFAAvalonia GUI components (with bundled MaaFramework)
-          - ✅ Agent source code
-          - ✅ Configuration files and assets
-          - ✅ Build report documentation
-          
-          ## 🔗 Quick Links
-          
-          - [📊 Build Workflow]
-          - [🏠 Source Repository]
-          - [🖥️ MFAAvalonia](MFA_URL_PLACEHOLDER)
+          ## 🔗 Links
+          - [MFAAvalonia](MFA_URL_PLACEHOLDER)
           
           ---
           *📅 Generated on BUILD_DATE_PLACEHOLDER*
           SUMMARY_EOF
           
-          # Replace placeholders in the summary
+          # Replacements for Summary
           sed -i "s/BUILD_DATE_PLACEHOLDER/${BUILD_DATE}/g" $GITHUB_STEP_SUMMARY
+          sed -i "s/MFA_DATE_PLACEHOLDER/${MFA_DATE}/g" $GITHUB_STEP_SUMMARY
           
-          # Handle MFA version link in summary
           if [[ -n "$MFA_URL" && "$MFA_URL" != "" ]]; then
             sed -i "s|MFA_VERSION_PLACEHOLDER|[${MFA_TAG}](${MFA_URL})|g" $GITHUB_STEP_SUMMARY
             sed -i "s|MFA_URL_PLACEHOLDER|${MFA_URL}|g" $GITHUB_STEP_SUMMARY
@@ -207,63 +181,43 @@ jobs:
             sed -i "s|MFA_URL_PLACEHOLDER|#|g" $GITHUB_STEP_SUMMARY
           fi
           
-          sed -i "s/MFA_DATE_PLACEHOLDER/${MFA_DATE}/g" $GITHUB_STEP_SUMMARY
-          
           if [[ "$MFA_PRERELEASE" == "true" ]]; then
             sed -i "s/MFA_PRERELEASE_PLACEHOLDER/🚧 Pre-release/g" $GITHUB_STEP_SUMMARY
           else
             sed -i "s/MFA_PRERELEASE_PLACEHOLDER/✅ Stable/g" $GITHUB_STEP_SUMMARY
           fi
 
-          # Create BUILD_REPORT.md file
+          # --- BUILD_REPORT.md (Inside install folder) ---
           cat > install/BUILD_REPORT.md << 'EOF'
           # Build Report
           
           ## Build Information
-          
           | Component | Details |
           |-----------|---------|
           | **Build Date** | `BUILD_DATE_PLACEHOLDER` |
           | **Build Tag** | `${{ needs.meta.outputs.tag }}` |
           | **Architecture** | `${{ matrix.arch }}` |
-          | **Operating System** | `${{ matrix.os }}` |
-          | **Python Version** | `3.11` |
+          | **OS** | `${{ matrix.os }}` |
           
           ## Dependencies
-          
-          ### MFAAvalonia (UI Framework & Core)
-          
-          *MaaFramework core libraries are included within MFAAvalonia.*
-          
+          ### MFAAvalonia
           | Property | Value |
           |----------|-------|
-          | **Repository** | [MaaGF1/MFAAvalonia] |
           | **Version** | MFA_VERSION_PLACEHOLDER |
           | **Release Date** | `MFA_DATE_PLACEHOLDER` |
-          | **Release Type** | MFA_PRERELEASE_PLACEHOLDER |
-          
-          ## Build Artifacts
-          
-          This build includes:
-          - MFAAvalonia GUI components (with bundled MaaFramework)
-          - Agent source code
-          - Configuration files and assets
+          | **Type** | MFA_PRERELEASE_PLACEHOLDER |
           
           ## Links
-          
-          - [Source Repository]
-          - [Build Workflow]
-          - [MFAAvalonia Latest Release](MFA_URL_PLACEHOLDER)
+          - [MFAAvalonia Release](MFA_URL_PLACEHOLDER)
           
           ---
-          
-          *This report was automatically generated on BUILD_DATE_PLACEHOLDER by GitHub Actions.*
+          *Generated by GitHub Actions.*
           EOF
           
-          # Replace placeholders in BUILD_REPORT.md file
+          # Replacements for File
           sed -i "s/BUILD_DATE_PLACEHOLDER/${BUILD_DATE}/g" install/BUILD_REPORT.md
+          sed -i "s/MFA_DATE_PLACEHOLDER/${MFA_DATE}/g" install/BUILD_REPORT.md
           
-          # Handle MFA version link in file
           if [[ -n "$MFA_URL" && "$MFA_URL" != "" ]]; then
             sed -i "s|MFA_VERSION_PLACEHOLDER|[${MFA_TAG}](${MFA_URL})|g" install/BUILD_REPORT.md
             sed -i "s|MFA_URL_PLACEHOLDER|${MFA_URL}|g" install/BUILD_REPORT.md
@@ -272,15 +226,13 @@ jobs:
             sed -i "s/MFA_URL_PLACEHOLDER/#/g" install/BUILD_REPORT.md
           fi
           
-          sed -i "s/MFA_DATE_PLACEHOLDER/${MFA_DATE}/g" install/BUILD_REPORT.md
-          
           if [[ "$MFA_PRERELEASE" == "true" ]]; then
             sed -i "s/MFA_PRERELEASE_PLACEHOLDER/🚧 Pre-release/g" install/BUILD_REPORT.md
           else
             sed -i "s/MFA_PRERELEASE_PLACEHOLDER/✅ Stable/g" install/BUILD_REPORT.md
           fi
           
-          echo "✅ Build report and summary generated successfully."
+          echo "✅ Build report generated."
 
       - uses: actions/upload-artifact@v4
         with:
@@ -300,47 +252,22 @@ jobs:
           # 🏁 Overall Build Summary
           
           ## 📊 Build Results
-          
           | Architecture | Status | 
           |--------------|--------|
           | **aarch64** | ${{ contains(needs.install.result, 'success') && '✅ Success' || '❌ Failed' }} |
           | **x86_64** | ${{ contains(needs.install.result, 'success') && '✅ Success' || '❌ Failed' }} |
           
-          ## 📋 Build Information
+          ## 📋 Info
+          - **Tag:** `${{ needs.meta.outputs.tag }}`
+          - **Release:** ${{ needs.meta.outputs.is_release == 'true' && '✅ Yes' || '❌ No' }}
+          - **Date:** `BUILD_DATE_PLACEHOLDER`
           
-          | Property | Value |
-          |----------|-------|
-          | **Build Tag** | `${{ needs.meta.outputs.tag }}` |
-          | **Is Release** | ${{ needs.meta.outputs.is_release == 'true' && '✅ Yes' || '❌ No (CI Build)' }} |
-          | **Trigger** | `${{ github.event_name }}` |
-          | **Branch/Tag** | `${{ github.ref_name }}` |
-          | **Commit** | [`${{ github.sha }}`] |
-          | **Build Date** | `BUILD_DATE_PLACEHOLDER` |
-          
-          ## 📦 Dependencies Used
-          
-          | Component | Repository |
-          |-----------|------------|
-          | **MFAAvalonia** | [MaaGF1/MFAAvalonia] |
-          
-          ## 🔗 Quick Actions
-          
-          - [📁 Download Artifacts]
-          - [📋 View Workflow]
-          - [🏠 Repository Home]
-          
-          ${{ needs.meta.outputs.is_release == 'true' && '## 🎉 This is a Release Build!' || '## 🔧 This is a CI Build' }}
-          
-          ${{ needs.meta.outputs.is_release == 'true' && 'The artifacts will be automatically released to GitHub Releases.' || 'The artifacts are available for download from this workflow run.' }}
+          ${{ needs.meta.outputs.is_release == 'true' && '## 🎉 Release Build' || '## 🔧 CI Build' }}
           
           ---
-          *📅 Generated on BUILD_DATE_PLACEHOLDER*
           SUMMARY_EOF
           
-          # Replace placeholder
           sed -i "s/BUILD_DATE_PLACEHOLDER/${BUILD_DATE}/g" $GITHUB_STEP_SUMMARY
-          
-          echo "✅ Overall build summary generated."
 
   changelog:
     name: Generate changelog
@@ -391,20 +318,5 @@ jobs:
         run: |
           cat >> $GITHUB_STEP_SUMMARY << 'EOF'
           # 🎉 Release Published!
-          
-          ## 📦 Release Information
-          
-          | Property | Value |
-          |----------|-------|
-          | **Release Tag** | `${{ needs.meta.outputs.tag }}` |
-          | **Release URL** | [View Release] |
-          | **Prerelease** | ${{ contains(needs.meta.outputs.tag, '-alpha') || contains(needs.meta.outputs.tag, '-beta') || contains(needs.meta.outputs.tag, '-rc') || contains(needs.meta.outputs.tag, '-pre') || contains(needs.meta.outputs.tag, '-dev') && '✅ Yes' || '❌ No' }} |
-          
-          ## 🔗 Quick Links
-          
-          - [📋 View All Releases]
-          - [📁 Download Assets]
-          
-          ---
-          *🎊 Release completed successfully!*
+          Release Tag: `${{ needs.meta.outputs.tag }}`
           EOF
