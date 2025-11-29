@@ -14,10 +14,8 @@
 		"duration": 50,
 		"post_delay": 400,
 		"next": [
-			"1_6_进入关卡"
-		],
-		"interrupt": [
-			"1_6_选图下拉"
+			"1_6_进入关卡",
+			"[JumpBack]1_6_选图下拉"
 		]
 	},
 	"1_6_进入关卡": {
@@ -169,11 +167,9 @@
 		"rate_limit": 2000,
 		"next": [
 			"1_6_再次作战",
-			"1_6_round3"
-		],
-		"interrupt": [
-			"public_加速结算进入",
-			"1_6_wait"
+			"1_6_round3",
+			"[JumpBack]public_加速结算进入",
+			"[JumpBack]1_6_wait"
 		]
 	},
 	"1_6_round3": {
@@ -214,11 +210,9 @@
 		"post_delay": 2000,
 		"next": [
 			"1_6_开始作战",
-			"1_6_菜单"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"1_6_菜单",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

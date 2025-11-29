@@ -141,13 +141,12 @@
 		"target_offset": [173, -138, 0, 0],
 		"post_delay": 400,
 		"next": [
-			"逃亡_切换难度",
+			"[JumpBack]逃亡_切换难度",
 			"逃亡_进入卷积核关卡",
 			"逃亡_识别假打捞关"
 		]
 	},
 	"逃亡_切换难度": {
-		"is_sub": true,
 		"recognition": "OCR",
 		"roi": [203, 656, 52, 33],
 		"expected": ["困难", "噩梦"],
@@ -241,11 +240,9 @@
 		"timeout": 120000,
 		"next": [
 			"逃亡_开始作战",
-			"逃亡_进入卷积核"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"逃亡_进入卷积核",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

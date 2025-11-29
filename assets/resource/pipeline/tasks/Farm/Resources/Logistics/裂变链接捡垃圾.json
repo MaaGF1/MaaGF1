@@ -176,9 +176,9 @@
 		"target": [694, 432, 38, 39],
 		"post_delay": 500,
 		"next": [
-			"裂变链接捡垃圾_开始作战"
-		],
-		"interrupt": "!public梯队部署"
+			"裂变链接捡垃圾_开始作战",
+			"[JumpBack]!public梯队部署"
+		]
 	},
 	"裂变链接捡垃圾_开始作战": {
 		"recognition": "OCR",

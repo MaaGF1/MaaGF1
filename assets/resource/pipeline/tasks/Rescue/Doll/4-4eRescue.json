@@ -7,10 +7,8 @@
 		"post_delay": 1000,
 		"next": [
 			"4-4e开始作战",
-			"4-4e_进入关卡"
-		],
-		"interrupt": [
-			"4-4e_选图下拉"
+			"4-4e_进入关卡",
+			"[JumpBack]4-4e_选图下拉"
 		]
 	},
 	"4-4e_进入关卡": {
@@ -168,11 +166,9 @@
 	"4_4战斗加速": {
 		"rate_limit": 2000,
 		"next": [
-			"4-4e再次作战"
-		],
-		"interrupt": [
-			"public_加速结算进入",
-			"4_4wait"
+			"4-4e再次作战",
+			"[JumpBack]public_加速结算进入",
+			"[JumpBack]4_4wait"
 		]
 	},
 	"4_4wait": {
@@ -189,11 +185,9 @@
 		"post_delay": 2000,
 		"next": [
 			"4-4e开始作战",
-			"!4-4e打捞总流程"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"!4-4e打捞总流程",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

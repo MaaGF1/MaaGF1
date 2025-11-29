@@ -2,9 +2,9 @@
 	"!public梯队部署": {
 		"next": [
 			"public梯队部署_选择梯队",
-			"public梯队部署_滑动梯队"
-		],
-		"interrupt": "public梯队部署_切换梯队"
+			"public梯队部署_滑动梯队",
+			"[JumpBack]public梯队部署_切换梯队"
+		]
 	},
 	"public梯队部署_切换梯队": {
 		"recognition": "OCR",

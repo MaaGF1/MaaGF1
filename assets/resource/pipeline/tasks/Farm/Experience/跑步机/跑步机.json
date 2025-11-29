@@ -1053,7 +1053,7 @@
 		"expected": "9",
 		"action": "DoNothing",
 		"post_delay": 500,
-		"next": "跑步机_跳过战斗4"
+		"next": ["跑步机_跳过战斗4"]
 	},
 	"跑步机_跳过战斗4": {
 		"recognition": "DirectHit",
@@ -1243,7 +1243,9 @@
 		"action": "Click",
 		"post_delay": 500,
 		"timeout": 1000,
-		"next": "跑步机_再次作战",
-		"interrupt": "public拆人形_人形回收"
+		"next": [
+			"跑步机_再次作战",
+			"[JumpBack]public拆人形_人形回收"
+		]
 	}
 }

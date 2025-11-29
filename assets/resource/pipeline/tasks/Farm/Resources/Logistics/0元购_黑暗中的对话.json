@@ -97,11 +97,9 @@
 		"timeout": 90000,
 		"next": [
 			"逃亡_进入卷积核",
-			"黑话_开始作战"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"黑话_开始作战",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

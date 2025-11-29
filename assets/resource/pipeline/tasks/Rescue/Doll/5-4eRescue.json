@@ -10,10 +10,8 @@
 		"roi": [515, 132, 89, 60],
 		"expected": ["第五"],
 		"next": [
-			"5-4e_进入关卡"
-		],
-		"interrupt": [
-			"5-4e_选图下拉"
+			"5-4e_进入关卡",
+			"[JumpBack]5-4e_选图下拉"
 		]
 	},
 	"5-4e_进入关卡": {
@@ -169,11 +167,9 @@
 	},
 	"5-4e计划加速": {
 		"next": [
-			"5-4e再次作战"
-		],
-		"interrupt": [
-			"public_加速结算进入",
-			"5-4e计划加速wait"
+			"5-4e再次作战",
+			"[JumpBack]public_加速结算进入",
+			"[JumpBack]5-4e计划加速wait"
 		]
 	},
 	"5-4e计划加速wait": {
@@ -190,11 +186,9 @@
 		"post_delay": 1000,
 		"next": [
 			"5-4菜单",
-			"5-4e开始作战"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"5-4e开始作战",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

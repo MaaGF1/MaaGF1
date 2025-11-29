@@ -41,10 +41,8 @@
 		"post_delay": 4000,
 		"next": [
 			"6-4e点击指挥部0",
-			"6-4e界面初始化"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收"
+			"6-4e界面初始化",
+			"[JumpBack]public二星人形回收_人形回收"
 		]
 	},
 	"6-4e点击指挥部0": {
@@ -96,10 +94,8 @@
 		"post_delay": 400,
 		"next": [
 			"6-4e点击开路队",
-			"6-4e界面初始化"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收"
+			"6-4e界面初始化",
+			"[JumpBack]public二星人形回收_人形回收"
 		]
 	},
 	"6-4e点击开路队": {
@@ -951,11 +947,9 @@
 		"pre_delay": 100,
 		"next": [
 			"6-4e开始作战",
-			"6-4e界面初始化"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收",
-			"public_关卡结算点击1"
+			"6-4e界面初始化",
+			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_关卡结算点击1"
 		]
 	}
 }

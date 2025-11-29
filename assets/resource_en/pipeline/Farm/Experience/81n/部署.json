@@ -8,10 +8,8 @@
 		"post_delay": 1,
 		"pre_delay": 1,
 		"next": [
-			"81N部署_确认1队是否已部署"
-		],
-		"interrupt": [
-			"81N部署_部署1队"
+			"81N部署_确认1队是否已部署",
+			"[JumpBack]81N部署_部署1队"
 		]
 	},
 	"81N部署_确认1队是否已部署": {
@@ -20,14 +18,12 @@
 		"threshold": 0.5,
 		"template": "combat/levelUp/8-1N/map_team1.png",
 		"next": [
-			"81N部署_确认2队是否已部署"
+			"81N部署_确认2队是否已部署",
+			"[JumpBack]81N部署_部署2队"
 		],
 		"rate_limit": 20,
 		"post_delay": 1,
-		"pre_delay": 1,
-		"interrupt": [
-			"81N部署_部署2队"
-		]
+		"pre_delay": 1
 	},
 	"81N部署_确认2队是否已部署": {
 		"recognition": "TemplateMatch",
@@ -35,14 +31,12 @@
 		"threshold": 0.5,
 		"template": "combat/levelUp/8-1N/map_team2.png",
 		"next": [
-			"81N部署_确认3队是否已部署"
+			"81N部署_确认3队是否已部署",
+			"[JumpBack]81N部署_部署3队"
 		],
 		"rate_limit": 20,
 		"post_delay": 1,
-		"pre_delay": 1,
-		"interrupt": [
-			"81N部署_部署3队"
-		]
+		"pre_delay": 1
 	},
 	"81N部署_确认3队是否已部署": {
 		"recognition": "TemplateMatch",
@@ -127,10 +121,8 @@
 		"action": "LongPress",
 		"duration": 20,
 		"next": [
-			"81N部署_部署3队确定"
-		],
-		"interrupt": [
-			"81N部署_重装机场选择梯队"
+			"81N部署_部署3队确定",
+			"[JumpBack]81N部署_重装机场选择梯队"
 		]
 	},
 	"81N部署_部署3队确定": {
@@ -150,10 +142,8 @@
 		"duration": 20,
 		"next": [
 			"81N部署_部署重装选择",
-			"81N部署_部署重装"
-		],
-		"interrupt": [
-			"81N部署_重装机场选择重装"
+			"81N部署_部署重装",
+			"[JumpBack]81N部署_重装机场选择重装"
 		]
 	},
 	"81N部署_部署重装选择": {
@@ -166,10 +156,8 @@
 		"duration": 20,
 		"next": [
 			"81N部署_部署重装确定",
-			"81N部署_部署重装"
-		],
-		"interrupt": [
-			"81N部署_重装机场选择梯队"
+			"81N部署_部署重装",
+			"[JumpBack]81N部署_重装机场选择梯队"
 		]
 	},
 	"81N部署_部署重装确定": {
@@ -199,10 +187,8 @@
 		"next": [
 			"81N部署_弹药判断有",
 			"81N部署_弹药判断无",
-			"81N部署_弹药检查"
-		],
-		"interrupt": [
-			"81N地图初始化_长按修正"
+			"81N部署_弹药检查",
+			"[JumpBack]81N地图初始化_长按修正"
 		]
 	},
 	"81N部署_弹药判断无": {
@@ -231,6 +217,6 @@
 		"action": "LongPress",
 		"duration": 20,
 		"post_delay": 500,
-		"next": "81N战斗_开始作战前初始化"
+		"next": ["81N战斗_开始作战前初始化"]
 	}
 }

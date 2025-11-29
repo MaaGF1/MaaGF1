@@ -1,6 +1,6 @@
 {
 	"!静风点-贝蒂数抽薪打捞": {
-		"next": "点击三维流形S-1"
+		"next": ["点击三维流形S-1"]
 	},
 	"点击三维流形S-1": {
 		"recognition": "TemplateMatch",
@@ -24,10 +24,8 @@
 		"target": [1141, 401, 25, 25],
 		"post_delay": 2500,
 		"next": [
-			"三维流形-点击指挥部"
-		],
-		"interrupt": [
-			"public二星人形回收_人形回收"
+			"三维流形-点击指挥部",
+			"[JumpBack]public二星人形回收_人形回收"
 		],
 		"timeout": 600000
 	},

@@ -48,10 +48,8 @@
 		"template": "combat/dollRescue/residentRescue/MP41&HK33RescueEX/init.png",
 		"next": [
 			"MP41打捞_点击机场",
-			"MP41打捞_布置完毕"
-		],
-		"interrupt": [
-			"MP41打捞_拖到右上角"
+			"MP41打捞_布置完毕",
+			"[JumpBack]MP41打捞_拖到右上角"
 		]
 	},
 	"MP41打捞_拖到右上角": {

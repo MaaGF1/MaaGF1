@@ -1,6 +1,6 @@
 {
 	"!VRB打捞": {
-		"next": "VRB打捞_开始作战"
+		"next": ["VRB打捞_开始作战"]
 	},
 	"VRB打捞_开始作战": {
 		"recognition": "OCR",
@@ -100,10 +100,8 @@
 		"rate_limit": 1200,
 		"target": [318, 614, 130, 24],
 		"next": [
-			"VRB打捞_开始作战"
-		],
-		"interrupt": [
-			"VRB打捞-点击获得角色"
+			"VRB打捞_开始作战",
+			"[JumpBack]VRB打捞-点击获得角色"
 		]
 	},
 	"VRB打捞-点击获得角色": {
