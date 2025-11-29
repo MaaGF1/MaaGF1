@@ -1,5 +1,4 @@
-name: Interface JSON Format Check
-
+name: Interface JSON Formatter
 on:
   push:
     branches:

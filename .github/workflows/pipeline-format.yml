@@ -1,4 +1,4 @@
-name: Pipeline JSON Format Check
+name: Pipeline JSON Formatter
 
 on:
   push:
