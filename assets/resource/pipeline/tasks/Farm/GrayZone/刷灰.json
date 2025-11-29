@@ -222,6 +222,8 @@
 		"action": "LongPress",
 		"duration": 10,
 		"target": [1130, 581, 56, 45],
-		"next": ["灰域_灰域检测"]
+		"next": [
+			"灰域_灰域检测"
+		]
 	}
 }

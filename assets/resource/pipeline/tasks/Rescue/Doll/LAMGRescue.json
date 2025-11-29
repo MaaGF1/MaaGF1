@@ -1,6 +1,8 @@
 {
 	"!LAMG打捞": {
-		"next": ["LAMG打捞_开始作战"]
+		"next": [
+			"LAMG打捞_开始作战"
+		]
 	},
 	"LAMG打捞_开始作战": {
 		"recognition": "OCR",

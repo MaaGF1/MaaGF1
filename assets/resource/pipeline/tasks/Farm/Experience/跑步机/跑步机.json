@@ -1053,7 +1053,9 @@
 		"expected": "9",
 		"action": "DoNothing",
 		"post_delay": 500,
-		"next": ["跑步机_跳过战斗4"]
+		"next": [
+			"跑步机_跳过战斗4"
+		]
 	},
 	"跑步机_跳过战斗4": {
 		"recognition": "DirectHit",

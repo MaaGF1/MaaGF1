@@ -1,6 +1,8 @@
 {
 	"!VRB打捞": {
-		"next": ["VRB打捞_开始作战"]
+		"next": [
+			"VRB打捞_开始作战"
+		]
 	},
 	"VRB打捞_开始作战": {
 		"recognition": "OCR",

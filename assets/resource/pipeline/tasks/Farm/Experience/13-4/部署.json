@@ -140,6 +140,8 @@
 		"action": "LongPress",
 		"duration": 20,
 		"post_delay": 500,
-		"next": ["134战斗_开始作战前初始化"]
+		"next": [
+			"134战斗_开始作战前初始化"
+		]
 	}
 }
