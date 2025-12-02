@@ -1,12 +1,11 @@
-name: Append External Assets
+name: Append Assets
 
-# 仅在 Release 发布成功后触发
 on:
   release:
     types: [published]
 
 permissions:
-  contents: write # 需要写权限来上传文件到 Release
+  contents: write
 
 jobs:
   append-external-artifacts:
@@ -27,7 +26,6 @@ jobs:
         id: config
         shell: bash
         run: |
-          # 使用 Python 解析 INI 配置，保持与 install.yml 一致的风格
           logdog_repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['logdog_repo'])")
           logdog_tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['logdog_tag'])")
           
@@ -44,18 +42,17 @@ jobs:
           echo "Docs:   $docs_repo @ $docs_tag"
           echo "::endgroup::"
 
-      # 1. 下载 LogDog
+      # 1. Download LogDog
       - name: Download LogDog Artifacts
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ steps.config.outputs.logdog_repo }}
-          # 下载所有文件 (*)，也可以指定具体文件名
           fileName: "*"
           latest: ${{ steps.config.outputs.logdog_tag == 'latest' }}
           tag: ${{ steps.config.outputs.logdog_tag != 'latest' && steps.config.outputs.logdog_tag || '' }}
           out-file-path: "assets_buffer/logdog"
 
-      # 2. 下载 Docs
+      # 2. Download Docs
       - name: Download Docs Artifacts
         uses: robinraju/release-downloader@v1
         with:
@@ -65,24 +62,20 @@ jobs:
           tag: ${{ steps.config.outputs.docs_tag != 'latest' && steps.config.outputs.docs_tag || '' }}
           out-file-path: "assets_buffer/docs"
 
-      # 3. 整理文件 (可选)
-      # 如果你想重命名文件，或者把它们扁平化，可以在这里处理
-      # 这里我们假设直接上传下载下来的文件
+      # 3. List Artifacts
       - name: List Downloaded Assets
         run: |
           echo "Downloaded files:"
           find assets_buffer -type f
 
-      # 4. 上传到当前的 Release
+      # 4. Upload to Release
       - name: Upload to Current Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          # 指向 assets_buffer 下的所有文件
           files: |
             assets_buffer/logdog/*
             assets_buffer/docs/*
-          # 这里的 tag_name 使用触发当前 workflow 的 tag
           tag_name: ${{ github.event.release.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
