@@ -1,0 +1,43 @@
+{
+    "settings": {
+        "repo_owner": "MaaGF1",
+        "repo_name": "MaaGF1",
+        "proxy_url": ""
+    },
+    "lang": {
+        "en": {
+            "detecting_version": "Detecting current version...",
+            "current_version": "Current Version: {0}",
+            "fetching_tags": "Fetching available versions from GitHub...",
+            "network_error": "Error: Unable to connect to GitHub API. Please check your network.",
+            "select_version": "Please select a version to update/downgrade to:",
+            "invalid_selection": "Invalid selection. Please try again.",
+            "downloading": "Downloading source code for version {0}...",
+            "extracting": "Extracting resources...",
+            "updating": "Updating files...",
+            "cleaning": "Cleaning up temporary files...",
+            "success": "Update to {0} completed successfully!",
+            "press_enter": "Press Enter to exit...",
+            "pre_release_warning": "[Pre-release]",
+            "same_version": "You are already on this version.",
+            "major_minor_mismatch": "Skipping {0} (Incompatible Major/Minor version)"
+        },
+        "zh": {
+            "detecting_version": "正在检测当前版本...",
+            "current_version": "当前版本: {0}",
+            "fetching_tags": "正在获取 GitHub 上的可用版本...",
+            "network_error": "错误：无法连接到 GitHub API。请检查您的网络连接。",
+            "select_version": "请选择要升级/降级到的版本：",
+            "invalid_selection": "输入无效，请重试。",
+            "downloading": "正在下载版本 {0} 的源码包...",
+            "extracting": "正在解压资源...",
+            "updating": "正在更新文件...",
+            "cleaning": "正在清理临时文件...",
+            "success": "成功更新至版本 {0}！",
+            "press_enter": "按回车键退出...",
+            "pre_release_warning": "[预览版]",
+            "same_version": "您当前已是该版本。",
+            "major_minor_mismatch": "跳过 {0} (主/次版本号不兼容)"
+        }
+    }
+}
