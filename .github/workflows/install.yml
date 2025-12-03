@@ -33,25 +33,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
       - id: set_tag
-        run: |
-          is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
-          tag=$(git describe --tags --match "v*" ${{ github.ref }} || true)
-          if [[ $tag != v* ]]; then
-            tag=$(curl -sX GET "https://api.github.com/repos/${{ github.repository }}/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | awk '/tag_name/{print $4}' FS='["]')
-            if [[ $tag != v* ]]; then
-              tag="v0.0.0"
-            fi
-            tag=$(date "+$tag-%y%m%d-$(git rev-parse --short HEAD)")
-          fi
-          if ! $($is_release) ; then
-            prefix=${tag%-*-*}
-            suffix=${tag#$prefix-}
-            tag="$prefix-ci.$suffix"
-          fi
+        name: Calculate Tag and Release Info
+        run: bash mk/ci.sh set_tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          echo tag=$tag | tee -a $GITHUB_OUTPUT
-          echo is_release=$is_release | tee -a $GITHUB_OUTPUT
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
@@ -81,71 +69,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Read Configuration
-        id: config
+      - name: Read Config and Get Dependencies Info
+        id: deps_info
         shell: bash
-        run: |
-          # Parse the INI file using python
-          repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['mfa_repo'])")
-          tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['mfa_tag'])")
-          
-          echo "mfa_repo=$repo" >> $GITHUB_OUTPUT
-          echo "mfa_tag=$tag" >> $GITHUB_OUTPUT
-          
-          echo "Configuration Loaded:"
-          echo "  Repo: $repo"
-          echo "  Tag:  $tag"
-
-      - name: Get MFAAvalonia release info
-        id: mfa_info
-        shell: bash
-        run: |
-          REPO="${{ steps.config.outputs.mfa_repo }}"
-          TAG="${{ steps.config.outputs.mfa_tag }}"
-          
-          echo "Getting $REPO release info (Target: $TAG)..."
-          
-          if [ "$TAG" == "latest" ]; then
-            API_URL="https://api.github.com/repos/$REPO/releases/latest"
-          else
-            API_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
-          fi
-          
-          response=$(curl -sX GET "$API_URL" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}')
-          
-          # Check if curl failed or API returned error
-          if echo "$response" | jq -e .message > /dev/null; then
-             echo "Error fetching release info: $(echo "$response" | jq -r .message)"
-             # Fallback logic or exit could go here, currently proceeding with defaults
-          fi
-          
-          tag_name=$(echo "$response" | jq -r '.tag_name // "unknown"')
-          date=$(echo "$response" | jq -r '.published_at // "unknown"')
-          url=$(echo "$response" | jq -r '.html_url // "unknown"')
-          prerelease=$(echo "$response" | jq -r '.prerelease // false')
-          
-          echo "MFAAvalonia Info:"
-          echo "  Tag: $tag_name"
-          echo "  Date: $date"
-          
-          tag_name=${tag_name:-"No releases"}
-          date=${date:-"N/A"}
-          url=${url:-""}
-          
-          echo "mfa_tag=$tag_name" >> $GITHUB_OUTPUT
-          echo "mfa_date=$date" >> $GITHUB_OUTPUT
-          echo "mfa_url=$url" >> $GITHUB_OUTPUT
-          echo "mfa_prerelease=$prerelease" >> $GITHUB_OUTPUT
+        run: bash mk/ci.sh get_deps
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download MFAAvalonia
         uses: robinraju/release-downloader@v1
         with:
-          repository: ${{ steps.config.outputs.mfa_repo }}
+          repository: ${{ steps.deps_info.outputs.mfa_repo }}
           fileName: "MFAAvalonia-*-${{ matrix.os }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          # If config tag is 'latest', set latest=true. Otherwise false.
-          latest: ${{ steps.config.outputs.mfa_tag == 'latest' }}
-          # If config tag is NOT 'latest', use the specific tag.
-          tag: ${{ steps.config.outputs.mfa_tag != 'latest' && steps.config.outputs.mfa_tag || '' }}
+          latest: ${{ steps.deps_info.outputs.config_mfa_tag == 'latest' }}
+          tag: ${{ steps.deps_info.outputs.config_mfa_tag != 'latest' && steps.deps_info.outputs.config_mfa_tag || '' }}
           out-file-path: "deps/bin"
           extract: true
 
@@ -165,10 +102,10 @@ jobs:
           BUILD_ARCH: ${{ matrix.arch }}
           BUILD_OS: ${{ matrix.os }}
           IS_RELEASE: ${{ needs.meta.outputs.is_release }}
-          MFA_TAG: ${{ steps.mfa_info.outputs.mfa_tag }}
-          MFA_DATE: ${{ steps.mfa_info.outputs.mfa_date }}
-          MFA_URL: ${{ steps.mfa_info.outputs.mfa_url }}
-          MFA_PRERELEASE: ${{ steps.mfa_info.outputs.mfa_prerelease }}
+          MFA_TAG: ${{ steps.deps_info.outputs.mfa_tag }}
+          MFA_DATE: ${{ steps.deps_info.outputs.mfa_date }}
+          MFA_URL: ${{ steps.deps_info.outputs.mfa_url }}
+          MFA_PRERELEASE: ${{ steps.deps_info.outputs.mfa_prerelease }}
         run: |
           python ./mk/report.py
 
@@ -182,30 +119,14 @@ jobs:
     needs: [meta, install]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Generate Overall Build Summary
-        run: |
-          # Bash variable expansion works here
-          BUILD_DATE=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
-          
-          # Note: EOF is NOT quoted, so ${VARIABLES} are expanded immediately
-          cat >> $GITHUB_STEP_SUMMARY << EOF
-          # Overall Build Summary
-          
-          ## Build Results
-          | Architecture | Status | 
-          |--------------|--------|
-          | **aarch64** | ${{ contains(needs.install.result, 'success') && '[SUCCESS]' || '[FAILED]' }} |
-          | **x86_64** | ${{ contains(needs.install.result, 'success') && '[SUCCESS]' || '[FAILED]' }} |
-          
-          ## Info
-          - **Tag:** \`${{ needs.meta.outputs.tag }}\`
-          - **Release:** ${{ needs.meta.outputs.is_release == 'true' && '[YES]' || '[NO]' }}
-          - **Date:** ${BUILD_DATE}
-          
-          ${{ needs.meta.outputs.is_release == 'true' && '## Release Build' || '## CI Build' }}
-          
-          ---
-          EOF
+        run: bash mk/ci.sh summary
+        env:
+          TAG: ${{ needs.meta.outputs.tag }}
+          IS_RELEASE: ${{ needs.meta.outputs.is_release }}
+          STATUS_INSTALL: ${{ needs.install.result }}
 
   changelog:
     name: Generate changelog
@@ -233,15 +154,16 @@ jobs:
     needs: [install, changelog]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           path: assets
 
-      - run: |
-          cd assets
-          for f in *; do
-            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
-          done
+      - name: Zip Assets
+        run: bash mk/ci.sh zip_assets
+        env:
+          TAG: ${{ needs.meta.outputs.tag }}
 
       - uses: softprops/action-gh-release@v2
         with:
@@ -253,8 +175,6 @@ jobs:
           prerelease: ${{ contains(needs.meta.outputs.tag, '-alpha') || contains(needs.meta.outputs.tag, '-beta') || contains(needs.meta.outputs.tag, '-rc') || contains(needs.meta.outputs.tag, '-pre') || contains(needs.meta.outputs.tag, '-dev') }}
 
       - name: Release Summary
-        run: |
-          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
-          # Release Published!
-          Release Tag: `${{ needs.meta.outputs.tag }}`
-          EOF
+        run: bash mk/ci.sh release_summary
+        env:
+          TAG: ${{ needs.meta.outputs.tag }}
