@@ -237,7 +237,7 @@
 		"target": [1002, 604, 277, 115],
 		"duration": 15,
 		"pre_delay": 1,
-		"post_delay": 500,
+		"post_delay": 1,
 		"next": [
 			"ad逃亡_结束回合",
 			"ad逃亡_开始作战"
