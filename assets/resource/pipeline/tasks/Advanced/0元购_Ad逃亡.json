@@ -2,11 +2,6 @@
 	"!莫比乌斯带上的ad逃亡": {
 		"recognition": "DirectHit",
 		"action": "DoNothing",
-	// 理论上来说，应该提前初始化避免异常，但是我不知道为什么，在这里初始化就不会返回主页面
-	// "custom_action": "matlab_calculate",
-	// "custom_action_param": {
-	// 	"syntax": "Start_Time = _get_time; T = 120"
-	// },
 		"post_delay": 1,
 		"next": [
 			"ad逃亡_识别卷积核",
