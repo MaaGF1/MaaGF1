@@ -40,12 +40,18 @@ Enable_MaaLog_Info = 1
 def MaaLog_Debug(message):
     """Debug log output"""
     if Enable_MaaLog_Debug:
-        print(f"[DEBUG] {message}")
+        try:
+            print(f"[DEBUG] {message}")
+        except UnicodeEncodeError:
+             print(f"[DEBUG] {message.encode('utf-8', 'ignore')}")
 
 def MaaLog_Info(message):
     """Info log output"""
     if Enable_MaaLog_Info:
-        print(f"[INFO] {message}")
+        try:
+            print(f"[INFO] {message}")
+        except UnicodeEncodeError:
+             print(f"[INFO] {message.encode('utf-8', 'ignore')}")
 
 def set_debug_log(enabled):
     """Set debug log switch"""
