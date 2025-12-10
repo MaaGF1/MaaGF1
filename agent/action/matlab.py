@@ -20,9 +20,17 @@ sys.path.insert(0, parent_dir)
 try:
     from .log import MaaLog_Debug, MaaLog_Info
 except ImportError:
-    # Fallback if log module is not fully initialized yet
-    def MaaLog_Debug(msg): print(f"[Matlab-DEBUG] {msg}")
-    def MaaLog_Info(msg): print(f"[Matlab-INFO] {msg}")
+    def MaaLog_Debug(msg): 
+        try:
+            print(f"[Matlab-DEBUG] {msg}")
+        except UnicodeEncodeError:
+            print(f"[Matlab-DEBUG]{msg.encode('utf-8', 'ignore')}")
+            
+    def MaaLog_Info(msg): 
+        try:
+            print(f"[Matlab-INFO] {msg}")
+        except UnicodeEncodeError:
+            print(f"[Matlab-INFO]{msg.encode('utf-8', 'ignore')}")
 
 ################################################################################ Part I : The Calculation Engine ################################################################################
 
