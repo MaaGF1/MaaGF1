@@ -142,58 +142,111 @@ class _MatlabAction(CustomAction):
         self._action_count = 0
         MaaLog_Debug("_MatlabAction singleton created")
 
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         try:
             self._action_count += 1
-            param = argv.custom_action_param
+            MaaLog_Debug(f"=== [Matlab] Run Start (Count: {self._action_count}) ===")
             
-            # Parse parameter if it's a string (legacy/compatibility)
+            # 1. Check argv
+            if not argv:
+                MaaLog_Debug("[Matlab] Error: argv is None")
+                return CustomAction.RunResult(success=False)
+            
+            MaaLog_Debug(f"[Matlab] Node Name: {argv.node_name}")
+            
+            # 2. Parse Param
+            param = argv.custom_action_param
+            MaaLog_Debug(f"[Matlab] Raw Param Type: {type(param)}")
+            MaaLog_Debug(f"[Matlab] Raw Param Value: {param}")
+
             if isinstance(param, str):
                 try:
                     param = json.loads(param)
-                except json.JSONDecodeError:
-                    MaaLog_Debug("MatlabAction param is invalid JSON string")
+                    MaaLog_Debug("[Matlab] JSON parsed successfully")
+                except json.JSONDecodeError as e:
+                    MaaLog_Debug(f"[Matlab] JSON Error: {e}")
                     return CustomAction.RunResult(success=False)
             
             if not isinstance(param, dict):
-                 MaaLog_Debug("MatlabAction param must be a dictionary")
+                 MaaLog_Debug(f"[Matlab] Error: Param is {type(param)}, expected dict")
                  return CustomAction.RunResult(success=False)
 
+            # 3. Get Syntax
             syntax = param.get('syntax', '')
+            MaaLog_Debug(f"[Matlab] Syntax: '{syntax}'")
+            
             if not syntax:
-                # No syntax means nothing to do, return success
+                MaaLog_Debug("[Matlab] Empty syntax, returning True")
                 return CustomAction.RunResult(success=True)
 
-            # Check logic branching mode
+            # 4. Check Logic Mode
             target_true = param.get('true')
             target_false = param.get('false')
+            MaaLog_Debug(f"[Matlab] Targets -> True: {target_true}, False: {target_false}")
 
             if target_true or target_false:
                 # --- Logic Mode ---
-                result = _matlab_engine.evaluate_condition(syntax)
+                MaaLog_Debug("[Matlab] Entering Logic Mode")
                 
+                # 4.1 Evaluate
+                try:
+                    result = _matlab_engine.evaluate_condition(syntax)
+                    MaaLog_Debug(f"[Matlab] Evaluation Result: {result} (Type: {type(result)})")
+                except Exception as e:
+                    MaaLog_Debug(f"[Matlab] Engine Eval Exception: {e}")
+                    return CustomAction.RunResult(success=False)
+                
+                # 4.2 Branching
+                target_node = None
                 if result:
                     if target_true:
-                        MaaLog_Debug(f"[Matlab] '{syntax}' is True -> Jump to {target_true}")
-                        context.override_next(argv.node_name, [target_true])
+                        target_node = target_true
+                        MaaLog_Debug(f"[Matlab] Condition TRUE. Target: {target_node}")
                     else:
-                        MaaLog_Debug(f"[Matlab] '{syntax}' is True (No jump target)")
+                        MaaLog_Debug("[Matlab] Condition TRUE. No Target.")
                 else:
                     if target_false:
-                        MaaLog_Debug(f"[Matlab] '{syntax}' is False -> Jump to {target_false}")
-                        context.override_next(argv.node_name, [target_false])
+                        target_node = target_false
+                        MaaLog_Debug(f"[Matlab] Condition FALSE. Target: {target_node}")
                     else:
-                        MaaLog_Debug(f"[Matlab] '{syntax}' is False (No jump target)")
+                        MaaLog_Debug("[Matlab] Condition FALSE. No Target.")
+
+                # 4.3 Override
+                if target_node:
+                    if not isinstance(target_node, str):
+                        MaaLog_Debug(f"[Matlab] Error: Target node is not string! It is {type(target_node)}")
+                        target_node = str(target_node) 
+                        
+                    MaaLog_Debug(f"[Matlab] Attempting override_next to: {target_node}")
+
+                    try:
+                        context.override_next(argv.node_name, [target_node])
+                        MaaLog_Debug("[Matlab] override_next called successfully")
+                    except Exception as e:
+                        MaaLog_Debug(f"[Matlab] Context Override Exception: {e}")
+                        return CustomAction.RunResult(success=False)
+
             else:
                 # --- Execution Mode ---
-                success = _matlab_engine.execute_command(syntax)
-                if not success:
+                MaaLog_Debug("[Matlab] Entering Execution Mode")
+                try:
+                    success = _matlab_engine.execute_command(syntax)
+                    MaaLog_Debug(f"[Matlab] Execution Success: {success}")
+                    if not success:
+                        return CustomAction.RunResult(success=False)
+                except Exception as e:
+                    MaaLog_Debug(f"[Matlab] Engine Exec Exception: {e}")
                     return CustomAction.RunResult(success=False)
 
+            MaaLog_Debug("=== [Matlab] Run Finished Successfully ===")
             return CustomAction.RunResult(success=True)
 
         except Exception as e:
-            MaaLog_Debug(f"MatlabAction Critical Error: {e}")
+            # Catch all unexpected Python exceptions
+            import traceback
+            tb = traceback.format_exc()
+            MaaLog_Debug(f"MatlabAction CRITICAL UNCAUGHT ERROR: {e}")
+            MaaLog_Debug(f"Traceback: {tb}")
             return CustomAction.RunResult(success=False)
 
 ################################################################################ Part III : Registration System ################################################################################

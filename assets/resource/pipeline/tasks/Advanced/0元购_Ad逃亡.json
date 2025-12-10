@@ -1,7 +1,11 @@
 {
 	"!莫比乌斯带上的ad逃亡": {
 		"recognition": "DirectHit",
-		"action": "DoNothing",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "Start_Time = _get_time; T = 120"
+		},
 		"post_delay": 1,
 		"next": [
 			"ad逃亡_识别卷积核",
@@ -221,16 +225,14 @@
 		// "recognition": "OCR",
 		// "roi": [1002, 604, 277, 115],
 		// "expected": "点击指挥",
+		"recognition": "DirectHit",
 		"action": "Custom",
 		"custom_action": "matlab_calculate",
 		"custom_action_param": {
 			"syntax": " (_get_time - Start_Time)/60 > T",
 			"true": "!返回主界面",
 			"false": "ad逃亡_开始作战"
-		},
-		"next": [
-			"ad逃亡_开始作战" 
-		]
+		}
 	},
 	"ad逃亡_开始作战": {
 		"recognition": "OCR",
