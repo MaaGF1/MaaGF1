@@ -218,9 +218,9 @@
 		]
 	},
 	"ad逃亡_计算时间": {
-		"recognition": "OCR",
-		"roi": [1002, 604, 277, 115],
-		"expected": "点击指挥",
+		// "recognition": "OCR",
+		// "roi": [1002, 604, 277, 115],
+		// "expected": "点击指挥",
 		"action": "Custom",
 		"custom_action": "matlab_calculate",
 		"custom_action_param": {
@@ -228,8 +228,9 @@
 			"true": "!返回主界面",
 			"false": "ad逃亡_开始作战"
 		},
-		"pre_delay": 1,
-		"post_delay": 500
+		"next": [
+			"ad逃亡_开始作战" 
+		]
 	},
 	"ad逃亡_开始作战": {
 		"recognition": "OCR",
@@ -238,7 +239,7 @@
 		"action": "LongPress",
 		"duration": 15,
 		"pre_delay": 1,
-		"post_delay": 500,
+		"post_delay": 1,
 		"next": [
 			"ad逃亡_结束回合",
 			"ad逃亡_开始作战"

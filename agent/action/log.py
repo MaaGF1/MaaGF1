@@ -32,8 +32,8 @@ except ImportError:
 Task_Counter = 0
 
 # Log Control
-Enable_MaaLog_Debug = 0
-Enable_MaaLog_Info = 0
+Enable_MaaLog_Debug = 1
+Enable_MaaLog_Info = 1
 
 ################################################################################ Part 0 : Logging Functions ################################################################################
 
