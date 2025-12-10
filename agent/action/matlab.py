@@ -142,7 +142,7 @@ class _MatlabAction(CustomAction):
         self._action_count = 0
         MaaLog_Debug("_MatlabAction singleton created")
 
-def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         try:
             self._action_count += 1
             MaaLog_Debug(f"=== [Matlab] Run Start (Count: {self._action_count}) ===")
