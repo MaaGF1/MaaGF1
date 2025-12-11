@@ -46,6 +46,28 @@ jobs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
 
+  # Package Resources independently
+  package-resources:
+    needs: meta
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Create Resource Package
+        run: |
+          python mk/resource_package.py ${{ needs.meta.outputs.tag }}
+          
+      - name: Upload Resource Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaaGF1-Resource-${{ needs.meta.outputs.tag }}
+          path: install/MaaGF1-Resource-*.zip
+
   install:
     needs: meta
     runs-on: windows-latest
@@ -70,7 +92,7 @@ jobs:
         id: config
         shell: bash
         run: |
-          # 使用 Python 解析 INI 文件以确保跨平台兼容性
+          # Parse INI file using Python for cross-platform compatibility
           maafw_ver=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['check']['maafw'])")
           echo "maafw_version=$maafw_ver" >> $GITHUB_OUTPUT
           echo "Target maafw version: $maafw_ver"
@@ -180,14 +202,16 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [install, changelog, meta]
+    # Added package-resources to needs
+    needs: [install, package-resources, changelog, meta]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      # GUI and Resource artifacts
       - uses: actions/download-artifact@v4
         with:
-          pattern: MaaGF1-GUI-*
+          pattern: MaaGF1-*
           path: assets
           merge-multiple: false
 

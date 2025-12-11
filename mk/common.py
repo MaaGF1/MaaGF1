@@ -15,6 +15,9 @@ AGENT_DIR = PROJECT_ROOT / "agent"
 AGENT_MK_DIR = AGENT_DIR / "mk"
 DOCS_FILES = ["README.md", "LICENSE", "CHANGES.md"]
 
+# List of files/dirs to be included in the standalone resource package
+RESOURCE_TARGETS = ["resource", "resource_en", "interface.json"]
+
 def add_path():
     """
     Add mk directory to sys.path for cross-script imports
