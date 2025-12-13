@@ -240,7 +240,7 @@
 		"post_delay": 100,
 		"next": [
 			"ad逃亡_结束回合1",
-			"[JumpBack]ad逃亡_结束回合_OCR"
+			"[JumpBack]ad逃亡_结束回合"
 		]
 	},
  // "[JumpBack]ad逃亡_开始作战"
@@ -252,20 +252,18 @@
 		"post_delay": 1,
 		"next": []
 	},
-	"ad逃亡_结束回合_OCR": {
-		"recognition": "OCR",
-		"roi": [416, 34, 64, 55],
-		"expected": ["01"],
-		"pre_delay": 100,
+	"ad逃亡_结束回合": {
+		"recognition": "DirectHit",
 		"action": "LongPress",
 		"target": [1120, 660, 0, 0],
 		"duration": 15,
+		"pre_delay": 100,
 		"next": []
 	},
 	"ad逃亡_结束回合1": {
 		"recognition": "OCR",
 		"roi": [416, 34, 64, 55],
-		"expected": ["2"],
+		"expected": ["2", "02"],
 		"rate_limit": 500,
 		"post_delay": 1,
 		"timeout": 120000,
