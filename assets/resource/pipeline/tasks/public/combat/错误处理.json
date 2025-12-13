@@ -70,11 +70,7 @@
 		"expected": ["开始", "作战"],
 		"roi": [1042, 617, 182, 71]
 	},
-	"错误_持续返回游戏主页": {
-		"action": "Key",
-		"key": 27,
-		"post_delay": 1000
-	},
+	"错误_持续返回游戏主页": {"action": "Key", "key": 27, "post_delay": 1000},
 	"错误_后勤出征": {
 		"recognition": "OCR",
 		"expected": ["后勤", "支援"],

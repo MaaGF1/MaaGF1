@@ -1,5 +1,3 @@
 {
-	"!Dormitory_Entry": {
-		"next": "!宿舍自动点赞"
-	}
+	"!Dormitory_Entry": {"next": "!宿舍自动点赞"}
 }

@@ -172,9 +172,7 @@
 			"[JumpBack]5-4e计划加速wait"
 		]
 	},
-	"5-4e计划加速wait": {
-		"post_delay": 1300
-	},
+	"5-4e计划加速wait": {"post_delay": 1300},
 	"5-4e再次作战": {
 		"recognition": "OCR",
 		"roi": [277, 572, 188, 73],

@@ -171,9 +171,7 @@
 			"[JumpBack]4_4wait"
 		]
 	},
-	"4_4wait": {
-		"post_delay": 1000
-	},
+	"4_4wait": {"post_delay": 1000},
 	"4-4e再次作战": {
 		"recognition": "OCR",
 		"roi": [277, 572, 188, 73],

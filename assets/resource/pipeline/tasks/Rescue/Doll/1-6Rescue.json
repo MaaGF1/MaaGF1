@@ -196,9 +196,7 @@
 			"1_6_round3_1"
 		]
 	},
-	"1_6_wait": {
-		"post_delay": 1500
-	},
+	"1_6_wait": {"post_delay": 1500},
 	"1_6_再次作战": {
 		"recognition": "OCR",
 		"roi": [277, 572, 188, 73],

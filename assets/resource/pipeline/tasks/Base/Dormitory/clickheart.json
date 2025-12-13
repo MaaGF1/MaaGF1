@@ -15,8 +15,5 @@
 		],
 		"timeout": 60000
 	},
-	"StopTask": {
-		"recognition": "DirectHit",
-		"action": "StopTask"
-	}
+	"StopTask": {"recognition": "DirectHit", "action": "StopTask"}
 }

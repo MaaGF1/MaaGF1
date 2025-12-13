@@ -6,7 +6,7 @@
 	},
 	"静默沙盘炼金_主循环": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"next": [
 			"静默沙盘炼金_剧情对话_00",
@@ -27,11 +27,11 @@
 		"recognition": "OCR",
 		"roi": [40, 50, 35, 20],
 		"expected": "记录",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [1231, 30, 0, 0],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_缩小地图",
@@ -40,7 +40,7 @@
 	},
 	"静默沙盘炼金_缩小地图": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Command",
 		"exec": "powershell",
 		"args": [
@@ -53,7 +53,7 @@
 			"-Direction",
 			"down"
 		],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_地图平移1"
@@ -61,12 +61,12 @@
 	},
 	"静默沙盘炼金_地图平移1": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [280, 600, 1, 1],
 		"end": [1000, 110, 1, 1],
 		"duration": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_地图平移2"
@@ -74,12 +74,12 @@
 	},
 	"静默沙盘炼金_地图平移2": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [280, 600, 1, 1],
 		"end": [1000, 110, 1, 1],
 		"duration": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_部署铁血_已全部部署",
@@ -98,11 +98,11 @@
 		"recognition": "OCR",
 		"roi": [1037, 621, 94, 47],
 		"expected": "开始",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [483, 530, 0, 0],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_部署铁血_R_部署_点击确定",
@@ -114,13 +114,13 @@
 		"recognition": "OCR",
 		"roi": [1141, 612, 86, 50],
 		"expected": "确定",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
 		"target": [1141, 612, 86, 50],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 400,
 		"next": [
 			"静默沙盘炼金_部署铁血_L_点击机场"
@@ -130,13 +130,13 @@
 		"recognition": "OCR",
 		"roi": [1141, 612, 86, 50],
 		"expected": "取消",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
 		"target": [1141, 612, 86, 50],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 400,
 		"next": [
 			"静默沙盘炼金_部署铁血_L_点击机场"
@@ -146,14 +146,14 @@
 		"recognition": "OCR",
 		"roi": [140, 150, 30, 35],
 		"expected": "火",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [300, 95, 0, 0],
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_部署铁血_R_部署_点击确定"
@@ -163,11 +163,11 @@
 		"recognition": "OCR",
 		"roi": [1037, 621, 94, 47],
 		"expected": "开始",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [408, 455, 0, 0],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_部署铁血_L_部署_点击确定",
@@ -179,13 +179,13 @@
 		"recognition": "OCR",
 		"roi": [1141, 612, 86, 50],
 		"expected": "确定",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
 		"target": [1141, 612, 86, 50],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_作战开始"
@@ -195,13 +195,13 @@
 		"recognition": "OCR",
 		"roi": [1141, 612, 86, 50],
 		"expected": "取消",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
 		"target": [1141, 612, 86, 50],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_作战开始"
@@ -211,14 +211,14 @@
 		"recognition": "OCR",
 		"roi": [140, 150, 30, 35],
 		"expected": "火",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [300, 95, 0, 0],
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_部署铁血_L_重装部队_切换到普通梯队"
@@ -226,13 +226,13 @@
 	},
 	"静默沙盘炼金_部署铁血_L_重装部队_切换到普通梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [300, 95, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_部署铁血_L_部署_点击确定"
@@ -242,11 +242,11 @@
 		"recognition": "OCR",
 		"roi": [1042, 624, 88, 45],
 		"expected": "开始",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [1040, 629, 179, 61],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 2000,
 		"next": [
 			"静默沙盘炼金_剧情对话_01",
@@ -257,11 +257,11 @@
 		"recognition": "OCR",
 		"roi": [240, 560, 80, 35],
 		"expected": "指挥官",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [1231, 30, 0, 0],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_任务简报",
@@ -272,42 +272,42 @@
 		"recognition": "OCR",
 		"roi": [260, 185, 70, 50],
 		"expected": "任务",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [97, 122, 0, 0],
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_Begin",
 			"静默沙盘炼金_任务简报"
 		]
 	},
- // 第一轮战斗 Begin
+	// 第一轮战斗 Begin
 	"静默沙盘炼金_战斗阶段_计划模式_1_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [305, 605, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_Begin"
 		]
 	},
- /// 计划模式 Begin
+	/// 计划模式 Begin
 	"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [80, 630, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_生效判断"
@@ -315,11 +315,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_生效判断": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_检查是否进入计划模式",
@@ -331,12 +331,12 @@
 		"template": "./sandbox_resource/04_planning_cropped.png",
 		"roi": [1100, 640, 100, 50],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击梯队"
@@ -344,27 +344,27 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_重新点击": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_点击计划_Begin"
 		]
 	},
- /// 计划模式 End
- /// 梯队R Begin
+	/// 计划模式 End
+	/// 梯队R Begin
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [483, 530, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击目标地点"
@@ -372,13 +372,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击目标地点": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [560, 530, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击空白位置"
@@ -386,29 +386,29 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_R_点击空白位置": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [305, 605, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队"
 		]
 	},
- /// 梯队R End
- /// 梯队L Begin
+	/// 梯队R End
+	/// 梯队L Begin
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [408, 455, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队_鼠标抬起"
@@ -416,11 +416,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点"
@@ -428,13 +428,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [408, 380, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点_鼠标抬起"
@@ -442,11 +442,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置"
@@ -454,13 +454,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [305, 605, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置_鼠标抬起"
@@ -468,11 +468,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队"
@@ -480,13 +480,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [747, 192, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队地图平移",
@@ -497,12 +497,12 @@
 		"recognition": "OCR",
 		"roi": [551, 537, 61, 28],
 		"expected": "3000",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [263, 694, 1, 1],
 		"end": [1192, 56, 1, 1],
 		"duration": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队"
@@ -510,11 +510,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R"
@@ -522,13 +522,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [860, 225, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R_鼠标抬起"
@@ -536,11 +536,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U"
@@ -548,13 +548,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [785, 82, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U_鼠标抬起"
@@ -562,11 +562,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_返回初始位置"
@@ -574,13 +574,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_返回初始位置": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 100,
 		"target": [747, 192, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_返回初始位置地图平移",
@@ -591,12 +591,12 @@
 		"recognition": "OCR",
 		"roi": [542, 525, 76, 60],
 		"expected": "3000",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [263, 694, 1, 1],
 		"end": [1192, 56, 1, 1],
 		"duration": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_回合判断"
@@ -604,11 +604,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_返回初始位置_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_回合判断"
@@ -616,42 +616,42 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_回合判断": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_检查回合5",
 			"静默沙盘炼金_战斗阶段_计划模式_1_继续循环"
 		]
 	},
- // if 剩余回合 == 5，则进行计划
+	// if 剩余回合 == 5，则进行计划
 	"静默沙盘炼金_战斗阶段_计划模式_1_检查回合5": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/04_end5_cropped.png",
 		"roi": [1000, 660, 50, 50],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_执行计划"
 		]
 	},
- // else 剩余回合 != 5，重新执行计划模式
+	// else 剩余回合 != 5，重新执行计划模式
 	"静默沙盘炼金_战斗阶段_计划模式_1_继续循环": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_地图平移"
@@ -659,12 +659,12 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_地图平移": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [263, 694, 1, 1],
 		"end": [1192, 56, 1, 1],
 		"duration": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_Begin"
@@ -672,30 +672,30 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_执行计划": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [1185, 675, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 10000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_制造补给_判断"
 		]
 	},
- // 第一轮战斗 第一轮战斗End
+	// 第一轮战斗 第一轮战斗End
 	"静默沙盘炼金_战斗阶段_指挥官_制造补给_判断": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/05_create_cropped.png",
 		"roi": [30, 430, 100, 40],
 		"threshold": 0.8,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_制造补给_点击制造"
@@ -703,44 +703,44 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_制造补给_点击制造": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [100, 520, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 3000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_地图平移",
 			"静默沙盘炼金_战斗阶段_计划模式_2_Begin"
 		]
 	},
- // 第二轮战斗 Begin
+	// 第二轮战斗 Begin
 	"静默沙盘炼金_战斗阶段_计划模式_2_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [305, 605, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_Begin"
 		]
 	},
- /// 计划模式 Begin
+	/// 计划模式 Begin
 	"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [80, 630, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_生效判断"
@@ -748,11 +748,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_生效判断": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_检查是否进入计划模式",
@@ -764,12 +764,12 @@
 		"template": "./sandbox_resource/04_planning_cropped.png",
 		"roi": [1100, 640, 100, 50],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队"
@@ -777,26 +777,26 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_重新点击": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_点击计划_Begin"
 		]
 	},
- /// 计划模式 End
+	/// 计划模式 End
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [750, 191, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队_twice"
@@ -804,13 +804,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队_twice": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [750, 191, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点"
@@ -818,11 +818,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队_twice_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点"
@@ -830,13 +830,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [630, 311, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点_鼠标抬起"
@@ -844,11 +844,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点_鼠标抬起": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_回合判断"
@@ -856,11 +856,11 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_回合判断": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_检查回合2",
@@ -868,50 +868,50 @@
 			"静默沙盘炼金_战斗阶段_计划模式_2_继续循环"
 		]
 	},
- // if 剩余回合 == 2，则进行计划
+	// if 剩余回合 == 2，则进行计划
 	"静默沙盘炼金_战斗阶段_计划模式_2_检查回合2": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/04_end2_cropped.png",
 		"roi": [1000, 660, 50, 50],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_执行计划"
 		]
 	},
- // else if 剩余回合 == 5，取消计划模式 && 重新执行计划模式
+	// else if 剩余回合 == 5，取消计划模式 && 重新执行计划模式
 	"静默沙盘炼金_战斗阶段_计划模式_2_检查回合5": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/04_end5_cropped.png",
 		"roi": [1000, 660, 50, 50],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [80, 630, 0, 0],
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_Begin"
 		]
 	},
- // else 剩余回合 != 2 && != 5，重新执行计划模式
+	// else 剩余回合 != 2 && != 5，重新执行计划模式
 	"静默沙盘炼金_战斗阶段_计划模式_2_继续循环": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_地图平移"
@@ -919,12 +919,12 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_地图平移": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "Swipe",
 		"begin": [263, 694, 1, 1],
 		"end": [1192, 56, 1, 1],
 		"duration": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_Begin"
@@ -932,27 +932,27 @@
 	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_执行计划": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [1185, 675, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 10000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_Begin"
 		]
 	},
- // 第二轮战斗 End
- // 补给铁血 R Begin
+	// 第二轮战斗 End
+	// 补给铁血 R Begin
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_判断_使用装置",
@@ -970,12 +970,12 @@
 		"template": "./sandbox_resource/06_supply_cropped.png",
 		"roi": [30, 430, 100, 40],
 		"threshold": 0.8,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_使用装置"
@@ -983,13 +983,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_使用装置": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [100, 455, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_点击梯队"
@@ -997,13 +997,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [558, 588, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 1000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_补给是否成功"
@@ -1011,56 +1011,56 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_补给是否成功": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 1000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_检查补给状态",
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_重新补给"
 		]
 	},
- // if 右侧（1梯队）补给成功，则开始补给左侧梯队
+	// if 右侧（1梯队）补给成功，则开始补给左侧梯队
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_检查补给状态": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/07_point_1_cropped.png",
 		"roi": [1200, 175, 20, 20],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_Begin"
 		]
 	},
- // else 重新执行右侧补给逻辑
+	// else 重新执行右侧补给逻辑
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_重新补给": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_Begin"
 		]
 	},
- // 补给铁血 R End
- // 补给铁血 L Begin
+	// 补给铁血 R End
+	// 补给铁血 L Begin
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_Begin": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_判断_使用装置",
@@ -1078,12 +1078,12 @@
 		"template": "./sandbox_resource/06_supply_cropped.png",
 		"roi": [30, 430, 100, 40],
 		"threshold": 0.8,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_使用装置"
@@ -1091,13 +1091,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_使用装置": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [100, 455, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_点击梯队"
@@ -1105,13 +1105,13 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_点击梯队": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [408, 433, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_补给是否成功"
@@ -1119,57 +1119,57 @@
 	},
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_补给是否成功": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 1000,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 1000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_检查补给状态",
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_重新补给"
 		]
 	},
- // if 左侧（2梯队）补给成功，尝试结算
+	// if 左侧（2梯队）补给成功，尝试结算
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_检查补给状态": {
 		"recognition": "TemplateMatch",
 		"template": "./sandbox_resource/07_point_2_cropped.png",
 		"roi": [1200, 175, 20, 20],
 		"threshold": 0.9,
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
 		"timeout": 20000,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_结算_点击战役结算"
 		]
 	},
- // else 重新执行右侧补给逻辑
+	// else 重新执行右侧补给逻辑
 	"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_重新补给": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血L_Begin"
 		]
 	},
- // 补给铁血 L End
+	// 补给铁血 L End
 	"静默沙盘炼金_结算_点击战役结算": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [315, 50, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 500,
 		"next": [
 			"静默沙盘炼金_结算_确定"
@@ -1177,13 +1177,13 @@
 	},
 	"静默沙盘炼金_结算_确定": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 200,
 		"target": [740, 500, 0, 0],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 500,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 800,
 		"next": [
 			"静默沙盘炼金_再次作战_1",
@@ -1194,12 +1194,12 @@
 		"recognition": "OCR",
 		"roi": [314, 405, 368, 242],
 		"expected": ["再次作战", "活动"],
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 100,
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"target": [405, 624, 6, 10],
 		"next": [
@@ -1208,13 +1208,13 @@
 	},
 	"静默沙盘炼金_再次作战_2": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_再次作战_3"
@@ -1222,13 +1222,13 @@
 	},
 	"静默沙盘炼金_再次作战_3": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_再次作战_4"
@@ -1236,13 +1236,13 @@
 	},
 	"静默沙盘炼金_再次作战_4": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_再次作战_5"
@@ -1250,13 +1250,13 @@
 	},
 	"静默沙盘炼金_再次作战_5": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_再次作战_6"
@@ -1264,13 +1264,13 @@
 	},
 	"静默沙盘炼金_再次作战_6": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_再次作战_7"
@@ -1278,13 +1278,13 @@
 	},
 	"静默沙盘炼金_再次作战_7": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 50,
 		"target": [405, 624, 6, 10],
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 50,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 50,
 		"next": [
 			"静默沙盘炼金_剧情对话_00",
@@ -1296,10 +1296,10 @@
 		"recognition": "OCR",
 		"roi": [405, 624, 6, 10],
 		"expected": "再次作战",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "LongPress",
 		"duration": 100,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 1000,
 		"target": [366, 610, 100, 27],
 		"next": [
@@ -1309,11 +1309,11 @@
 	},
 	"静默沙盘炼金_输出日志": {
 		"recognition": "DirectHit",
-  // 点击空白位置
+		// 点击空白位置
 		"action": "DoNothing",
-  // "custom_action": "sandbox_runtimes",
+		// "custom_action": "sandbox_runtimes",
 		"pre_delay": 200,
-  // 装备制造会卡一下，这里用暂定3秒
+		// 装备制造会卡一下，这里用暂定3秒
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_主循环"

@@ -1,7 +1,5 @@
 {
-	"!UMP-UX打捞": {
-		"next": "UMP-UX打捞_开始作战"
-	},
+	"!UMP-UX打捞": {"next": "UMP-UX打捞_开始作战"},
 	"UMP-UX打捞_开始作战": {
 		"recognition": "OCR",
 		"roi": [1020, 623, 211, 79],
