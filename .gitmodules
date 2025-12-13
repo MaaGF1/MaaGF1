@@ -4,3 +4,4 @@
 [submodule "tools/maapipeline-format"]
 	path = tools/maapipeline-format
 	url = git@github.com:MaaGF1/MaaPipeline-Format.git
+	branch = master
