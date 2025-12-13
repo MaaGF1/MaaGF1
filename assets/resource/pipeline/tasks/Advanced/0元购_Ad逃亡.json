@@ -236,8 +236,8 @@
 		"action": "LongPress",
 		"target": [1120, 660, 0, 0],
 		"duration": 15,
-		"pre_delay": 500,
-		"post_delay": 500,
+		"pre_delay": 100,
+		"post_delay": 100,
 		"next": [
 			"ad逃亡_结束回合1",
 			"[JumpBack]ad逃亡_结束回合_OCR"
@@ -256,13 +256,6 @@
 		"recognition": "OCR",
 		"roi": [416, 34, 64, 55],
 		"expected": ["01"],
-		"action": "DoNothing",
-		"next": [
-			"ad逃亡_结束回合_点击结束"
-		]
-	},
-	"ad逃亡_结束回合_点击结束": {
-		"recognition": "DirectHit",
 		"action": "LongPress",
 		"target": [1120, 660, 0, 0],
 		"duration": 15,
