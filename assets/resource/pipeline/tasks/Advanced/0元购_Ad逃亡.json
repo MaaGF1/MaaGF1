@@ -241,9 +241,9 @@
 		"next": [
 			"ad逃亡_结束回合1",
 			"[JumpBack]ad逃亡_结束回合"
+			// "[JumpBack]ad逃亡_开始作战"
 		]
 	},
- // "[JumpBack]ad逃亡_开始作战"
 	"ad逃亡_开始作战1": {
 		"recognition": "OCR",
 		"roi": [1002, 604, 277, 115],
