@@ -256,6 +256,7 @@
 		"recognition": "OCR",
 		"roi": [416, 34, 64, 55],
 		"expected": ["01"],
+		"pre_delay": 100,
 		"action": "LongPress",
 		"target": [1120, 660, 0, 0],
 		"duration": 15,
