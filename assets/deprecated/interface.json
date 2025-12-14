@@ -111,7 +111,7 @@
                 "拆解选择"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "基地-兵棋挂机",
@@ -144,7 +144,7 @@
                 "目标梯队一号位人形"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "4-6捡垃圾",
@@ -169,7 +169,7 @@
                 "目标梯队一号位人形"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "0元购",
@@ -180,7 +180,7 @@
                 "0元购关卡"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "Advanced 0元购",
@@ -191,7 +191,7 @@
                 "N分钟后返回基地"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "打捞-人形",
@@ -212,6 +212,46 @@
             "option": [
                 "选择夜战打捞地图"
             ]
+        },
+        {
+            "name": "打捞-虚粒子对",
+            "entry": "!虚粒子对打捞",
+            "check": false,
+            "doc": "进入关卡将地图缩放至最小并拉至左下边缘后部署梯队开始运行",
+            "option": [
+                "虚粒子对_选择打捞目标",
+                "虚粒子对_是否开启结算加速"
+            ],
+            "repeatable": true,
+            "repeat_count": 1
+        },
+        {
+            "name": "打捞-蝴蝶星云",
+            "entry": "!蝴蝶星云打捞",
+            "check": false,
+            "doc": "进入关卡将地图缩放至最小并拉至左下边缘后部署梯队开始运行",
+            "option": [
+                "蝴蝶星云_选择打捞目标",
+                "蝴蝶星云_是否开启结算加速"
+            ],
+            "repeatable": true,
+            "repeat_count": 4
+        },
+        {
+            "name": "打捞-零态潮汐",
+            "entry": "!零态潮汐打捞",
+            "check": false,
+            "doc": "进入关卡将地图缩放至最小并拉至左下边缘后部署梯队开始运行",
+            "option": [
+                "零态潮汐_选择打捞目标",
+                "零态潮汐_是否开启结算加速",
+                "部署梯队选择"
+            ],
+            "advanced": [
+                "目标梯队一号位人形"
+            ],
+            "repeatable": true,
+            "repeat_count": 4
         },
         {
             "name": "Farm-炼金",
@@ -254,7 +294,7 @@
                 "循演EX选择打捞路线{横排从上往下}"
             ],
             "repeatable": true,
-            "repeat_count": -1
+            "repeat_count": 9999
         },
         {
             "name": "循演战役夜战打捞",
@@ -821,7 +861,7 @@
             "inputs": [
                 {
                     "name": "N分钟后返回基地",
-                    "default": "30",
+                    "default": "99999",
                     "pipeline_type": "int"
                 }
             ],
@@ -1499,6 +1539,306 @@
                 }
             ]
         },
+        "虚粒子对_选择打捞目标": {
+            "cases": [
+                {
+                    "name": "左一 M1895 CB"
+                },
+                {
+                    "name": "左二 Cx4风暴",
+                    "pipeline_override": {
+                        "虚粒子对_计划点": {
+                            "target": [
+                                651,
+                                118,
+                                9,
+                                11
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "左三 SRS",
+                    "pipeline_override": {
+                        "虚粒子对_点击梯队": {
+                            "target": [
+                                779,
+                                495,
+                                6,
+                                13
+                            ]
+                        },
+                        "虚粒子对_计划点": {
+                            "target": [
+                                651,
+                                118,
+                                9,
+                                11
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "左四 AK-74U",
+                    "pipeline_override": {
+                        "虚粒子对_点击梯队": {
+                            "target": [
+                                779,
+                                495,
+                                6,
+                                13
+                            ]
+                        },
+                        "虚粒子对_计划点": {
+                            "target": [
+                                906,
+                                120,
+                                6,
+                                9
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右一 TKB-408",
+                    "pipeline_override": {
+                        "虚粒子对_点击梯队": {
+                            "target": [
+                                969,
+                                193,
+                                5,
+                                7
+                            ]
+                        },
+                        "虚粒子对_计划点": {
+                            "target": [
+                                968,
+                                496,
+                                7,
+                                8
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "虚粒子对_是否开启结算加速": {
+            "cases": [
+                {
+                    "name": "关闭"
+                },
+                {
+                    "name": "开启",
+                    "pipeline_override": {
+                        "虚粒子对_执行计划": {
+                            "next": [
+                                "虚粒子对_再次作战",
+                                "虚粒子对_执行计划",
+                                "[JumpBack]public_不中断计划",
+                                "[JumpBack]public_加速结算进入"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "蝴蝶星云_选择打捞目标": {
+            "cases": [
+                {
+                    "name": "第一行 FARA 83"
+                },
+                {
+                    "name": "第二行 CZ2000",
+                    "pipeline_override": {
+                        "蝴蝶星云_点击梯队": {
+                            "target": [
+                                460,
+                                262,
+                                11,
+                                11
+                            ]
+                        },
+                        "蝴蝶星云_计划点": {
+                            "target": [
+                                803,
+                                261,
+                                12,
+                                13
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "第三行 SL8",
+                    "pipeline_override": {
+                        "蝴蝶星云_点击梯队": {
+                            "target": [
+                                457,
+                                369,
+                                21,
+                                14
+                            ]
+                        },
+                        "蝴蝶星云_计划点": {
+                            "target": [
+                                805,
+                                369,
+                                12,
+                                14
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "第四行 VHS",
+                    "pipeline_override": {
+                        "蝴蝶星云_点击梯队": {
+                            "target": [
+                                458,
+                                460,
+                                20,
+                                15
+                            ]
+                        },
+                        "蝴蝶星云_计划点": {
+                            "target": [
+                                802,
+                                464,
+                                17,
+                                11
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "蝴蝶星云_是否开启结算加速": {
+            "cases": [
+                {
+                    "name": "关闭"
+                },
+                {
+                    "name": "开启",
+                    "pipeline_override": {
+                        "蝴蝶星云_执行计划": {
+                            "next": [
+                                "蝴蝶星云_再次作战",
+                                "蝴蝶星云_执行计划",
+                                "[JumpBack]public_不中断计划",
+                                "[JumpBack]public_加速结算进入"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "零态潮汐_选择打捞目标": {
+            "cases": [
+                {
+                    "name": "左上 韦伯利"
+                },
+                {
+                    "name": "左中 vp1915",
+                    "pipeline_override": {
+                        "零态潮汐_计划点": {
+                            "target": [
+                                582,
+                                179,
+                                14,
+                                11
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "左下 ots-14",
+                    "pipeline_override": {
+                        "零态潮汐_计划点": {
+                            "target": [
+                                755,
+                                280,
+                                12,
+                                11
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右下 pp-19",
+                    "pipeline_override": {
+                        "零态潮汐_点击梯队": {
+                            "target": [
+                                897,
+                                166,
+                                17,
+                                15
+                            ]
+                        },
+                        "零态潮汐_补给": {
+                            "next": [
+                                "零态潮汐_滑动",
+                                "零态潮汐_补给"
+                            ]
+                        },
+                        "零态潮汐_计划点": {
+                            "target": [
+                                523,
+                                313,
+                                18,
+                                13
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右上 ksvk",
+                    "pipeline_override": {
+                        "零态潮汐_点击梯队": {
+                            "target": [
+                                897,
+                                166,
+                                17,
+                                15
+                            ]
+                        },
+                        "零态潮汐_补给": {
+                            "next": [
+                                "零态潮汐_滑动",
+                                "零态潮汐_补给"
+                            ]
+                        },
+                        "零态潮汐_计划点": {
+                            "target": [
+                                660,
+                                247,
+                                14,
+                                11
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "零态潮汐_是否开启结算加速": {
+            "cases": [
+                {
+                    "name": "关闭"
+                },
+                {
+                    "name": "开启",
+                    "pipeline_override": {
+                        "零态潮汐_执行计划": {
+                            "next": [
+                                "零态潮汐_再次作战",
+                                "零态潮汐_执行计划",
+                                "[JumpBack]public_不中断计划",
+                                "[JumpBack]public_加速结算进入"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
         "选择夜战打捞地图": {
             "cases": [
                 {
@@ -1879,6 +2219,22 @@
         },
         "Alchemy_Task_List": {
             "cases": [
+                {
+                    "name": "潘洛斯",
+                    "pipeline_override": {
+                        "!Alchemy_Entry": {
+                            "next": "潘_炼金"
+                        }
+                    }
+                },
+                {
+                    "name": "静默沙盘",
+                    "pipeline_override": {
+                        "!Alchemy_Entry": {
+                            "next": "!静默沙盘炼金_Entry"
+                        }
+                    }
+                },
                 {
                     "name": "向你微笑炼金(仙贝版)",
                     "pipeline_override": {
