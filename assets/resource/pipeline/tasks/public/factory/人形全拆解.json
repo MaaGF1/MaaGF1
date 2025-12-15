@@ -2,7 +2,7 @@
 	"public拆人形_人形回收": {
 		"recognition": "OCR",
 		"expected": "人形回收",
-		"roi": [191, 296, 891, 59],
+		"roi": [194, 264, 897, 155],
 		"action": "LongPress",
 		"duration": 20,
 		"next": [

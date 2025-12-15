@@ -1,7 +1,7 @@
 {
 	"public装备强化_装备强化": {
 		"recognition": "OCR",
-		"roi": [191, 296, 891, 59],
+		"roi": [194, 264, 897, 155],
 		"expected": ["装备强化"],
 		"action": "LongPress",
 		"duration": 20,
