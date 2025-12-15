@@ -1248,10 +1248,9 @@
                     "pipeline_override": {
                         "循演_执行计划": {
                             "post_delay": 8000,
-		                    "timeout": 150000,
-		                    "rate_limit": 2000,
-		                    "interrupt": [
-		                    ]
+                            "timeout": 150000,
+                            "rate_limit": 2000,
+                            "interrupt": []
                         }
                     }
                 }
@@ -1263,8 +1262,18 @@
                     "name": "手动校准",
                     "pipeline_override": {
                         "循演_部署": {
-		                    "target": [852, 223, 20, 21],
-		                    "target_offset": [0, 0, 0, 0]
+                            "target": [
+                                852,
+                                223,
+                                20,
+                                21
+                            ],
+                            "target_offset": [
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
                         }
                     }
                 },
