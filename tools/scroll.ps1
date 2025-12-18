@@ -76,15 +76,28 @@ public class MouseWheelHelper {
     
     # Find by process name if method 1 failed
     if ($gameWindow -eq [System.IntPtr]::Zero) {
-        $processes = Get-Process -Name "GrilsFrontLine" -ErrorAction SilentlyContinue
-        if ($processes) {
-            foreach ($process in $processes) {
-                if ($process.MainWindowHandle -ne [System.IntPtr]::Zero) {
-                    $gameWindow = $process.MainWindowHandle
-                    $foundTitle = $process.MainWindowTitle
-                    Write-Host "Found via process: $($process.MainWindowTitle)"
-                    break
+        
+        # Name List
+        $targetProcessNames = @("GrilsFrontLine", "GirlsFrontLine")
+        
+        foreach ($procName in $targetProcessNames) {
+            Write-Host "Checking process name: $procName ..."
+            $processes = Get-Process -Name $procName -ErrorAction SilentlyContinue
+            
+            if ($processes) {
+                foreach ($process in $processes) {
+                    if ($process.MainWindowHandle -ne [System.IntPtr]::Zero) {
+                        $gameWindow = $process.MainWindowHandle
+                        $foundTitle = $process.MainWindowTitle
+                        Write-Host "Found via process ($procName): $($process.MainWindowTitle)"
+                        break
+                    }
                 }
+            }
+            
+            # If find, then break
+            if ($gameWindow -ne [System.IntPtr]::Zero) {
+                break
             }
         }
     }
