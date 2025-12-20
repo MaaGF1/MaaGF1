@@ -1,134 +1,82 @@
 {
-  "灰域_彩蛋_奇遇之地": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "奇遇之地"
-        ],
-        "roi": [
-          381,
-          280,
-          213,
-          62
-        ]
-      }
-    },
-    "action": {
-      "type": "DoNothing",
-      "param": {}
-    },
-    "next": [
-      "灰域_彩蛋_代理中",
-      {
-        "name": "灰域_终止代理_取消",
-        "jump_back": true
-      }
-    ]
-  },
-  "灰域_彩蛋_代理中": {
-    "recognition": {
-      "type": "ColorMatch",
-      "param": {
-        "roi": [
-          1164,
-          29,
-          67,
-          46
-        ],
-        "lower": [
-          [
-            197,
-            64,
-            18
-          ]
-        ],
-        "upper": [
-          [
-            237,
-            104,
-            58
-          ]
-        ],
-        "count": 100
-      }
-    },
-    "action": {
-      "type": "DoNothing",
-      "param": {}
-    },
-    "next": [
-      "灰域_彩蛋_关卡结束",
-      {
-        "name": "灰域_彩蛋_作战中",
-        "jump_back": true
-      },
-      "灰域_彩蛋_代理中"
-    ]
-  },
-  "灰域_彩蛋_作战中": {
-    "recognition": {
-      "type": "ColorMatch",
-      "param": {
-        "roi": [
-          810,
-          98,
-          90,
-          45
-        ],
-        "lower": [
-          [
-            197,
-            64,
-            18
-          ]
-        ],
-        "upper": [
-          [
-            237,
-            104,
-            58
-          ]
-        ],
-        "count": 100
-      }
-    },
-    "action": {
-      "type": "DoNothing",
-      "param": {}
-    }
-  },
-  "灰域_彩蛋_关卡结束": {
-    "recognition": {
-      "type": "ColorMatch",
-      "param": {
-        "roi": [
-          1139,
-          115,
-          94,
-          58
-        ],
-        "lower": [
-          [
-            197,
-            64,
-            18
-          ]
-        ],
-        "upper": [
-          [
-            237,
-            104,
-            58
-          ]
-        ],
-        "count": 1000,
-        "connected": true
-      }
-    },
-    "action": {
-      "type": "DoNothing",
-      "param": {}
-    }
-  }
+	"灰域_彩蛋_奇遇之地": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["奇遇之地"],
+				"roi": [381, 280, 213, 62]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_彩蛋_代理中",
+			{"name": "灰域_终止代理_取消", "jump_back": true}
+		]
+	},
+	"灰域_彩蛋_代理中": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1164, 29, 67, 46],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 100
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_彩蛋_关卡结束",
+			{"name": "灰域_彩蛋_作战中", "jump_back": true},
+			"灰域_彩蛋_代理中"
+		]
+	},
+	"灰域_彩蛋_作战中": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [810, 98, 90, 45],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 100
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		}
+	},
+	"灰域_彩蛋_关卡结束": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1139, 115, 94, 58],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 1000,
+				"connected": true
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		}
+	}
 }

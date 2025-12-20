@@ -1,584 +1,341 @@
 {
-  "灰域_计划模式_进入": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "当前",
-          "积分"
-        ],
-        "roi": [
-          269,
-          606,
-          228,
-          43
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          53,
-          348,
-          37,
-          39
-        ],
-        "duration": 20
-      }
-    },
-    "post_wait_freezes": 100
-  },
-  "灰域_刷新_进入": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "当前",
-          "积分"
-        ],
-        "roi": [
-          269,
-          606,
-          228,
-          43
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          153,
-          618,
-          33,
-          24
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_计划模式_返回": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "计划模式"
-        ],
-        "roi": [
-          558,
-          644,
-          172,
-          36
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          53,
-          348,
-          37,
-          39
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_刷新_难度选择": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "难度选择"
-        ],
-        "roi": [
-          591,
-          17,
-          196,
-          62
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          1018,
-          374,
-          68,
-          54
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_刷新_重置确定": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "确定"
-        ],
-        "roi": [
-          724,
-          470,
-          91,
-          53
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_主页_进入": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "灰域",
-          "探查"
-        ],
-        "roi": [
-          792,
-          485,
-          469,
-          120
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_导航栏_进入": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "探查"
-        ],
-        "roi": [
-          1101,
-          626,
-          133,
-          60
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_导航栏_灰域探查": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "灰域",
-          "探查"
-        ],
-        "roi": [
-          47,
-          464,
-          131,
-          73
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_主界面_火力点位1判断": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "当前",
-          "积分"
-        ],
-        "roi": [
-          269,
-          606,
-          228,
-          43
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          413,
-          675,
-          15,
-          14
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_主界面_火力点位2判断": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "当前",
-          "积分"
-        ],
-        "roi": [
-          269,
-          606,
-          228,
-          43
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          897,
-          677,
-          6,
-          5
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_主界面_点位关闭": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "点位"
-        ],
-        "roi": [
-          252,
-          99,
-          291,
-          77
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          1161,
-          164,
-          76,
-          45
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_炸山1_计划点1": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "计划模式_日.png"
-        ],
-        "roi": [
-          884,
-          62,
-          34,
-          53
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.6
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20,
-        "target_offset": [
-          -38,
-          18,
-          2,
-          -1
-        ]
-      }
-    },
-    "post_wait_freezes": 100
-  },
-  "灰域_炸山1_计划点2": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "计划模式_日.png"
-        ],
-        "roi": [
-          796,
-          88,
-          43,
-          60
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.6
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20,
-        "target_offset": [
-          -38,
-          18,
-          2,
-          -1
-        ]
-      }
-    },
-    "post_wait_freezes": 100
-  },
-  "灰域_炸山2_计划点1": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "计划模式_日.png"
-        ],
-        "roi": [
-          943,
-          101,
-          49,
-          63
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.6
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20,
-        "target_offset": [
-          -38,
-          18,
-          2,
-          -1
-        ]
-      }
-    },
-    "post_wait_freezes": 100
-  },
-  "灰域_炸山2_计划点2": {
-    "recognition": {
-      "type": "TemplateMatch",
-      "param": {
-        "template": [
-          "计划模式_日.png"
-        ],
-        "roi": [
-          955,
-          178,
-          42,
-          56
-        ],
-        "green_mask": true,
-        "threshold": [
-          0.6
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20,
-        "target_offset": [
-          -38,
-          18,
-          2,
-          -1
-        ]
-      }
-    },
-    "post_wait_freezes": 100
-  },
-  "灰域_计划模式_运行": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "计划模式"
-        ],
-        "roi": [
-          562,
-          649,
-          157,
-          29
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          562,
-          649,
-          157,
-          29
-        ],
-        "duration": 20
-      }
-    }
-  },
-  "灰域_代理作战_确认": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "确认"
-        ],
-        "roi": [
-          900,
-          475,
-          108,
-          64
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_执行代理作战": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "代理作战"
-        ],
-        "roi": [
-          846,
-          638,
-          142,
-          60
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_代理结束": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "已完成"
-        ],
-        "roi": [
-          1011,
-          614,
-          124,
-          53
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target_offset": [
-          207,
-          4,
-          -93,
-          -13
-        ]
-      }
-    }
-  },
-  "灰域_终止代理_取消": {
-    "recognition": {
-      "type": "OCR",
-      "param": {
-        "expected": [
-          "取消"
-        ],
-        "roi": [
-          392,
-          468,
-          217,
-          58
-        ]
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "duration": 20
-      }
-    }
-  },
-  "灰域_代理_扣除许可证资源": {
-    "recognition": {
-      "type": "ColorMatch",
-      "param": {
-        "roi": [
-          1105,
-          204,
-          22,
-          20
-        ],
-        "lower": [
-          [
-            245,
-            245,
-            245
-          ]
-        ],
-        "upper": [
-          255,
-          255,
-          255
-        ],
-        "count": 20
-      }
-    },
-    "action": {
-      "type": "LongPress",
-      "param": {
-        "target": [
-          1105,
-          242,
-          24,
-          22
-        ],
-        "duration": 20
-      }
-    }
-  }
+	"灰域_计划模式_进入": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [53, 348, 37, 39],
+				"duration": 20
+			}
+		},
+		"post_wait_freezes": 100
+	},
+	"灰域_刷新_进入": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [153, 618, 33, 24],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_计划模式_返回": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["计划模式"],
+				"roi": [558, 644, 172, 36]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [53, 348, 37, 39],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_刷新_难度选择": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["难度选择"],
+				"roi": [591, 17, 196, 62]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [1018, 374, 68, 54],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_刷新_重置确定": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["确定"],
+				"roi": [724, 470, 91, 53]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_主页_进入": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["灰域", "探查"],
+				"roi": [792, 485, 469, 120]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_导航栏_进入": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["探查"],
+				"roi": [1101, 626, 133, 60]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_导航栏_灰域探查": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["灰域", "探查"],
+				"roi": [47, 464, 131, 73]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_主界面_火力点位1判断": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [413, 675, 15, 14],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_主界面_火力点位2判断": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [897, 677, 6, 5],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_主界面_点位关闭": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["点位"],
+				"roi": [252, 99, 291, 77]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [1161, 164, 76, 45],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_炸山1_计划点1": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"计划模式_日.png"
+				],
+				"roi": [884, 62, 34, 53],
+				"green_mask": true,
+				"threshold": [0.6]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-38, 18, 2, -1]
+			}
+		},
+		"post_wait_freezes": 100
+	},
+	"灰域_炸山1_计划点2": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"计划模式_日.png"
+				],
+				"roi": [796, 88, 43, 60],
+				"green_mask": true,
+				"threshold": [0.6]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-38, 18, 2, -1]
+			}
+		},
+		"post_wait_freezes": 100
+	},
+	"灰域_炸山2_计划点1": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"计划模式_日.png"
+				],
+				"roi": [943, 101, 49, 63],
+				"green_mask": true,
+				"threshold": [0.6]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-38, 18, 2, -1]
+			}
+		},
+		"post_wait_freezes": 100
+	},
+	"灰域_炸山2_计划点2": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"计划模式_日.png"
+				],
+				"roi": [955, 178, 42, 56],
+				"green_mask": true,
+				"threshold": [0.6]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-38, 18, 2, -1]
+			}
+		},
+		"post_wait_freezes": 100
+	},
+	"灰域_计划模式_运行": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["计划模式"],
+				"roi": [562, 649, 157, 29]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [562, 649, 157, 29],
+				"duration": 20
+			}
+		}
+	},
+	"灰域_代理作战_确认": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["确认"],
+				"roi": [900, 475, 108, 64]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_执行代理作战": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["代理作战"],
+				"roi": [846, 638, 142, 60]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_代理结束": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["已完成"],
+				"roi": [1011, 614, 124, 53]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target_offset": [207, 4, -93, -13]
+			}
+		}
+	},
+	"灰域_终止代理_取消": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["取消"],
+				"roi": [392, 468, 217, 58]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_代理_扣除许可证资源": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1105, 204, 22, 20],
+				"lower": [
+					[245, 245, 245]
+				],
+				"upper": [255, 255, 255],
+				"count": 20
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"target": [1105, 242, 24, 22],
+				"duration": 20
+			}
+		}
+	}
 }
