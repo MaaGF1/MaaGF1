@@ -88,7 +88,7 @@
 	"4_6捡垃圾_第四战役选中": {
 		"recognition": "OCR",
 		"roi": [295, 196, 87, 523],
-		"expected": "04",
+		"expected": "4",
 		"next": [
 			"4_6捡垃圾_普通难度选中",
 			"4_6捡垃圾_普通难度选择"
@@ -97,7 +97,7 @@
 	"4_6捡垃圾_普通难度选择": {
 		"recognition": "OCR",
 		"roi": [295, 196, 87, 523],
-		"expected": "04",
+		"expected": "4",
 		"action": "LongPress",
 		"duration": 20,
 		"target": [969, 179, 29, 16],
