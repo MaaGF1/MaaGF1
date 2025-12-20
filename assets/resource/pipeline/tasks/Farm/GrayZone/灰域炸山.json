@@ -290,7 +290,7 @@
 					"./dlz_greyzone/炸山_角标.png"
 				],
 				"green_mask": true,
-				"threshold": [0.40]
+				"threshold": [0.4]
 			}
 		},
 		"action": {
