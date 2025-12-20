@@ -1,98 +1,397 @@
 {
 	"错误处理": {
-		"next": [
-			"错误_返回作战",
-			"错误_游戏主页",
-			"[JumpBack]错误_游戏登录",
-			"[JumpBack]错误_进入游戏",
-			"[JumpBack]错误_后勤出征",
-			"[JumpBack]错误_持续返回游戏主页"
-		]
+	  "recognition": {
+		"type": "DirectHit",
+		"param": {}
+	  },
+	  "action": {
+		"type": "DoNothing",
+		"param": {}
+	  },
+	  "next": [
+		"错误_游戏主页",
+		{
+		  "name": "错误_游戏登录",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_进入游戏",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_后勤出征",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_关闭代理_确定",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_弹粮耗尽",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_战斗结束界面",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_持续返回游戏主页",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_返回作战",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_关闭代理",
+		  "jump_back": true
+		}
+	  ]
 	},
 	"错误_游戏主页": {
-		"recognition": "OCR",
-		"expected": "战斗",
-		"roi": [899, 384, 126, 81],
-		"post_delay": 1000
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": "战斗",
+		  "roi": [
+			899,
+			384,
+			126,
+			81
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "DoNothing",
+		"param": {}
+	  },
+	  "post_delay": 1000
 	},
 	"错误_游戏登录": {
-		"recognition": "OCR",
-		"expected": "登录",
-		"roi": [600, 400, 78, 53],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 1000
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": "登录",
+		  "roi": [
+			600,
+			400,
+			78,
+			53
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  },
+	  "post_delay": 1000
 	},
 	"错误_进入游戏": {
-		"recognition": "OCR",
-		"expected": "开始",
-		"roi": [532, 565, 213, 112],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 1000
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": "开始",
+		  "roi": [
+			532,
+			565,
+			213,
+			112
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  },
+	  "post_delay": 1000
 	},
 	"错误_返回作战": {
-		"recognition": "OCR",
-		"expected": ["返回", "作战"],
-		"roi": [1105, 519, 155, 62],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 1000,
-		"next": [
-			"错误_终止作战",
-			"错误_返回作战"
-		]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"返回",
+			"作战"
+		  ],
+		  "roi": [
+			1105,
+			519,
+			155,
+			62
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  },
+	  "post_delay": 1000,
+	  "next": [
+		{
+		  "name": "错误_重新作战",
+		  "jump_back": true
+		},
+		{
+		  "name": "错误_终止作战",
+		  "jump_back": true
+		},
+		"错误_开始作战界面"
+	  ]
 	},
 	"错误_终止作战": {
-		"recognition": "OCR",
-		"roi": [267, 43, 96, 41],
-		"expected": ["终止", "作战"],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"错误_重新作战",
-			"错误_终止作战"
-		]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "roi": [
+			267,
+			43,
+			96,
+			41
+		  ],
+		  "expected": [
+			"终止",
+			"作战"
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  }
 	},
 	"错误_重新作战": {
-		"recognition": "OCR",
-		"expected": ["重新", "作战"],
-		"roi": [421, 464, 138, 55],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"错误_开始作战界面",
-			"错误_重新作战"
-		]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"重新",
+			"作战"
+		  ],
+		  "roi": [
+			421,
+			464,
+			138,
+			55
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  }
 	},
 	"错误_开始作战界面": {
-		"recognition": "OCR",
-		"expected": ["开始", "作战"],
-		"roi": [1042, 617, 182, 71]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"开始",
+			"作战"
+		  ],
+		  "roi": [
+			1042,
+			617,
+			182,
+			71
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "DoNothing",
+		"param": {}
+	  }
 	},
-	"错误_持续返回游戏主页": {"action": "Key", "key": 27, "post_delay": 1000},
+	"错误_弹粮耗尽": {
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": "取消",
+		  "roi": [
+			504,
+			465,
+			92,
+			59
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  }
+	},
+	"错误_持续返回游戏主页": {
+	  "recognition": {
+		"type": "DirectHit",
+		"param": {}
+	  },
+	  "action": {
+		"type": "Key",
+		"param": {
+		  "key": 27
+		}
+	  },
+	  "post_delay": 1000
+	},
 	"错误_后勤出征": {
-		"recognition": "OCR",
-		"expected": ["后勤", "支援"],
-		"roi": [142, 13, 183, 51],
-		"action": "LongPress",
-		"duration": 20,
-		"target": [1112, 667, 52, 20],
-		"next": [
-			"错误_游戏主页",
-			"错误_后勤出征确定",
-			"错误_后勤出征"
-		]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"后勤",
+			"支援"
+		  ],
+		  "roi": [
+			142,
+			13,
+			183,
+			51
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20,
+		  "target": [
+			1112,
+			667,
+			52,
+			20
+		  ]
+		}
+	  },
+	  "next": [
+		"错误_游戏主页",
+		"错误_后勤出征确定",
+		"错误_后勤出征"
+	  ]
 	},
 	"错误_后勤出征确定": {
-		"recognition": "OCR",
-		"expected": "确定",
-		"roi": [732, 472, 82, 49],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"错误_游戏主页",
-			"错误_后勤出征确定"
-		]
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": "确定",
+		  "roi": [
+			732,
+			472,
+			82,
+			49
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  },
+	  "next": [
+		"错误_游戏主页",
+		"错误_后勤出征确定"
+	  ]
+	},
+	"错误_战斗结束界面": {
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"级"
+		  ],
+		  "roi": [
+			0,
+			597,
+			135,
+			121
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20,
+		  "target": [
+			372,
+			615,
+			1,
+			1
+		  ]
+		}
+	  }
+	},
+	"错误_关闭代理": {
+	  "recognition": {
+		"type": "ColorMatch",
+		"param": {
+		  "roi": [
+			1139,
+			29,
+			94,
+			144
+		  ],
+		  "lower": [
+			[
+			  197,
+			  64,
+			  18
+			]
+		  ],
+		  "upper": [
+			[
+			  237,
+			  104,
+			  58
+			]
+		  ],
+		  "count": 1000,
+		  "connected": true
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20
+		}
+	  }
+	},
+	"错误_关闭代理_确定": {
+	  "recognition": {
+		"type": "OCR",
+		"param": {
+		  "expected": [
+			"中断",
+			"计划"
+		  ],
+		  "roi": [
+			743,
+			279,
+			212,
+			69
+		  ]
+		}
+	  },
+	  "action": {
+		"type": "LongPress",
+		"param": {
+		  "duration": 20,
+		  "target": [
+			724,
+			471,
+			93,
+			50
+		  ]
+		}
+	  }
 	}
-}
+  }

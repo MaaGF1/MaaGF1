@@ -1,0 +1,725 @@
+{
+  "灰域_总流程": {
+    "recognition": {
+      "type": "DirectHit",
+      "param": {}
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "pre_delay": 0,
+    "post_delay": 0,
+    "timeout": 1000,
+    "next": [
+      "灰域_界面",
+      {
+        "name": "灰域_主页_进入",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_导航栏_进入",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_导航栏_灰域探查",
+        "jump_back": true
+      }
+    ],
+    "on_error": [
+      {
+        "name": "错误处理",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_界面": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "当前",
+          "积分"
+        ],
+        "roi": [
+          269,
+          606,
+          228,
+          43
+        ],
+        "threshold": 0.95
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "post_wait_freezes": 100,
+    "next": [
+      "灰域_右上角左侧判断",
+      "灰域_刷新难度"
+    ]
+  },
+  "灰域_刷新难度": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "当前",
+          "积分"
+        ],
+        "roi": [
+          269,
+          606,
+          228,
+          43
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_难度选择",
+      {
+        "name": "灰域_刷新_进入",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_难度选择": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "难度选择"
+        ],
+        "roi": [
+          591,
+          17,
+          196,
+          62
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_界面",
+      {
+        "name": "灰域_刷新_重置确定",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_刷新_难度选择",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_右上角左侧判断": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          180,
+          324,
+          109,
+          77
+        ],
+        "lower": [
+          [
+            81,
+            10,
+            49
+          ]
+        ],
+        "upper": [
+          [
+            121,
+            50,
+            89
+          ]
+        ],
+        "count": 2000,
+        "connected": true
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_右上角上方判断",
+      "灰域_刷新难度"
+    ]
+  },
+  "灰域_右上角右侧判断": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          980,
+          345,
+          113,
+          105
+        ],
+        "lower": [
+          [
+            81,
+            10,
+            49
+          ]
+        ],
+        "upper": [
+          [
+            121,
+            50,
+            89
+          ]
+        ],
+        "count": 2000,
+        "connected": true
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_火力点位1",
+      {
+        "name": "灰域_主界面_火力点位1判断",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_火力点位1": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "点位"
+        ],
+        "roi": [
+          252,
+          99,
+          291,
+          77
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山关判断1",
+      "灰域_点位1_点位关闭",
+      {
+        "name": "灰域_主界面_点位关闭",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_火力点位2": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "点位"
+        ],
+        "roi": [
+          252,
+          99,
+          291,
+          77
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山关判断2",
+      "灰域_点位2_点位关闭",
+      {
+        "name": "灰域_主界面_点位关闭",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山关判断1": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          990,
+          465,
+          6,
+          6
+        ],
+        "lower": [
+          [
+            65,
+            65,
+            65
+          ]
+        ],
+        "upper": [
+          [
+            95,
+            95,
+            95
+          ]
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山1_计划模式",
+      {
+        "name": "灰域_主界面_点位关闭",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_计划模式_进入",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山关判断2": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          990,
+          465,
+          6,
+          6
+        ],
+        "lower": [
+          [
+            65,
+            65,
+            65
+          ]
+        ],
+        "upper": [
+          [
+            95,
+            95,
+            95
+          ]
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山2_计划模式",
+      {
+        "name": "灰域_主界面_点位关闭",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_计划模式_进入",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_点位1_点位关闭": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "点位"
+        ],
+        "roi": [
+          252,
+          99,
+          291,
+          77
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "inverse": true,
+    "next": [
+      "灰域_火力点位2",
+      {
+        "name": "灰域_主界面_火力点位2判断",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_点位2_点位关闭": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "点位"
+        ],
+        "roi": [
+          252,
+          99,
+          291,
+          77
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "inverse": true,
+    "next": [
+      "灰域_刷新难度"
+    ]
+  },
+  "灰域_炸山1_计划模式": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "计划模式"
+        ],
+        "roi": [
+          558,
+          644,
+          172,
+          36
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "post_wait_freezes": 100,
+    "anchor": [
+      "计划模式"
+    ],
+    "next": [
+      "灰域_炸山1_计划点2判断",
+      {
+        "name": "灰域_代理_扣除许可证资源",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_炸山1_计划点1",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_炸山1_计划点2",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山2_计划模式": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "计划模式"
+        ],
+        "roi": [
+          558,
+          644,
+          172,
+          36
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "post_wait_freezes": 100,
+    "anchor": [
+      "计划模式"
+    ],
+    "next": [
+      "灰域_炸山2_计划点2判断",
+      {
+        "name": "灰域_代理_扣除许可证资源",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_炸山2_计划点1",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_炸山2_计划点2",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山1_计划点2判断": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          757,
+          106,
+          59,
+          69
+        ],
+        "lower": [
+          [
+            206,
+            77,
+            0
+          ]
+        ],
+        "upper": [
+          [
+            246,
+            117,
+            25
+          ]
+        ],
+        "count": 100
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山_代理中",
+      {
+        "name": "灰域_计划模式_运行",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山2_计划点2判断": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          919,
+          178,
+          60,
+          69
+        ],
+        "lower": [
+          [
+            206,
+            77,
+            0
+          ]
+        ],
+        "upper": [
+          [
+            246,
+            117,
+            25
+          ]
+        ],
+        "count": 100
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_炸山_代理中",
+      {
+        "name": "灰域_计划模式_运行",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_炸山_代理中": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1144,
+          120,
+          86,
+          48
+        ],
+        "lower": [
+          [
+            197,
+            64,
+            18
+          ]
+        ],
+        "upper": [
+          [
+            237,
+            104,
+            58
+          ]
+        ],
+        "count": 100
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_人形回收",
+      "灰域_代理已完成",
+      {
+        "name": "灰域_普通关卡_流程",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_炸山_流程",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_彩蛋_奇遇之地",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_代理已完成": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "已完成"
+        ],
+        "roi": [
+          1011,
+          614,
+          124,
+          53
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_刷新难度",
+      {
+        "name": "灰域_代理结束",
+        "jump_back": true
+      }
+    ]
+  },
+  "灰域_人形回收": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "人形回收"
+        ],
+        "roi": [
+          545,
+          303,
+          128,
+          50
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      {
+        "name": "public二星人形回收_人形回收",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_计划模式_进入",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_导航栏_进入",
+        "jump_back": true
+      },
+      {
+        "name": "灰域_导航栏_灰域探查",
+        "jump_back": true
+      },
+      "灰域_重返计划模式"
+    ]
+  },
+  "灰域_重返计划模式": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "计划模式"
+        ],
+        "roi": [
+          558,
+          644,
+          172,
+          36
+        ]
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "post_wait_freezes": 100,
+    "next": [
+      {
+        "name": "计划模式",
+        "anchor": true
+      }
+    ]
+  },
+  "灰域_右上角上方判断": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          595,
+          125,
+          109,
+          77
+        ],
+        "lower": [
+          [
+            81,
+            10,
+            49
+          ]
+        ],
+        "upper": [
+          [
+            121,
+            50,
+            89
+          ]
+        ],
+        "count": 2000,
+        "connected": true
+      }
+    },
+    "action": {
+      "type": "DoNothing",
+      "param": {}
+    },
+    "next": [
+      "灰域_右上角右侧判断",
+      "灰域_刷新难度"
+    ]
+  }
+}
