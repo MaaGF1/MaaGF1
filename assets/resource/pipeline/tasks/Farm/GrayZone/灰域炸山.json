@@ -96,7 +96,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [516, 238, 103, 101]
 			}
@@ -227,7 +227,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [516, 238, 103, 101]
 			}
@@ -262,7 +262,7 @@
 				"roi": "灰域_炸山_重装小队",
 				"roi_offset": [23, -1, 13, 0],
 				"template": [
-					"炸山_口粮.png"
+					"./dlz_greyzone/炸山_口粮.png"
 				],
 				"green_mask": true,
 				"threshold": [0.6]
@@ -275,6 +275,7 @@
 		"next": [
 			"灰域_炸山_炸山结束",
 			{"name": "灰域_炸山_选中重装小队", "jump_back": true},
+			// "灰域_炸山_选中重装小队",
 			{"name": "灰域_炸山_炸山", "jump_back": true},
 			{"name": "灰域_炸山_补给_关闭", "jump_back": true}
 		]
@@ -286,10 +287,10 @@
 				"roi": "灰域_炸山_重装小队",
 				"roi_offset": [85, -191, 307, 386],
 				"template": [
-					"炸山_角标.png"
+					"./dlz_greyzone/炸山_角标.png"
 				],
 				"green_mask": true,
-				"threshold": [0.56]
+				"threshold": [0.40]
 			}
 		},
 		"action": {
@@ -348,11 +349,12 @@
 			"param": {
 				"roi": "灰域_炸山_重装小队",
 				"lower": [
-					[100, 100, 0]
+					[50]
 				],
 				"upper": [
-					[255, 255, 100]
+					[255]
 				],
+				"method": 6,
 				"count": 10,
 				"connected": true,
 				"roi_offset": [-424, -3, 15, -14]

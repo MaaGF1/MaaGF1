@@ -86,7 +86,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"补给修理站.png"
+					"./dlz_greyzone/补给修理站.png"
 				],
 				"roi": [765, 179, 187, 142]
 			}
