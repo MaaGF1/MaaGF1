@@ -28,7 +28,8 @@ def send_click_message(hwnd, x, y):
     
     # Send press and release messages via **PostMessage**
     user32.PostMessageW(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, lParam)
-    time.sleep(0.05) # 模拟短暂按压
+    # Click Delay
+    time.sleep(0.05)
     user32.PostMessageW(hwnd, WM_LBUTTONUP, 0, lParam)
     print(f"[*] Sent click message to HWND {hwnd} at ({x}, {y})")
 
