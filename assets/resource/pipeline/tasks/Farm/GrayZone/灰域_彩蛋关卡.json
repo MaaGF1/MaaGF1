@@ -39,7 +39,9 @@
 		"action": {
 			"type": "DoNothing",
 			"param": {}
-		}
+		},
+		// 增加冗余时间, 避免重复
+		"post_delay": 200
 	},
 	"灰域_彩蛋_作战中": {
 		"recognition": {
