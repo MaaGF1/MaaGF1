@@ -75,7 +75,8 @@
 		"action": {
 			"type": "LongPress",
 			"param": {"duration": 20}
-		}
+		},
+		"post_delay": 1000
 	},
 	"灰域_主页_进入": {
 		"recognition": {
