@@ -133,9 +133,11 @@
             "repeat_count": -1
         },
         {
-            "name":"3.资源 - DLZ版炸山",
-            "entry":"灰域_总流程",
-            "option":["炸山彩蛋"],
+            "name": "3.资源 - DLZ版炸山",
+            "entry": "灰域_总流程",
+            "option": [
+                "炸山彩蛋"
+            ],
             "repeatable": true,
             "repeat_count": -1
         },
@@ -321,7 +323,7 @@
                     "pipeline_override": {
                         "灰域_刷新难度": {
                             "next": [
-                              "灰域_彩蛋_刷新难度_炸山彩蛋"
+                                "灰域_彩蛋_刷新难度_炸山彩蛋"
                             ]
                         }
                     }
