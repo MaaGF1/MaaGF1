@@ -315,10 +315,6 @@
         "炸山彩蛋": {
             "cases": [
                 {
-                    "name": "关闭",
-                    "pipeline_override": {}
-                },
-                {
                     "name": "开启",
                     "pipeline_override": {
                         "灰域_刷新难度": {
@@ -327,6 +323,10 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "关闭",
+                    "pipeline_override": {}
                 }
             ]
         },
