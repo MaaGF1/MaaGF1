@@ -12,7 +12,10 @@
 			"param": {}
 		},
 		"next": [
-			{"name": "灰域_普通关卡_效能不足关闭", "jump_back": true},
+			{
+				"name": "灰域_普通关卡_效能不足关闭",
+				"jump_back": true
+			},
 			"灰域_普通关卡_地图重置"
 		]
 	},
@@ -88,7 +91,8 @@
 				"template": [
 					"./dlz_greyzone/补给修理站.png"
 				],
-				"roi": [765, 179, 187, 142]
+				"roi": [692, 126, 275, 220],
+				"green_mask": true
 			}
 		},
 		"action": {
@@ -96,10 +100,16 @@
 			"param": {}
 		},
 		"next": [
-			{"name": "灰域_普通关卡_梯队部署确定", "jump_back": true},
+			{
+				"name": "灰域_普通关卡_梯队部署确定",
+				"jump_back": true
+			},
 			"灰域_普通关卡_梯队部署完毕",
 			{"name": "灰域_普通关卡_点击机场", "jump_back": true},
-			{"name": "灰域_普通关卡_梯队部署取消", "jump_back": true}
+			{
+				"name": "灰域_普通关卡_梯队部署取消",
+				"jump_back": true
+			}
 		]
 	},
 	"灰域_普通关卡_地图缩小": {
@@ -252,7 +262,10 @@
 		},
 		"next": [
 			{"name": "灰域_普通关卡_重新战斗", "jump_back": true},
-			{"name": "灰域_普通关卡_战斗失败关闭", "jump_back": true},
+			{
+				"name": "灰域_普通关卡_战斗失败关闭",
+				"jump_back": true
+			},
 			"灰域_普通关卡_新战斗"
 		]
 	},

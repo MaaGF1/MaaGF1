@@ -12,8 +12,14 @@
 			"param": {}
 		},
 		"next": [
-			"灰域_彩蛋_代理中",
-			{"name": "灰域_终止代理_取消", "jump_back": true}
+			{"name": "灰域_终止代理_取消", "jump_back": true},
+			"灰域_彩蛋_进入代理中",
+			{
+				"name": "灰域_普通关卡_效能不足关闭",
+				"jump_back": true
+			},
+			{"name": "灰域_代理作战_确认", "jump_back": true},
+			{"name": "灰域_执行代理作战", "jump_back": true}
 		]
 	},
 	"灰域_彩蛋_代理中": {
@@ -33,12 +39,7 @@
 		"action": {
 			"type": "DoNothing",
 			"param": {}
-		},
-		"next": [
-			"灰域_彩蛋_关卡结束",
-			{"name": "灰域_彩蛋_作战中", "jump_back": true},
-			"灰域_彩蛋_代理中"
-		]
+		}
 	},
 	"灰域_彩蛋_作战中": {
 		"recognition": {
@@ -78,5 +79,206 @@
 			"type": "DoNothing",
 			"param": {}
 		}
+	},
+	"灰域_彩蛋_进入代理中": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1164, 29, 67, 46],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 100
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			{"name": "灰域_彩蛋_代理中", "jump_back": true},
+			{"name": "灰域_彩蛋_作战中", "jump_back": true},
+			"灰域_彩蛋_关卡结束",
+			"灰域_彩蛋_代理已完成"
+		]
+	},
+	"灰域_彩蛋_刷新难度_炸山彩蛋": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_彩蛋_彩蛋_计划模式",
+			{"name": "灰域_计划模式_进入", "jump_back": true}
+		]
+	},
+	"灰域_彩蛋_彩蛋_计划模式": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["计划模式"],
+				"roi": [558, 644, 172, 36]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"post_wait_freezes": 200,
+		"anchor": ["计划模式"],
+		"next": [
+			"灰域_彩蛋_彩蛋识别",
+			{"name": "灰域_计划模式_返回", "jump_back": true},
+			"灰域_彩蛋_返回刷新难度"
+		]
+	},
+	"灰域_彩蛋_彩蛋识别": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"./dlz_greyzone/计划模式_彩蛋.png"
+				],
+				"roi": [276, 53, 733, 535],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			{"name": "灰域_代理_扣除许可证资源", "jump_back": true},
+			"灰域_彩蛋_彩蛋_计划点判断",
+			{"name": "灰域_彩蛋_彩蛋识别_点击", "jump_back": true},
+			"灰域_彩蛋_彩蛋_计划点判断2"
+		]
+	},
+	"灰域_彩蛋_彩蛋_计划点判断": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": "灰域_彩蛋_彩蛋识别",
+				"lower": [
+					[120, 40, 0]
+				],
+				"upper": [
+					[246, 117, 50]
+				],
+				"count": 500
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			{"name": "灰域_计划模式_运行", "jump_back": true},
+			"灰域_彩蛋_彩蛋_代理中"
+		]
+	},
+	"灰域_彩蛋_彩蛋_代理中": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1144, 120, 86, 48],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 100
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_代理已完成",
+			{"name": "灰域_彩蛋_奇遇之地", "jump_back": true},
+			"灰域_人形回收",
+			"灰域_组件回收"
+		]
+	},
+	"灰域_彩蛋_代理已完成": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["已完成"],
+				"roi": [1011, 614, 124, 53]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		}
+	},
+	"灰域_彩蛋_返回刷新难度": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_难度选择",
+			{"name": "灰域_刷新_进入", "jump_back": true}
+		]
+	},
+	"灰域_彩蛋_彩蛋识别_点击": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"./dlz_greyzone/计划模式_彩蛋.png"
+				],
+				"roi": [276, 53, 733, 535],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_彩蛋_彩蛋_计划点判断2": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": "灰域_彩蛋_彩蛋识别",
+				"lower": [
+					[60, 20, 40]
+				],
+				"upper": [
+					[143, 62, 68]
+				],
+				"count": 300
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			{"name": "灰域_计划模式_运行", "jump_back": true},
+			"灰域_彩蛋_彩蛋_代理中"
+		]
 	}
 }

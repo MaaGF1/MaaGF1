@@ -10,7 +10,7 @@
 		},
 		"pre_delay": 0,
 		"post_delay": 0,
-		"timeout": 1000,
+		"timeout": 10000,
 		"next": [
 			"灰域_界面",
 			{"name": "灰域_主页_进入", "jump_back": true},
@@ -18,7 +18,7 @@
 			{"name": "灰域_导航栏_灰域探查", "jump_back": true}
 		],
 		"on_error": [
-			{"name": "错误处理", "jump_back": true}
+			"错误处理"
 		]
 	},
 	"灰域_界面": {
@@ -34,16 +34,13 @@
 			"type": "DoNothing",
 			"param": {}
 		},
-		"post_wait_freezes": 100,
-		// Note: 右上角freeze会慢一点，这里加个延迟
-		"post_delay": 2000,
+		"post_wait_freezes": 300,
 		"next": [
-			"灰域_右上角左侧判断",
+			"灰域_右上角判断",
 			"灰域_刷新难度"
 		]
 	},
 	"灰域_刷新难度": {
-		"focus": {"Node.Recognition.Succeeded": "{DLZ}灰域_刷新难度"},
 		"recognition": {
 			"type": "OCR",
 			"param": {
@@ -56,8 +53,7 @@
 			"param": {}
 		},
 		"next": [
-			"灰域_难度选择",
-			{"name": "灰域_刷新_进入", "jump_back": true}
+			"灰域_刷新难度_仅炸山"
 		]
 	},
 	"灰域_难度选择": {
@@ -73,20 +69,16 @@
 			"param": {}
 		},
 		"next": [
-			"灰域_界面",
 			{"name": "灰域_刷新_重置确定", "jump_back": true},
+			"灰域_界面",
 			{"name": "灰域_刷新_难度选择", "jump_back": true}
 		]
 	},
-	"灰域_右上角左侧判断": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_右上角左侧判断 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_右上角左侧判断 - 失败"
-		},
+	"灰域_右上角判断": {
 		"recognition": {
 			"type": "ColorMatch",
 			"param": {
-				"roi": [180, 324, 109, 77],
+				"roi": [44, 647, 150, 30],
 				"lower": [
 					[81, 10, 49]
 				],
@@ -101,39 +93,16 @@
 			"type": "DoNothing",
 			"param": {}
 		},
-		// 有个直升机的干扰，要一点延迟
-		"post_delay": 2000,
-		"next": [
-			"灰域_右上角上方判断",
-			"灰域_刷新难度"
-		]
-	},
-	"灰域_右上角右侧判断": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_右上角右侧判断 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_右上角右侧判断 - 失败"
-		},
-		"recognition": {
-			"type": "ColorMatch",
-			"param": {
-				"roi": [980, 345, 113, 105],
-				"lower": [
-					[81, 10, 49]
-				],
-				"upper": [
-					[121, 50, 89]
-				],
-				"count": 2000,
-				"connected": true
-			}
-		},
-		"action": {
-			"type": "DoNothing",
-			"param": {}
-		},
+		"inverse": true,
 		"next": [
 			"灰域_火力点位1",
-			{"name": "灰域_主界面_火力点位1判断", "jump_back": true}
+			"灰域_右上角判断_防卡死1",
+			"灰域_右上角判断_防卡死2",
+			"灰域_右上角判断_防卡死3",
+			{
+				"name": "灰域_主界面_火力点位1判断",
+				"jump_back": true
+			}
 		]
 	},
 	"灰域_火力点位1": {
@@ -233,7 +202,10 @@
 		"inverse": true,
 		"next": [
 			"灰域_火力点位2",
-			{"name": "灰域_主界面_火力点位2判断", "jump_back": true}
+			{
+				"name": "灰域_主界面_火力点位2判断",
+				"jump_back": true
+			}
 		]
 	},
 	"灰域_点位2_点位关闭": {
@@ -361,6 +333,7 @@
 		},
 		"next": [
 			"灰域_人形回收",
+			"灰域_组件回收",
 			"灰域_代理已完成",
 			{"name": "灰域_普通关卡_流程", "jump_back": true},
 			{"name": "灰域_炸山_流程", "jump_back": true},
@@ -380,8 +353,9 @@
 			"param": {}
 		},
 		"next": [
-			"灰域_刷新难度",
-			{"name": "灰域_代理结束", "jump_back": true}
+			{"name": "灰域_代理结束", "jump_back": true},
+			{"name": "灰域_代理结束_领取奖励", "jump_back": true},
+			"灰域_刷新难度"
 		]
 	},
 	"灰域_人形回收": {
@@ -397,7 +371,30 @@
 			"param": {}
 		},
 		"next": [
-			{"name": "public二星人形回收_人形回收", "jump_back": true},
+			{
+				"name": "public二星人形回收_人形回收",
+				"jump_back": true
+			},
+			{"name": "灰域_计划模式_进入", "jump_back": true},
+			{"name": "灰域_导航栏_进入", "jump_back": true},
+			{"name": "灰域_导航栏_灰域探查", "jump_back": true},
+			"灰域_重返计划模式"
+		]
+	},
+	"灰域_组件回收": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["组件回收"],
+				"roi": [419, 307, 118, 44]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			{"name": "组件回收_总流程", "jump_back": true},
 			{"name": "灰域_计划模式_进入", "jump_back": true},
 			{"name": "灰域_导航栏_进入", "jump_back": true},
 			{"name": "灰域_导航栏_灰域探查", "jump_back": true},
@@ -421,15 +418,28 @@
 			{"name": "计划模式", "anchor": true}
 		]
 	},
-	"灰域_右上角上方判断": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_右上角上方判断 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_右上角上方判断 - 失败"
+	"灰域_刷新难度_仅炸山": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["当前", "积分"],
+				"roi": [269, 606, 228, 43]
+			}
 		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_难度选择",
+			{"name": "灰域_刷新_进入", "jump_back": true}
+		]
+	},
+	"灰域_右上角判断_防卡死1": {
 		"recognition": {
 			"type": "ColorMatch",
 			"param": {
-				"roi": [595, 125, 109, 77],
+				"roi": [44, 647, 150, 30],
 				"lower": [
 					[81, 10, 49]
 				],
@@ -445,7 +455,50 @@
 			"param": {}
 		},
 		"next": [
-			"灰域_右上角右侧判断",
+			"灰域_刷新难度"
+		]
+	},
+	"灰域_右上角判断_防卡死2": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [831, 420, 80, 30],
+				"lower": [
+					[148, 113, 136]
+				],
+				"upper": [
+					[188, 153, 176]
+				],
+				"count": 500
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_刷新难度"
+		]
+	},
+	"灰域_右上角判断_防卡死3": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [408, 403, 75, 41],
+				"lower": [
+					[148, 113, 136]
+				],
+				"upper": [
+					[190, 160, 176]
+				],
+				"count": 500
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
 			"灰域_刷新难度"
 		]
 	}

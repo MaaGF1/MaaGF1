@@ -62,8 +62,7 @@
 				"target": [1018, 374, 68, 54],
 				"duration": 20
 			}
-		},
-		"post_delay": 500
+		}
 	},
 	"灰域_刷新_重置确定": {
 		"recognition": {
@@ -76,8 +75,7 @@
 		"action": {
 			"type": "LongPress",
 			"param": {"duration": 20}
-		},
-		"post_delay": 500
+		}
 	},
 	"灰域_主页_进入": {
 		"recognition": {
@@ -132,7 +130,8 @@
 				"target": [413, 675, 15, 14],
 				"duration": 20
 			}
-		}
+		},
+		"post_wait_freezes": 100
 	},
 	"灰域_主界面_火力点位2判断": {
 		"recognition": {
@@ -148,7 +147,8 @@
 				"target": [897, 677, 6, 5],
 				"duration": 20
 			}
-		}
+		},
+		"post_wait_freezes": 100
 	},
 	"灰域_主界面_点位关闭": {
 		"recognition": {
@@ -167,104 +167,88 @@
 		}
 	},
 	"灰域_炸山1_计划点1": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_炸山1_计划点1 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_炸山1_计划点1 - 失败"
-		},
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
 					"./dlz_greyzone/计划模式_日.png"
 				],
-				"roi": [884, 62, 34, 53],
+				"roi": [816, 46, 101, 97],
 				"green_mask": true,
-				"threshold": [0.7]
+				"threshold": [0.65]
 			}
 		},
 		"action": {
 			"type": "LongPress",
 			"param": {
 				"duration": 20,
-				"target_offset": [-15, 10, -42, -56]
+				"target_offset": [-38, 18, 2, -1]
 			}
 		},
-		"post_delay": 1000
+		"post_wait_freezes": 100
 	},
 	"灰域_炸山1_计划点2": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_炸山1_计划点2 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_炸山1_计划点2 - 失败"
-		},
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
 					"./dlz_greyzone/计划模式_日.png"
 				],
-				"roi": [796, 88, 43, 60],
+				"roi": [743, 94, 101, 97],
 				"green_mask": true,
-				"threshold": [0.7]
+				"threshold": [0.65]
 			}
 		},
 		"action": {
 			"type": "LongPress",
 			"param": {
 				"duration": 20,
-				"target_offset": [-15, 10, -42, -56]
+				"target_offset": [-38, 18, 2, -1]
 			}
 		},
-		"post_delay": 1000
+		"post_wait_freezes": 100
 	},
 	"灰域_炸山2_计划点1": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_炸山2_计划点1 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_炸山2_计划点1 - 失败"
-		},
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
 					"./dlz_greyzone/计划模式_日.png"
 				],
-				"roi": [943, 101, 49, 63],
+				"roi": [901, 84, 101, 97],
 				"green_mask": true,
-				"threshold": [0.7]
+				"threshold": [0.65]
 			}
 		},
 		"action": {
 			"type": "LongPress",
 			"param": {
 				"duration": 20,
-				"target_offset": [-15, 10, -42, -56]
+				"target_offset": [-38, 18, 2, -1]
 			}
 		},
-		"post_delay": 1000
+		"post_wait_freezes": 100
 	},
 	"灰域_炸山2_计划点2": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{DLZ}灰域_炸山2_计划点2 - 成功",
-			"Node.Recognition.Failed": "{DLZ}灰域_炸山2_计划点2 - 失败"
-		},
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
 					"./dlz_greyzone/计划模式_日.png"
 				],
-				"roi": [955, 178, 42, 56],
+				"roi": [898, 162, 101, 97],
 				"green_mask": true,
-				"threshold": [0.7]
+				"threshold": [0.65]
 			}
 		},
 		"action": {
 			"type": "LongPress",
 			"param": {
 				"duration": 20,
-				"target_offset": [-15, 10, -42, -56]
+				"target_offset": [-38, 18, 2, -1]
 			}
 		},
-		"post_delay": 1000
+		"post_wait_freezes": 100
 	},
 	"灰域_计划模式_运行": {
 		"recognition": {
@@ -300,7 +284,7 @@
 			"type": "OCR",
 			"param": {
 				"expected": ["代理作战"],
-				"roi": [846, 638, 142, 60]
+				"roi": [809, 623, 280, 82]
 			}
 		},
 		"action": {
@@ -353,6 +337,22 @@
 			"param": {
 				"target": [1105, 242, 24, 22],
 				"duration": 20
+			}
+		}
+	},
+	"灰域_代理结束_领取奖励": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["领取", "型"],
+				"roi": [0, 69, 652, 354]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target": [1130, 581, 56, 45]
 			}
 		}
 	}
