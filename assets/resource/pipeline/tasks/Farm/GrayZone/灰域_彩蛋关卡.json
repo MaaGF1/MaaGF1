@@ -14,10 +14,7 @@
 		"next": [
 			{"name": "灰域_终止代理_取消", "jump_back": true},
 			"灰域_彩蛋_进入代理中",
-			{
-				"name": "灰域_普通关卡_效能不足关闭",
-				"jump_back": true
-			},
+			{"name": "灰域_普通关卡_效能不足关闭", "jump_back": true},
 			{"name": "灰域_代理作战_确认", "jump_back": true},
 			{"name": "灰域_执行代理作战", "jump_back": true}
 		]
