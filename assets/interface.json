@@ -133,9 +133,11 @@
             "repeat_count": -1
         },
         {
-            "name": "3.资源 - 灰域炸山",
-            "entry": "灰域_总流程",
-            "check": false
+            "name":"炸山",
+            "entry":"灰域_总流程",
+            "option":["炸山彩蛋"],
+            "repeatable": true,
+            "repeat_count": -1
         },
         {
             "name": "3.资源 - 裂变链接捡垃圾",
@@ -308,6 +310,24 @@
         }
     },
     "option": {
+        "炸山彩蛋": {
+            "cases": [
+                {
+                    "name": "关闭",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "开启",
+                    "pipeline_override": {
+                        "灰域_刷新难度": {
+                            "next": [
+                              "灰域_彩蛋_刷新难度_炸山彩蛋"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
         "捡垃圾版本选择": {
             "cases": [
                 {
