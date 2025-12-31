@@ -207,7 +207,7 @@
             "name": "3.资源 - 炼金",
             "entry": "!Alchemy_Entry",
             "check": false,
-            "doc": "向你微笑(先辈)通关任意难度向你微笑，将地图缩放至最小即可开启运行，自动部署的梯队须为铁血梯队。\n向你微笑(DLZC)通关任意难度向你微笑，地图缩放到最小，拖动到右下角边缘开始",
+            "doc": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",
             "option": [
                 "Alchemy_Task_List"
             ],
