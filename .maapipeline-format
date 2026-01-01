@@ -4,6 +4,9 @@
         "style": "tab",
         "width": 1
     },
+    "posix": {
+        "insert_final_newline": false
+    },
     "formatting": {
         "simple_array_threshold": 50,
         "coordinate_fields": [
