@@ -534,8 +534,8 @@
 	},
 	// 第一轮战斗 第一轮战斗End
 	"静默沙盘炼金_战斗阶段_计划模式_1_等待画面加载": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
+		"recognition": "DirectHit",
+		"action": "DoNothing",
 		"post_delay": 1000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_指挥官_制造补给_判断",
