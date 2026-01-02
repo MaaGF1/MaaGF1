@@ -27,7 +27,7 @@
 			"param": {
 				"expected": ["当前", "积分"],
 				"roi": [269, 606, 228, 43],
-				"threshold": 0.95
+				"threshold": 0.9
 			}
 		},
 		"action": {
