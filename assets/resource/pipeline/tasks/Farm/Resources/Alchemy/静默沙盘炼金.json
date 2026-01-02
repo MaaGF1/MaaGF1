@@ -379,15 +379,6 @@
 		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击梯队_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点"
 		]
 	},
@@ -399,15 +390,6 @@
 		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击目标地点_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置"
 		]
 	},
@@ -416,15 +398,6 @@
 		"action": "LongPress",
 		"duration": 200,
 		"target": [305, 605, 0, 0],
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_铁血_L_点击空白位置_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
 		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
@@ -456,29 +429,11 @@
 			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队"
 		]
 	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_点击梯队_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R"
-		]
-	},
 	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R": {
 		"recognition": "DirectHit",
 		"action": "LongPress",
 		"duration": 200,
 		"target": [860, 225, 0, 0],
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_R_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
 		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
@@ -490,15 +445,6 @@
 		"action": "LongPress",
 		"duration": 200,
 		"target": [785, 82, 0, 0],
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_杂鱼_U_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
 		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
@@ -525,15 +471,6 @@
 		"begin": [263, 694, 1, 1],
 		"end": [1192, 56, 1, 1],
 		"duration": 1000,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_1_回合判断"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_1_指挥官_返回初始位置_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_回合判断"
@@ -590,7 +527,7 @@
 		"duration": 200,
 		"target": [1185, 675, 0, 0],
 		"pre_delay": 500,
-		"post_delay": 10000,
+		"post_delay": 20000,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_1_等待画面加载"
 		]
@@ -710,15 +647,6 @@
 			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点"
 		]
 	},
-	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击梯队_twice_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
-		"post_delay": 200,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点"
-		]
-	},
 	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点": {
 		"recognition": "DirectHit",
 		"action": "LongPress",
@@ -726,15 +654,6 @@
 		"target": [630, 311, 0, 0],
 		"pre_delay": 500,
 		"post_delay": 500,
-		"next": [
-			"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点_鼠标抬起"
-		]
-	},
-	"静默沙盘炼金_战斗阶段_计划模式_2_指挥官_点击目标地点_鼠标抬起": {
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"pre_delay": 200,
-		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_战斗阶段_计划模式_2_回合判断"
 		]
@@ -809,7 +728,18 @@
 		"pre_delay": 500,
 		"post_delay": 10000,
 		"next": [
-			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_Begin"
+			"静默沙盘炼金_战斗阶段_计划模式_2_等待画面加载"
+		]
+	},
+	// 第二轮战斗等待画面加载
+	"静默沙盘炼金_战斗阶段_计划模式_2_等待画面加载": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"post_delay": 1000,
+		"next": [
+			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_判断_使用装置",
+			"静默沙盘炼金_战斗阶段_指挥官_执行补给_铁血R_判断_已使用装置",
+			"静默沙盘炼金_战斗阶段_计划模式_2_等待画面加载"
 		]
 	},
 	// 第二轮战斗 End
