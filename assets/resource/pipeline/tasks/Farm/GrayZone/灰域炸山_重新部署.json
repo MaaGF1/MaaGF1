@@ -182,7 +182,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [485, 194, 200, 214],
 				"green_mask": true
@@ -203,7 +203,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [485, 194, 200, 214],
 				"green_mask": true
@@ -239,7 +239,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [485, 194, 200, 214],
 				"green_mask": true
@@ -260,7 +260,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [485, 194, 200, 214],
 				"green_mask": true
@@ -329,7 +329,8 @@
 			"type": "LongPress",
 			"param": {
 				"duration": 20,
-				"target": [800, 163, 104, 50]
+				// 限制区间，避免点击到"作战能效"
+				"target": [800, 163, 0, 0]
 			}
 		}
 	},
@@ -338,7 +339,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": [
-					"重装小队.png"
+					"./dlz_greyzone/重装小队.png"
 				],
 				"roi": [485, 194, 200, 214],
 				"green_mask": true

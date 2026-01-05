@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "name": "MaaGF1",
-    "version": "v1.9.1",
+    "version": "v1.9.2",
     "url": "https://github.com/MaaGF1/MaaGF1",
     "mirrorchyan_rid": null,
     "mirrorchyan_multiplatform": false,
