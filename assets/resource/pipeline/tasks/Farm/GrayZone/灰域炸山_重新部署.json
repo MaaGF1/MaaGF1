@@ -1,0 +1,357 @@
+{
+	"灰域_炸山_重新部署_流程": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1164, 29, 67, 46],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 50
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_炸山_重新部署_计划模式中",
+			{"name": "灰域_炸山_重新部署_关闭代理", "jump_back": true},
+			{"name": "灰域_炸山_重新部署_计划模式", "jump_back": true}
+		]
+	},
+	"灰域_炸山_重新部署_关闭代理": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [1164, 29, 67, 46],
+				"lower": [
+					[197, 64, 18]
+				],
+				"upper": [
+					[237, 104, 58]
+				],
+				"count": 50
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_炸山_重新部署_计划模式": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [2, 615, 47, 32],
+				"lower": [
+					[245, 245, 245]
+				],
+				"upper": [
+					[255, 255, 255]
+				],
+				"count": 30
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target": [35, 615, 46, 32]
+			}
+		}
+	},
+	"灰域_炸山_重新部署_计划模式中": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [35, 615, 46, 32],
+				"lower": [
+					[240, 180, 40]
+				],
+				"upper": [
+					[255, 210, 90]
+				],
+				"count": 20
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"inverse": false,
+		"next": [
+			"灰域_炸山_重新部署_开始作战",
+			{"name": "灰域_炸山_重新部署_重新作战", "jump_back": true},
+			{"name": "灰域_炸山_重新部署_终止作战", "jump_back": true}
+		]
+	},
+	"灰域_炸山_重新部署_终止作战": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["终止", "作战"],
+				"roi": [266, 48, 102, 33]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_炸山_重新部署_重新作战": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["重新", "作战"],
+				"roi": [418, 471, 142, 44]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_炸山_重新部署_开始作战": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["开始", "作战"],
+				"roi": [1034, 616, 203, 82]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_炸山_重新部署_地图缩小"
+		]
+	},
+	"灰域_炸山_重新部署_地图缩小": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "Command",
+			"param": {
+				"exec": "powershell",
+				"args": [
+					"-ExecutionPolicy",
+					"Bypass",
+					"-File",
+					"{RESOURCE_DIR}/../tools/scroll.ps1",
+					"-ScrollCount",
+					"100",
+					"-Direction",
+					"down"
+				]
+			}
+		},
+		"pre_delay": 0,
+		"post_delay": 0,
+		"next": [
+			"灰域_炸山_重新部署_地图左下角"
+		]
+	},
+	"灰域_炸山_重新部署_地图左下角": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "Swipe",
+			"param": {
+				"begin": [287, 484, 48, 47],
+				"end": [
+					[838, 120, 25, 23]
+				],
+				"duration": [200]
+			}
+		},
+		"next": [
+			"灰域_炸山_重新部署_重装小队"
+		]
+	},
+	"灰域_炸山_重新部署_重装小队": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"重装小队.png"
+				],
+				"roi": [485, 194, 200, 214],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_炸山_重新部署_重装小队_再部署",
+			{"name": "灰域_炸山_重新部署_撤离", "jump_back": true},
+			{"name": "灰域_炸山_重新部署_点击重装小队", "jump_back": true}
+		]
+	},
+	"灰域_炸山_重新部署_点击重装小队": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"重装小队.png"
+				],
+				"roi": [485, 194, 200, 214],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-13, 24, -39, -56]
+			}
+		},
+		"post_wait_freezes": {
+			"time": 200,
+			"target": [505, 616, 183, 72]
+		}
+	},
+	"灰域_炸山_重新部署_撤离": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["撤离"],
+				"roi": [1160, 654, 87, 46]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_炸山_重新部署_重装小队_再部署": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"重装小队.png"
+				],
+				"roi": [485, 194, 200, 214],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"inverse": true,
+		"next": [
+			"灰域_炸山_重新部署_部署界面",
+			{"name": "灰域_炸山_重新部署_点击机场", "jump_back": true}
+		]
+	},
+	"灰域_炸山_重新部署_点击机场": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"重装小队.png"
+				],
+				"roi": [485, 194, 200, 214],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target_offset": [-13, 24, -39, -56],
+				"target": "灰域_炸山_重新部署_重装小队"
+			}
+		},
+		"post_wait_freezes": {
+			"time": 200,
+			"target": [505, 616, 183, 72]
+		},
+		"inverse": true
+	},
+	"灰域_炸山_重新部署_部署界面": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["部署"],
+				"roi": [1119, 620, 97, 58]
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_炸山_重新部署_重装小队_部署完毕",
+			{"name": "灰域_炸山_重新部署_点击重装一号位", "jump_back": true},
+			{"name": "灰域_炸山_重新部署_部署", "jump_back": true}
+		]
+	},
+	"灰域_炸山_重新部署_部署": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["部署"],
+				"roi": [1119, 620, 97, 58]
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {"duration": 20}
+		}
+	},
+	"灰域_炸山_重新部署_点击重装一号位": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"roi": [296, 138, 20, 20],
+				"lower": [
+					[20, 20, 20]
+				],
+				"upper": [
+					[40, 40, 40]
+				],
+				"count": 50
+			}
+		},
+		"action": {
+			"type": "LongPress",
+			"param": {
+				"duration": 20,
+				"target": [800, 163, 104, 50]
+			}
+		}
+	},
+	"灰域_炸山_重新部署_重装小队_部署完毕": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": [
+					"重装小队.png"
+				],
+				"roi": [485, 194, 200, 214],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"灰域_炸山_流程",
+			{"name": "灰域_代理作战_确认", "jump_back": true},
+			{"name": "灰域_执行代理作战", "jump_back": true}
+		]
+	}
+}

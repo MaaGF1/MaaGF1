@@ -137,7 +137,8 @@
             "entry": "灰域_总流程",
             "doc": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/tutorial/resource/DLZ版自动灰域/)",
             "option": [
-                "炸山彩蛋"
+                "炸山彩蛋",
+                "炸山流程"
             ],
             "repeatable": true,
             "repeat_count": -1
@@ -328,6 +329,29 @@
                 {
                     "name": "关闭",
                     "pipeline_override": {}
+                }
+            ]
+        },
+        "炸山流程": {
+            "cases": [
+                {
+                    "name": "正常流程",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "重启部署",
+                    "pipeline_override": {
+                        "灰域_炸山_代理中": {
+                            "next": [
+                                "灰域_人形回收",
+                                "灰域_组件回收",
+                                "灰域_代理已完成",
+                                {"name": "灰域_普通关卡_流程", "jump_back": true},
+                                {"name": "灰域_炸山_重新部署_流程", "jump_back": true},
+                                {"name": "灰域_彩蛋_奇遇之地", "jump_back": true}
+                            ]
+                        }
+                    }
                 }
             ]
         },
