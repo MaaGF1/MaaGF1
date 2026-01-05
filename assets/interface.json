@@ -339,7 +339,7 @@
                     "pipeline_override": {}
                 },
                 {
-                    "name": "重启部署",
+                    "name": "重新部署",
                     "pipeline_override": {
                         "灰域_炸山_代理中": {
                             "next": [
