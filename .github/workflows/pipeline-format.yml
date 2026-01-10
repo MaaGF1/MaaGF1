@@ -6,6 +6,8 @@ on:
       - "**"
     paths:
       - "assets/resource/pipeline/**/*.json"
+      - "assets/resource_en/pipeline/**/*.json"
+      - "assets/interface.json"
       - ".github/workflows/pipeline-format.yml"
       - "tools/maapipeline-format/**"
   pull_request:
@@ -13,6 +15,8 @@ on:
       - "**"
     paths:
       - "assets/resource/pipeline/**/*.json"
+      - "assets/resource_en/pipeline/**/*.json"
+      - "assets/interface.json"
       - ".github/workflows/pipeline-format.yml"
       - "tools/maapipeline-format/**"
   workflow_dispatch:
@@ -48,45 +52,110 @@ jobs:
           fi
           echo "[OK] Formatter tool found"
       
-      - name: Check for pipeline JSON files
+      - name: Check for target files
         id: check_files
         run: |
-          if [ ! -d "assets/resource/pipeline/tasks" ]; then
-            echo "[WARN] Pipeline tasks directory not found"
-            echo "files_exist=false" >> $GITHUB_OUTPUT
-            exit 0
+          FILES_FOUND=false
+          TOTAL_COUNT=0
+          
+          # Check 1: Standard Tasks
+          if [ -d "assets/resource/pipeline/tasks" ]; then
+            COUNT=$(find assets/resource/pipeline/tasks -name "*.json" -type f | wc -l)
+            if [ "$COUNT" -gt 0 ]; then
+              echo "[INFO] Found standard pipeline tasks ($COUNT files)"
+              FILES_FOUND=true
+              TOTAL_COUNT=$((TOTAL_COUNT + COUNT))
+            fi
+          fi
+
+          # Check 2: EN Resource Pipeline
+          if [ -d "assets/resource_en/pipeline" ]; then
+            COUNT=$(find assets/resource_en/pipeline -name "*.json" -type f | wc -l)
+            if [ "$COUNT" -gt 0 ]; then
+              echo "[INFO] Found EN pipeline files ($COUNT files)"
+              FILES_FOUND=true
+              TOTAL_COUNT=$((TOTAL_COUNT + COUNT))
+            fi
+          fi
+
+          # Check 3: Interface JSON
+          if [ -f "assets/interface.json" ]; then
+            echo "[INFO] Found assets/interface.json"
+            FILES_FOUND=true
+            TOTAL_COUNT=$((TOTAL_COUNT + 1))
           fi
           
-          FILE_COUNT=$(find assets/resource/pipeline/tasks -name "*.json" -type f | wc -l)
-          
-          if [ "$FILE_COUNT" -eq 0 ]; then
-            echo "[WARN] No JSON files found in assets/resource/pipeline/tasks/"
+          if [ "$FILES_FOUND" = "false" ]; then
+            echo "[WARN] No relevant JSON files found to process"
             echo "files_exist=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           
           echo "files_exist=true" >> $GITHUB_OUTPUT
-          echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
-          echo "[OK] Found $FILE_COUNT JSON files to process"
+          echo "file_count=$TOTAL_COUNT" >> $GITHUB_OUTPUT
+          echo "[OK] Found total $TOTAL_COUNT JSON files to process"
       
       - name: Generate diffs (before formatting)
         id: generate_diffs
         if: steps.check_files.outputs.files_exist == 'true'
         run: |
-          # Create diff directory
+          # Create base diff directory
           mkdir -p pipeline_diffs
           
-          # Generate diffs using the formatter tool
-          python tools/maapipeline-format/src/main.py \
-            assets/resource/pipeline/tasks \
-            --diff-only \
-            --diff-dir pipeline_diffs \
-            --yes
+          # --- Target 1: Standard Tasks ---
+          if [ -d "assets/resource/pipeline/tasks" ]; then
+            echo "[INFO] Generating diffs for Standard Tasks..."
+            mkdir -p pipeline_diffs/tasks
+            python tools/maapipeline-format/src/main.py \
+              assets/resource/pipeline/tasks \
+              --diff-only \
+              --diff-dir pipeline_diffs/tasks \
+              --yes
+          fi
+
+          # --- Target 2: EN Resource Pipeline ---
+          if [ -d "assets/resource_en/pipeline" ]; then
+            echo "[INFO] Generating diffs for EN Pipeline..."
+            mkdir -p pipeline_diffs/en
+            python tools/maapipeline-format/src/main.py \
+              assets/resource_en/pipeline \
+              --diff-only \
+              --diff-dir pipeline_diffs/en \
+              --yes
+          fi
+
+          # --- Target 3: Interface JSON (Single File Workaround) ---
+          if [ -f "assets/interface.json" ]; then
+            echo "[INFO] Generating diffs for interface.json..."
+            # Create temp dir to mimic folder structure for the tool
+            mkdir -p .temp_fmt/interface
+            cp assets/interface.json .temp_fmt/interface/
+            
+            mkdir -p pipeline_diffs/interface
+            
+            python tools/maapipeline-format/src/main.py \
+              .temp_fmt/interface \
+              --diff-only \
+              --diff-dir pipeline_diffs/interface \
+              --yes
+            
+            # Clean up temp
+            rm -rf .temp_fmt
+            
+            # Fix the path in the diff file to point to the real location
+            # The tool likely generated diff header as a/interface.json
+            # We want it to look like it came from assets/interface.json for context
+            if [ -f "pipeline_diffs/interface/interface.json.diff" ]; then
+                sed -i 's|a/interface.json|a/assets/interface.json|g' pipeline_diffs/interface/interface.json.diff
+                sed -i 's|b/interface.json|b/assets/interface.json|g' pipeline_diffs/interface/interface.json.diff
+            fi
+          fi
           
           # Check if any diffs were generated
-          if [ -d "pipeline_diffs" ] && [ "$(find pipeline_diffs -name '*.diff' -type f | wc -l)" -gt 0 ]; then
+          DIFF_COUNT=$(find pipeline_diffs -name '*.diff' -type f | wc -l)
+          
+          if [ "$DIFF_COUNT" -gt 0 ]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            DIFF_COUNT=$(find pipeline_diffs -name '*.diff' -type f | wc -l)
             echo "diff_count=$DIFF_COUNT" >> $GITHUB_OUTPUT
             echo "[OK] Generated $DIFF_COUNT diff files"
           else
@@ -99,11 +168,41 @@ jobs:
         id: format_files
         if: steps.check_files.outputs.files_exist == 'true' && steps.generate_diffs.outputs.has_changes == 'true'
         run: |
-          # Format files in-place
-          python tools/maapipeline-format/src/main.py \
-            assets/resource/pipeline/tasks \
-            --in-place \
-            --yes
+          # --- Target 1: Standard Tasks ---
+          if [ -d "assets/resource/pipeline/tasks" ]; then
+            echo "[INFO] Formatting Standard Tasks..."
+            python tools/maapipeline-format/src/main.py \
+              assets/resource/pipeline/tasks \
+              --in-place \
+              --yes
+          fi
+
+          # --- Target 2: EN Resource Pipeline ---
+          if [ -d "assets/resource_en/pipeline" ]; then
+            echo "[INFO] Formatting EN Pipeline..."
+            python tools/maapipeline-format/src/main.py \
+              assets/resource_en/pipeline \
+              --in-place \
+              --yes
+          fi
+
+          # --- Target 3: Interface JSON (Single File Workaround) ---
+          if [ -f "assets/interface.json" ]; then
+            echo "[INFO] Formatting interface.json..."
+            # Create temp dir
+            mkdir -p .temp_fmt/interface
+            cp assets/interface.json .temp_fmt/interface/
+            
+            # Format in temp
+            python tools/maapipeline-format/src/main.py \
+              .temp_fmt/interface \
+              --in-place \
+              --yes
+            
+            # Copy back
+            cp .temp_fmt/interface/interface.json assets/interface.json
+            rm -rf .temp_fmt
+          fi
           
           echo "[OK] Files formatted successfully"
       
@@ -149,12 +248,15 @@ jobs:
           SUMMARY_EOF
             
             FILE_COUNT=0
+            # Find diffs recursively
             for DIFF_FILE in $(find pipeline_diffs -name '*.diff' -type f | head -n 5); do
-              RELATIVE_PATH=$(echo "$DIFF_FILE" | sed 's|^pipeline_diffs/||')
+              # Clean up path for display (remove pipeline_diffs/ prefix)
+              # This will show as "tasks/Farm/..." or "interface/interface.json.diff"
+              DISPLAY_PATH=$(echo "$DIFF_FILE" | sed 's|^pipeline_diffs/||')
               
               cat >> $GITHUB_STEP_SUMMARY << SUMMARY_EOF
           
-          ### \`$RELATIVE_PATH\`
+          ### \`$DISPLAY_PATH\`
           
           \`\`\`diff
           SUMMARY_EOF
@@ -193,7 +295,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Pipeline Format Bot"
           
-          git add assets/resource/pipeline/**/*.json
+          # Add all potential targets
+          git add assets/resource/pipeline/**/*.json || true
+          git add assets/resource_en/pipeline/**/*.json || true
+          git add assets/interface.json || true
           
           cat > commit_message.txt << 'COMMIT_EOF'
           Auto-format pipeline JSON files

@@ -24,9 +24,7 @@
 		"next": []
 	},
 	"准备继续任务": {
-		"focus": {
-			"Node.Recognition.Succeeded": "{准备继续任务} goooooo"
-		},
+		"focus": {"Node.Recognition.Succeeded": "{准备继续任务} goooooo"},
 		"recognition": "OCR",
 		"roi": [911, 238, 141, 85],
 		"expected": ["研发", "RE"],
