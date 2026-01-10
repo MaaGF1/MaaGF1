@@ -115,7 +115,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Cache Mechanism Implementation
+      - name: Cache MFAAvalonia
+        id: cache-mfa
+        uses: actions/cache@v4
+        with:
+          path: deps/bin
+          # Key includes OS, Arch, and the resolved Tag to ensure uniqueness
+          key: mfa-deps-${{ matrix.os }}-${{ matrix.arch }}-${{ steps.deps_info.outputs.mfa_tag }}
+
       - name: Download MFAAvalonia
+        if: steps.cache-mfa.outputs.cache-hit != 'true'
         uses: robinraju/release-downloader@v1
         with:
           repository: ${{ steps.deps_info.outputs.mfa_repo }}
@@ -126,6 +136,7 @@ jobs:
           extract: true
 
       - name: Clean up MFAAvalonia archive
+        if: steps.cache-mfa.outputs.cache-hit != 'true'
         shell: bash
         run: find deps/bin -name "*.zip" -type f -delete
 
