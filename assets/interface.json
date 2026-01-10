@@ -138,7 +138,8 @@
             "doc": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/tutorial/resource/DLZ版自动灰域/)",
             "option": [
                 "炸山彩蛋",
-                "炸山流程"
+                "炸山流程",
+                "炸山人形拆解"
             ],
             "repeatable": true,
             "repeat_count": -1
@@ -358,6 +359,28 @@
                                     "name": "灰域_彩蛋_奇遇之地",
                                     "jump_back": true
                                 }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "炸山人形拆解": {
+            "cases": [
+                {
+                    "name": "拆解2星人形",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "拆解全部人形",
+                    "pipeline_override": {
+                        "灰域_人形回收": {
+                            "next": [
+                                {"name": "public拆人形_人形回收", "jump_back": true},
+                                {"name": "灰域_计划模式_进入", "jump_back": true},
+                                {"name": "灰域_导航栏_进入", "jump_back": true},
+                                {"name": "灰域_导航栏_灰域探查", "jump_back": true},
+                                "灰域_重返计划模式"
                             ]
                         }
                     }
