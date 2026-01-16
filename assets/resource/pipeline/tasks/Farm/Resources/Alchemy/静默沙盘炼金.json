@@ -50,8 +50,18 @@
 	},
 	"静默沙盘炼金_缩小地图": {
 		"recognition": "DirectHit",
-		"action": "Scroll",
-		"dy": -12000,
+		"action": "Command",
+		"exec": "powershell",
+		"args": [
+			"-ExecutionPolicy",
+			"Bypass",
+			"-File",
+			"{RESOURCE_DIR}/../tools/scroll.ps1",
+			"-ScrollCount",
+			"100",
+			"-Direction",
+			"down"
+		],
 		"post_delay": 200,
 		"next": [
 			"静默沙盘炼金_地图平移1"
