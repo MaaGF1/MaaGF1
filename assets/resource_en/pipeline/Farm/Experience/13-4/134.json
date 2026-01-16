@@ -1,8 +1,35 @@
 {
-	"!134总流程": {
+	"ad134总流程": {
 		"next": [
-			"134_部署21",
-			"134进入"
+			"134计时",
+			"134_部署1",
+			"134桌面点击战斗"
+		]
+	},
+	"134桌面点击战斗": {
+		"recognition": "OCR",
+		"roi": [904, 387, 124, 65],
+		"expected": "CO",
+		"action": "LongPress",
+		"duration": 15,
+		"next": [
+			"134记录开始参数",
+			"134桌面点击战斗"
+		]
+	},
+	"134记录开始参数": {
+		"recognition": "OCR",
+		"roi": [649, 668, 139, 33],
+		"expected": "Old",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "Start_Time = _get_time; T = 15; A = 33; B = 0"
+		},
+		"post_delay": 1,
+		"next": [
+			"134进入",
+			"[JumpBack]134进入_切换"
 		]
 	},
 	"134进入": {
@@ -11,10 +38,21 @@
 		"expected": "Old",
 		"action": "LongPress",
 		"duration": 12,
+		"post_delay": 1000,
 		"next": [
 			"134进入作战",
 			"134进入"
 		]
+	},
+	"134进入_切换": {
+		"recognition": "OCR",
+		"roi": [649, 668, 139, 33],
+		"expected": "mm",
+		"action": "LongPress",
+		"duration": 12,
+		"target": [976, 188, 1, 1],
+		"post_delay": 1000,
+		"next": []
 	},
 	"134进入作战": {
 		"recognition": "OCR",
@@ -30,16 +68,15 @@
 	},
 	"134_部署1": {
 		"recognition": "OCR",
-		"roi": [1008, 635, 92, 27],
-		"expected": ["START"],
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "LongPress",
-		"duration": 5,
-		"target": [710, 449, 1, 1],
-		"pre_delay": 800,
+		"duration": 12,
+		"target": [710, 449, 0, 0],
+		"pre_delay": 1000,
 		"post_delay": 1000,
 		"next": [
-			"[JumpBack]134_确定部署",
-			"134_部署2",
+			"134_确定部署",
 			"134_部署1"
 		]
 	},
@@ -49,42 +86,64 @@
 		"expected": ["CANCEL", "OK", "ok"],
 		"action": "LongPress",
 		"duration": 12,
+		"post_delay": 800,
+		"next": [
+			"134_部署2"
+		]
+	},
+	"134_确定部署2": {
+		"recognition": "OCR",
+		"roi": [1071, 592, 192, 88],
+		"expected": ["CANCEL", "OK", "ok"],
+		"action": "LongPress",
+		"duration": 12,
 		"post_delay": 500,
 		"next": []
 	},
 	"134_部署2": {
-		"recognition": "TemplateMatch",
-		"roi": [720, 394, 42, 57],
-		"template": "combat/levelUp/13-4/map_team1.png",
+		"recognition": "OCR",
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "LongPress",
 		"duration": 12,
 		"target": [82, 542, 1, 1],
 		"post_delay": 1000,
 		"next": [
-			"[JumpBack]134_确定部署",
-			"134_部署21"
+			"134_开始作战",
+			"134_判断弹药",
+			"[JumpBack]134_确定部署2",
+			"[JumpBack]134_部署2_切换"
 		]
 	},
+	"134_部署2_切换": {
+		"recognition": "OCR",
+		"roi": [133, 156, 44, 28],
+		"expected": "FIRE",
+		"action": "LongPress",
+		"duration": 12,
+		"target": [283, 83, 1, 1],
+		"next": []
+	},
 	"134_重新进入地图": {
-		"recognition": "TemplateMatch",
-		"roi": [720, 394, 42, 57],
-		"template": "combat/levelUp/13-4/map_team1.png",
+		"recognition": "OCR",
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "DoNothing",
-		"next": [
-			"134_部署1"
-		]
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": []
 	},
 	"134_部署21": {
 		"recognition": "OCR",
-		"roi": [1008, 635, 92, 27],
-		"expected": ["START"],
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "LongPress",
 		"duration": 12,
 		"target": [82, 542, 1, 1],
 		"rate_limit": 1500,
 		"post_delay": 1500,
 		"next": [
-			"134_识别开始作战",
+			"134_开始作战",
 			"134_判断弹药",
 			"[JumpBack]134_确定部署"
 		]
@@ -115,22 +174,24 @@
 	},
 	"134_交换2": {
 		"recognition": "OCR",
-		"roi": [1108, 287, 82, 29],
-		"expected": "Show",
+		"roi": [1108, 241, 77, 32],
+		"expected": "LTE",
 		"action": "LongPress",
 		"duration": 12,
 		"post_delay": 500,
 		"next": [
-			"134_交换3"
+			"134_交换3",
+			"134_交换2"
 		]
 	},
 	"134_交换3": {
 		"recognition": "OCR",
-		"roi": [915, 123, 33, 20],
-		"expected": "Show",
+		"roi": [619, 203, 76, 34],
+		"expected": "STAR",
 		"action": "LongPress",
+		"target": [978, 129, 1, 1],
 		"duration": 12,
-		"post_delay": 500,
+		"post_delay": 800,
 		"next": [
 			"134_交换4"
 		]
@@ -162,8 +223,19 @@
 		"green_mask": true,
 		"template": "combat/levelUp/13-4/G_team1.png",
 		"action": "LongPress",
-		"post_delay": 500,
+		"post_delay": 800,
 		"duration": 12,
+		"next": [
+			"134_交换判断",
+			"134_交换6"
+		]
+	},
+	"134_交换判断": {
+		"recognition": "ColorMatch",
+		"roi": [172, 663, 11, 10],
+		"upper": [203, 47, 57],
+		"lower": [203, 47, 57],
+		"method": 4,
 		"next": [
 			"134_交换7"
 		]
@@ -188,39 +260,69 @@
 		"pre_delay": 2000,
 		"next": [
 			"134_部署1",
-			"134_识别开始作战",
 			"134_交换8"
 		]
 	},
 	"134_识别开始作战": {
-		"recognition": "TemplateMatch",
-		"roi": [720, 394, 42, 57],
-		"template": "combat/levelUp/13-4/map_team1.png",
+		"recognition": "OCR",
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"next": [
-			"134_开始作战",
-			"!返回主界面"
+			"134_开始作战"
 		]
 	},
 	"134_开始作战": {
-		"max_hit": 40,
-		"recognition": "TemplateMatch",
-		"roi": [720, 394, 42, 57],
-		"template": "combat/levelUp/13-4/map_team1.png",
+		"recognition": "OCR",
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "LongPress",
 		"duration": 12,
 		"target": [1069, 637, 38, 16],
 		"next": [
-			"134_补给1"
+			"134计时",
+			"134_开始作战"
 		]
 	},
-	"134_开始作战1": {
-		"recognition": "TemplateMatch",
-		"roi": [720, 394, 42, 57],
-		"template": "combat/levelUp/13-4/map_team1.png",
-		"action": "DoNothing",
+	"134计时": {
+		"recognition": "OCR",
+		"roi": [1104, 647, 62, 38],
+		"expected": "END",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "(_get_time - Start_Time)/60 > T",
+			"true": "!返回主界面",
+			"false": "134计数"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
+	},
+	"134计数": {
+		"recognition": "OCR",
+		"roi": [1104, 647, 62, 38],
+		"expected": "END",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "B = B + 6"
+		},
 		"pre_delay": 1,
 		"post_delay": 1,
-		"next": []
+		"next": [
+			"134计数1"
+		]
+	},
+	"134计数1": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "B > A",
+			"true": "!返回主界面_拆解",
+			"false": "134_补给1"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
 	},
 	"134_补给1": {
 		"recognition": "OCR",
@@ -229,6 +331,7 @@
 		"action": "LongPress",
 		"duration": 12,
 		"target": [82, 542, 1, 1],
+		"pre_delay": 500,
 		"post_delay": 800,
 		"next": [
 			"134_补给2",
@@ -241,9 +344,10 @@
 		"expected": "RE",
 		"action": "LongPress",
 		"duration": 12,
-		"post_delay": 800,
+		"post_delay": 1700,
 		"next": [
-			"134_计划1"
+			"134_计划1",
+			"134_补给2"
 		]
 	},
 	"134_计划2": {
@@ -253,17 +357,19 @@
 		"target": [85, 627, 15, 6],
 		"action": "LongPress",
 		"duration": 12,
-		"post_delay": 1000,
+		"post_delay": 500,
 		"next": [
 			"134_计划3",
 			"134_计划2"
 		]
 	},
 	"134_计划1": {
-		"recognition": "DirectHit",
+		"recognition": "OCR",
+		"roi": [837, 344, 81, 40],
+		"expected": ["4", "8"],
 		"action": "LongPress",
 		"duration": 12,
-		"target": [710, 449, 1, 1],
+		"target": [710, 449, 0, 0],
 		"post_delay": 1300,
 		"next": [
 			"134_计划2",
@@ -278,7 +384,7 @@
 		"action": "LongPress",
 		"duration": 12,
 		"target": [608, 537, 19, 15],
-		"post_delay": 1000,
+		"post_delay": 500,
 		"next": [
 			"134_计划4"
 		]
@@ -288,7 +394,7 @@
 		"action": "LongPress",
 		"duration": 12,
 		"target": [700, 711, 15, 6],
-		"post_delay": 800,
+		"post_delay": 500,
 		"next": [
 			"134_计划5"
 		]
@@ -305,11 +411,22 @@
 		]
 	},
 	"134_计划6": {
-		"recognition": "DirectHit",
+		"recognition": "OCR",
+		"roi": [1101, 623, 162, 85],
+		"expected": ["EXE", "CUTE"],
 		"action": "LongPress",
 		"duration": 12,
-		"target": [1154, 655, 29, 12],
+		"post_delay": 1000,
+		"next": [
+			"134_计划6",
+			"134_计划6.5"
+		]
+	},
+	"134_计划6.5": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
 		"post_delay": 4000,
+		"timeout": 120000,
 		"next": [
 			"134_关卡结算",
 			"[JumpBack]public_加速结算进入"
@@ -317,12 +434,12 @@
 	},
 	"134_关卡结算": {
 		"recognition": "OCR",
-		"roi": [425, 295, 112, 36],
-		"expected": "LOSSES",
+		"roi": [371, 608, 91, 36],
+		"expected": ["Repeat"],
 		"action": "DoNothing",
+		"post_delay": 1500,
 		"next": [
 			"134_重新进入地图",
-			"134进入",
 			"[JumpBack]public_关卡结算点击1"
 		]
 	}

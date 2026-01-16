@@ -56,7 +56,6 @@
 		"action": "LongPress",
 		"duration": 20,
 		"pre_delay": 800,
-		"post_wait_freezes": 200,
 		"next": [
 			"public二星人形回收_导航栏战斗",
 			"public二星人形回收_进入导航栏"

@@ -1,4 +1,51 @@
 {
+	"!返回主界面_拆解": {
+		"focus": {"Node.Recognition.Succeeded": "仓位快满，返回主界面拆解"},
+		"rate_limit": 2000,
+		"post_delay": 2000,
+		"next": [
+			"桌面点击工厂",
+			"[JumpBack]后勤",
+			"[JumpBack]返回主界面_ESC"
+		]
+	},
+	"桌面点击工厂": {
+		"recognition": "OCR",
+		"roi": [1073, 261, 135, 55],
+		"expected": "FA",
+		"action": "LongPress",
+		"duration": 10,
+		"post_delay": 2000,
+		"next": [
+			"选择回收人形",
+			"[JumpBack]后勤",
+			"桌面点击工厂"
+		]
+	},
+	"选择回收人形": {
+		"recognition": "OCR",
+		"roi": [0, 331, 247, 144],
+		"expected": "RE",
+		"action": "LongPress",
+		"duration": 12,
+		"post_delay": 1000,
+		"next": [
+			"重置计数参数"
+		]
+	},
+	"重置计数参数": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "A = 33; B = 0"
+		},
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"public_全回收_回收角色"
+		]
+	},
 	"public_全回收_人形回收": {
 		"recognition": "OCR",
 		"roi": [631, 309, 81, 40],
@@ -58,7 +105,7 @@
 		"post_delay": 2000,
 		"next": [
 			"public_全回收_进入全拆解",
-			"public二星人形回收_进入导航栏"
+			"!返回主界面_返回作战"
 		]
 	},
 	"public_全回收_进入全拆解": {
@@ -76,7 +123,7 @@
 		"post_delay": 500,
 		"next": [
 			"piblic_全拆解判断是否还有人形",
-			"public二星人形回收_进入导航栏"
+			"!返回主界面_返回作战"
 		]
 	},
 	"piblic_全拆解判断是否还有人形": {
@@ -125,6 +172,56 @@
 		"duration": 15,
 		"post_delay": 500,
 		"next": [
+			"public_点击11"
+		]
+	},
+	"public_点击11": {
+		"action": "LongPress",
+		"target": [80, 581, 49, 29],
+		"duration": 15,
+		"post_delay": 500,
+		"next": [
+			"public_点击21"
+		]
+	},
+	"public_点击21": {
+		"action": "LongPress",
+		"target": [261, 581, 53, 33],
+		"duration": 15,
+		"next": [
+			"public_点击31"
+		]
+	},
+	"public_点击31": {
+		"action": "LongPress",
+		"target": [429, 581, 63, 33],
+		"duration": 15,
+		"next": [
+			"public_点击41"
+		]
+	},
+	"public_点击41": {
+		"action": "LongPress",
+		"target": [610, 581, 62, 33],
+		"duration": 15,
+		"next": [
+			"public_点击51"
+		]
+	},
+	"public_点击51": {
+		"action": "LongPress",
+		"target": [768, 581, 70, 35],
+		"duration": 15,
+		"next": [
+			"public_点击61"
+		]
+	},
+	"public_点击61": {
+		"action": "LongPress",
+		"target": [944, 581, 61, 28],
+		"duration": 15,
+		"post_delay": 500,
+		"next": [
 			"public_全回收_智能选择1"
 		]
 	},
@@ -163,8 +260,8 @@
 		"post_delay": 1500,
 		"timeout": 60000,
 		"next": [
-			"public二星人形回收_进入导航栏",
-			"public_全回收_确认回收1_1"
+			"public_全回收_确认回收1_1",
+			"!返回主界面_返回作战"
 		]
 	}
 }

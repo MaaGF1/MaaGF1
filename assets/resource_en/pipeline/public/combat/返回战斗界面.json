@@ -66,5 +66,35 @@
 		"action": "LongPress",
 		"duration": 20,
 		"next": []
+	},
+	"继续任务": {
+		"recognition": "OCR",
+		"roi": [1109, 525, 131, 63],
+		"expected": "RESUME",
+		"action": "LongPress",
+		"duration": 12,
+		"post_delay": 1200,
+		"next": [
+			"继续作战1"
+		]
+	},
+	"继续作战1": {
+		"recognition": "DirectHit",
+		"expected": "RESUME",
+		"action": "LongPress",
+		"target": "继续任务",
+		"duration": 12,
+		"next": []
+	},
+	"不中断计划": {
+		"recognition": "OCR",
+		"roi": [469, 279, 97, 67],
+		"expected": "Halt",
+		"rate_limit": 1000,
+		"action": "LongPress",
+		"duration": 10,
+		"post_delay": 800,
+		"target": [467, 480, 118, 24],
+		"next": []
 	}
 }

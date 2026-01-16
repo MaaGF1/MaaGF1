@@ -1,0 +1,167 @@
+{
+	"!裂变链接捡垃圾": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"裂变_计时1",
+			"裂变_开始作战"
+		]
+	},
+	"裂变_计时": {
+		"recognition": "OCR",
+		"roi": [997, 193, 193, 78],
+		"expected": ["1", "9", "5"],
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "Start_Time = _get_time; T = 30"
+		},
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"裂变_开始作战"
+		]
+	},
+	"裂变_计时1": {
+		"recognition": "OCR",
+		"roi": [1104, 647, 62, 38],
+		"expected": "END",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "Start_Time = _get_time; T = 30"
+		},
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"裂变_计算时间"
+		]
+	},
+	"裂变_开始作战": {
+		"recognition": "OCR",
+		"roi": [997, 193, 193, 78],
+		"expected": ["1", "9", "5"],
+		"action": "LongPress",
+		"duration": 12,
+		"target": [1097, 660, 1, 1],
+		"post_delay": 1,
+		"next": [
+			"裂变_计算时间"
+		]
+	},
+	"裂变_计算时间": {
+		"recognition": "OCR",
+		"roi": [1104, 647, 62, 38],
+		"expected": "END",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": " (_get_time - Start_Time)/60 > T",
+			"true": "!返回主界面",
+			"false": "裂变_计划1"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
+	},
+	"裂变_计划1": {
+		"recognition": "OCR",
+		"roi": [1104, 647, 62, 38],
+		"expected": "END",
+		"action": "LongPress",
+		"duration": 12,
+		"target": [631, 431, 25, 25],
+		"post_delay": 1000,
+		"next": [
+			"裂变_计划2",
+			"[JumpBack]134_确定部署",
+			"裂变_计划1"
+		]
+	},
+	"裂变_计划2": {
+		"recognition": "OCR",
+		"roi": [1173, 396, 82, 27],
+		"expected": ["A", "c", "t"],
+		"target": [85, 627, 15, 6],
+		"action": "LongPress",
+		"duration": 12,
+		"pre_delay": 1000,
+		"post_delay": 500,
+		"next": [
+			"裂变_计划3"
+		]
+	},
+	"裂变_计划3": {
+		"recognition": "OCR",
+		"roi": [1101, 623, 162, 85],
+		"expected": ["EXE", "CUTE"],
+		"action": "LongPress",
+		"duration": 12,
+		"target": [631, 25, 22, 18],
+		"next": [
+			"裂变_计划4"
+		]
+	},
+	"裂变_计划4": {
+		"recognition": "OCR",
+		"roi": [1136, 525, 82, 32],
+		"expected": "N",
+		"action": "LongPress",
+		"duration": 12,
+		"post_delay": 500,
+		"next": [
+			"裂变_计划6"
+		]
+	},
+	"裂变_计划6": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"duration": 12,
+		"target": [1154, 655, 29, 12],
+		"post_delay": 4000,
+		"next": [
+			"裂变_确定"
+		]
+	},
+	"裂变_确定": {
+		"recognition": "OCR",
+		"roi": [732, 477, 85, 43],
+		"expected": ["OK", "ok", "K"],
+		"action": "LongPress",
+		"duration": 12,
+		"post_delay": 500,
+		"rate_limit": 500,
+		"next": [
+			"裂变_撤退",
+			"[JumpBack]裂变_esc"
+		]
+	},
+	"裂变_esc": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 2000,
+		"next": []
+	},
+	"裂变_撤退": {
+		"recognition": "OCR",
+		"roi": [342, 10, 171, 35],
+		"expected": "WITH",
+		"action": "LongPress",
+		"duration": 12,
+		"post_delay": 4000,
+		"timeout": 90000,
+		"next": [
+			"裂变_关卡结算"
+		]
+	},
+	"裂变_关卡结算": {
+		"recognition": "OCR",
+		"roi": [371, 608, 91, 36],
+		"expected": ["Re"],
+		"action": "DoNothing",
+		"next": [
+			"裂变_开始作战",
+			"[JumpBack]public_关卡结算点击1"
+		]
+	}
+}

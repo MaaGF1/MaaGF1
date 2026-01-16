@@ -19,13 +19,13 @@
 		"post_delay": 2500,
 		"next": [
 			"重建完成",
-			"public二星人形回收_进入导航栏"
+			"!返回主界面_返回作战"
 		]
 	},
 	"重建完成": {
 		"recognition": "OCR",
-		"roi": [999, 166, 247, 327],
-		"expected": "00:00'00",
+		"roi": [1019, 234, 199, 426],
+		"expected": "PRODUCTION",
 		"action": "LongPress",
 		"duration": 10,
 		"next": [
@@ -51,7 +51,7 @@
 		"duration": 10,
 		"post_delay": 1500,
 		"next": [
-			"public二星人形回收_进入导航栏"
+			"!返回主界面_返回作战"
 		]
 	}
 }
