@@ -449,3 +449,6 @@ tools/ImageCropper/**/*.png
 
 config
 debug
+
+# Hack
+tools/hack/**/*.json
