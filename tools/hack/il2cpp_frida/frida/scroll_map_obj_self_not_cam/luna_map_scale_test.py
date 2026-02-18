@@ -2,7 +2,7 @@ import frida
 import sys
 import os
 
-JS_FILE = "monitor_motion.js"
+JS_FILE = "monitor_map_scale.js"
 
 def on_message(message, data):
     if message['type'] == 'send':
@@ -32,8 +32,8 @@ def main():
     script.on('message', on_message)
     script.load()
     
-    print("[*] Monitoring Camera Position... Please manually ZOOM the map in-game.")
-    print("[*] Look for Z-axis or Y-axis changes.")
+    print("[*] Monitoring Scale... Please manually ZOOM the map in-game.")
+    print("[*] Look for values changing around 1.0 (e.g., 0.8 -> 1.2)")
     sys.stdin.read()
 
 if __name__ == '__main__':

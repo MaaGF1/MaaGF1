@@ -2,7 +2,7 @@ import frida
 import sys
 import os
 
-JS_FILE = "monitor_motion.js"
+JS_FILE = "monitor_rect.js"
 
 def on_message(message, data):
     if message['type'] == 'send':
@@ -32,8 +32,7 @@ def main():
     script.on('message', on_message)
     script.load()
     
-    print("[*] Monitoring Camera Position... Please manually ZOOM the map in-game.")
-    print("[*] Look for Z-axis or Y-axis changes.")
+    print("[*] Monitoring RectTransform... Please DRAG the map in-game.")
     sys.stdin.read()
 
 if __name__ == '__main__':
