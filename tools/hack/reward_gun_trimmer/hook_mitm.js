@@ -1,3 +1,5 @@
+// tools/hack/reward_gun_trimmer/hook_mitm.js
+
 var addr_DecodeWithGzip = 21054368; // AC.AuthCode$$DecodeWithGzip
 
 // Helper function: Read C# byte array
@@ -16,14 +18,11 @@ function getCSharpByteArray(ptr) {
 function writeCSharpByteArray(ptr, newData) {
     if (ptr.isNull()) return false;
     
-    // Get original array capacity (simplified to assume current length is capacity)
+    // Get original array capacity (assume current length is capacity)
     var originalLen = ptr.add(0x18).readU32();
     var newLen = newData.byteLength;
     
-    // Safety check: If new data is larger than original space, we cannot write directly,
-    // otherwise it will overwrite subsequent memory and cause a crash.
-    // Unless we can call C#'s new byte[], under pure JS raw pointer operations, 
-    // we can only use existing space. This is why Python side uses max compression.
+    // Safety check: If new data is larger than original space, we cannot write directly
     if (newLen > originalLen) {
         console.log("[JS Danger] New data length (" + newLen + ") exceeds original array capacity (" + originalLen + ")!");
         console.log("[JS Danger] Aborting modification to prevent game crash.");

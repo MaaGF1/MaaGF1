@@ -1,3 +1,5 @@
+# tools/hack/reward_gun_trimmer/main.py
+
 import frida
 import sys
 import gzip
@@ -50,15 +52,15 @@ def trim_game_payload(json_obj):
                 trimmed = True
     
     # =======================================================
-    # Target 2: Payload Size Reduction (To ensure write success)
+    # Target 2: Payload Size Reduction
     # =======================================================
     
-    # 1. Remove Root Logs (Safe and large)
+    # 1. Remove Root Logs
     if "mica_client_log" in json_obj:
         del json_obj["mica_client_log"]
         trimmed = True
 
-    # 2. Remove Death Stats (Usually safe, prevents death effect)
+    # 2. Remove Death Stats
     if "died_this_section" in json_obj:
         died = json_obj["died_this_section"]
         if isinstance(died, dict):
@@ -67,7 +69,7 @@ def trim_game_payload(json_obj):
                 trimmed = True
                 print("[Python] Cleared died_this_section")
 
-    # 3. Remove Protocol Overhead Fields (Safe)
+    # 3. Remove Protocol Overhead Fields
     keys_to_delete = ["mission_control", "building_info", "mission_lose_result"]
     for key in keys_to_delete:
         if key in json_obj:
@@ -75,9 +77,9 @@ def trim_game_payload(json_obj):
             trimmed = True
 
     # =======================================================
-    # ABORTED: Map & Movement Optimization
+    # Warning: Map & Movement
     # Reasons: Caused game logic freeze / infinite wait.
-    # We DO NOT touch 'spot_act_info', 'target_moved_step', etc.
+    # DO NOT modify 'spot_act_info', 'target_moved_step', etc.
     # =======================================================
 
     return trimmed, json_obj
@@ -98,32 +100,25 @@ def on_message(message, data):
                 # 2. Execute Optimization
                 is_modified, json_obj = trim_game_payload(json_obj)
 
-                # 3. Modify Values (User Exp / Rank)
-                if "mission_win_result" in json_obj:
-                    win_res = json_obj["mission_win_result"]
-                    if isinstance(win_res, dict):
-                        # Force high exp/rank if needed
-                        win_res["user_exp"] = "255"
-                        is_modified = True
-
                 if is_modified:
-                    # 4. Reserialize (Compact)
+                    # 3. Reserialize (Compact)
                     new_json_str = json.dumps(json_obj, separators=(',', ':'), ensure_ascii=False)
                     
-                    # 5. Recompress
-                    # Using level 6 to balance speed and size.
-                    # With mica_client_log removed, size should be smaller than original.
+                    # 4. Recompress
+                    # Level 6 is balanced for speed/size. 
+                    # Ensure size < original to pass memory write check.
                     new_gzip_data = gzip.compress(new_json_str.encode('utf-8'), compresslevel=6)
                     new_len = len(new_gzip_data)
                     
-                    # 6. Safety Check
+                    # 5. Safety Check
                     if new_len <= original_len:
-                        # print(f"[Python] Success: {original_len} -> {new_len} bytes")
+                        # print(f"[Python] Optimized: {original_len} -> {new_len} bytes")
                         script.post({'type': 'resp_modify', 'payload': 'modified'}, new_gzip_data)
                     else:
                         print(f"[Python] Warning: Size increased ({new_len} > {original_len}). Skipped.")
                         script.post({'type': 'resp_modify', 'payload': 'original'})
                 else:
+                    # Nothing to trim, just pass through
                     script.post({'type': 'resp_modify', 'payload': 'original'})
 
             except Exception as e:
