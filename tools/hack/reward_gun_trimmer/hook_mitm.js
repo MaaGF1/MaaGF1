@@ -74,7 +74,7 @@ function hook() {
                     // 1. Send request to Python
                     send({ id: "req_modify" }, originalData);
                     
-                    // 2. [Critical] Synchronously wait for Python's reply
+                    // 2. Synchronously wait for Python's reply
                     // recv().wait() will block the game thread until Python sends a message back
                     var received = recv('resp_modify', function(msg, data) {
                         
@@ -91,7 +91,8 @@ function hook() {
                         }
                     });
                     
-                    received.wait(); // Block here
+                    // Block here
+                    received.wait();
                 }
             }
         }

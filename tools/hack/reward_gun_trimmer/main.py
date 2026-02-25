@@ -121,6 +121,13 @@ def on_message(message, data):
                 is_modified, json_obj = trim_game_payload(json_obj)
 
                 # 3. Individual value modifications (Incremental addition from original code)
+                if "mission_win_result" in json_obj:
+                    # Modify user_exp
+                    old_exp = json_obj["mission_win_result"].get("user_exp", "N/A")
+                    json_obj["mission_win_result"]["user_exp"] = "255"
+                    print(f"[Python] Modified user_exp: {old_exp} -> 255")
+                    is_modified = True
+
                 if is_modified:
                     # 4. Reserialize (remove spaces to compress volume)
                     new_json_str = json.dumps(json_obj, separators=(',', ':'), ensure_ascii=False)
