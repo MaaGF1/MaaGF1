@@ -24,7 +24,6 @@ def save_dump(data, prefix, tag=""):
 
 def trim_game_payload(json_obj):
     """
-    Optimization Strategy 5.0: Safe Settlement Acceleration
     Reverted map/movement modifications to prevent game freeze.
     """
     trimmed = False
@@ -127,6 +126,7 @@ def on_message(message, data):
                 script.post({'type': 'resp_modify', 'payload': 'original'})
 
 def main():
+    # Note: Grils for Steam, Girls for Epic
     process_name = "GrilsFrontLine.exe" 
     print(f"[*] Attaching to process: {process_name} ...")
     
