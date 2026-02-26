@@ -204,7 +204,6 @@
 		"action": "LongPress",
 		"duration": 20,
 		"target": [1152, 644, 53, 30],
-		"post_delay": 100000,
 		"timeout": 200000,
 		"next": [
 			"循演战役夜战打捞_再次作战",
