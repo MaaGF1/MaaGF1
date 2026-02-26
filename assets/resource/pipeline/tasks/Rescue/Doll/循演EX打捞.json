@@ -166,7 +166,6 @@
 		"action": "LongPress",
 		"target": [1143, 664, 20, 16],
 		"duration": 15,
-		"post_delay": 7000,
 		"timeout": 90000,
 		"rate_limit": 2000,
 		"next": [
