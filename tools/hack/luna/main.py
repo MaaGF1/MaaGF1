@@ -24,23 +24,49 @@ def on_frida_message(message, data):
 def pipe_handler(msg):
     """
     Protocol:
-    "MOVE x y" -> Returns "OK"
+    "MOVE x y"       -> Returns "OK"
+    "WHEEL delta x y" -> Returns "OK" (delta usually 120 or -120)
     """
     global global_script
+
+    print(f"[IPC DEBUG] Received raw message: '{msg}'")
+
     if not global_script:
+        print("[IPC DEBUG] Error: Global script is not loaded!")
         return "ERR_NO_SCRIPT"
 
     try:
         parts = msg.split()
-        if parts[0] == 'MOVE' and len(parts) == 3:
+        if not parts:
+            return "ERR_EMPTY"
+
+        cmd = parts[0]
+
+        if cmd == 'MOVE' and len(parts) == 3:
             x, y = int(parts[1]), int(parts[2])
-            # Send to Frida (Fire and forget, but Frida is fast)
+            # print(f"[IPC DEBUG] Processing MOVE: {x}, {y}")
             global_script.post({'type': 'UPDATE_POS', 'x': x, 'y': y})
             return "OK"
+            
+        elif cmd == 'WHEEL' and len(parts) >= 4:
+            # Format: WHEEL delta x y
+            delta = int(parts[1])
+            x = int(parts[2])
+            y = int(parts[3])
+            
+            print(f"[IPC DEBUG] Processing WHEEL >>> Delta: {delta}, Pos: ({x}, {y})")
+            
+            # Update pos first, then inject wheel
+            global_script.post({'type': 'UPDATE_POS', 'x': x, 'y': y})
+            global_script.post({'type': 'SIMULATE_WHEEL', 'delta': delta})
+            return "OK"
+
         else:
+            print(f"[IPC DEBUG] Warning: Unknown or invalid command format: {msg}")
             return "ERR_INVALID_CMD"
+
     except Exception as e:
-        print(f"[!] Handler Error: {e}")
+        print(f"[!] Handler Exception: {e}")
         return "ERR_EXCEPTION"
 
 def main():

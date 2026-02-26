@@ -1,14 +1,16 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"name": "MaaGF1",
-	"version": "v1.9.4",
 	"url": "https://github.com/MaaGF1/MaaGF1",
+	"interface_version": 2,
+	"version": "v1.11.0-alpha.1",
+	"title": "$MaaGF1_Title",
+	"welcome": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/",
 	"mirrorchyan_rid": null,
 	"mirrorchyan_multiplatform": false,
-	"custom_title": "MaaGF1",
 	"controller": [
 		{
-			"name": "桌面端",
+			"name": "Desktop",
 			"type": "Win32",
 			"win32": {
 				"class_regex": ".*",
@@ -17,12 +19,11 @@
 				"mouse": 1,
 				"keyboard": 1
 			}
-		},
-		{"name": "模拟器", "type": "Adb"}
+		}
 	],
 	"resource": [
 		{
-			"name": "官服",
+			"name": "国服",
 			"path": ["{PROJECT_DIR}/resource/"]
 		},
 		{
@@ -33,6 +34,10 @@
 			]
 		}
 	],
+	"languages": {
+		"zh-CN": "./resource/lang.zh-CN.json",
+		"en-US": "./resource_en/lang.en-US.json"
+	},
 	"task": [
 		{
 			"name": "1.经验 - 13-4循环",
@@ -70,8 +75,7 @@
 				"81N_装备溢出处理",
 				"81N_是否开启无限循环",
 				"81N_路线选择"
-			],
-			"advanced": ["指定装备强化(未完成)"]
+			]
 		},
 		{
 			"name": "1.经验 - 8-1N地图初始化",
@@ -129,8 +133,7 @@
 			"entry": "!裂变链接捡垃圾",
 			"check": false,
 			"doc": "⚠️打开记录缩放，将地图缩放至最小并拉从最左下向右上拉至地图边缘后手动运行一次再开始脚本[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",
-			"option": ["部署梯队选择"],
-			"advanced": ["目标梯队一号位人形"],
+			"option": ["部署梯队选择", "目标梯队一号位人形"],
 			"repeatable": true,
 			"repeat_count": -1
 		},
@@ -148,8 +151,7 @@
 			"entry": "!指挥官后勤",
 			"check": false,
 			"doc": "⚠️打开记录缩放，将地图缩放至最小并拉从最左下向右上拉至地图边缘后手动运行一次再开始脚本[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",
-			"option": ["部署梯队选择"],
-			"advanced": ["目标梯队一号位人形"],
+			"option": ["部署梯队选择", "目标梯队一号位人形"],
 			"repeatable": true,
 			"repeat_count": -1
 		},
@@ -168,15 +170,6 @@
 			"check": false,
 			"doc": "[color:tomato]在 主界面 启动，局内地图缩放要求同`0元购`[/color]",
 			"option": ["N分钟后返回基地"],
-			"repeatable": true,
-			"repeat_count": -1
-		},
-		{
-			"name": "3.资源 - 炼金",
-			"entry": "!Alchemy_Entry",
-			"check": false,
-			"doc": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",
-			"option": ["Alchemy_Task_List"],
 			"repeatable": true,
 			"repeat_count": -1
 		},
@@ -200,16 +193,20 @@
 			"name": "5.循演战役 - 普通",
 			"entry": "!循演战役普通打捞",
 			"check": false,
-			"doc": "地图索至最小，向右下拉至边缘（即拉至左上角），左侧机场下梯队，记得去高级填写梯队第一个人形",
-			"option": ["循演普通_选择打捞关卡", "循演普通_选择打捞目标", "部署梯队选择"],
-			"advanced": ["目标梯队一号位人形"],
+			"doc": "地图索至最小，向右下拉至边缘（即拉至左上角），左侧机场下梯队，记得去高级填写梯队第一个人形。[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/",
+			"option": [
+				"循演普通_选择打捞关卡",
+				"循演普通_选择打捞目标",
+				"部署梯队选择",
+				"目标梯队一号位人形"
+			],
 			"repeatable": false,
 			"repeat_count": 1
 		},
 		{
 			"name": "5.循演战役 - EX",
 			"entry": "循演_开始作战",
-			"doc": "选择打捞关卡和路线，固定`第一队为打捞队`，将地图缩放最小、`所有点位不要被遮挡`即可，在对应路线横向右边机场上部署后再运行脚本",
+			"doc": "选择打捞关卡和路线，固定`第一队为打捞队`，将地图缩放最小、`所有点位不要被遮挡`即可，在对应路线横向右边机场上部署后再运行脚本。[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/",
 			"option": ["循演EX选择打捞关卡", "循演EX选择打捞路线{横排从上往下}"],
 			"repeatable": true,
 			"repeat_count": -1
@@ -218,9 +215,13 @@
 			"name": "5.循演战役 - 夜战",
 			"entry": "!循演战役夜战打捞",
 			"check": false,
-			"doc": "地图索至最小，向右下拉至边缘（即拉至左上角），左侧机场下梯队（一二行上三四行下），记得去高级填写梯队第一个人形",
-			"option": ["循演夜战_选择打捞关卡", "循演夜战_选择打捞目标", "部署梯队选择"],
-			"advanced": ["目标梯队一号位人形"],
+			"doc": "地图索至最小，向右下拉至边缘（即拉至左上角），左侧机场下梯队（一二行上三四行下），记得去高级填写梯队第一个人形。[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/",
+			"option": [
+				"循演夜战_选择打捞关卡",
+				"循演夜战_选择打捞目标",
+				"部署梯队选择",
+				"目标梯队一号位人形"
+			],
 			"repeatable": false,
 			"repeat_count": 1
 		},
@@ -234,22 +235,6 @@
 			"repeat_count": 1
 		}
 	],
-	"advanced": {
-		"指定装备强化": {
-			"field": ["装备名称"],
-			"type": "string",
-			"default": "111",
-			"pipeline_override": {}
-		},
-		"目标梯队一号位人形": {
-			"field": ["一号位人形名称"],
-			"type": "string",
-			"default": "布伦·坦",
-			"pipeline_override": {
-				"public梯队部署_检测梯队人形": {"expected": "{一号位人形名称}"}
-			}
-		}
-	},
 	"option": {
 		"炸山彩蛋": {
 			"cases": [
@@ -1445,16 +1430,6 @@
 				}
 			]
 		},
-		"Alchemy_Task_List": {
-			"cases": [
-				{
-					"name": "静默沙盘",
-					"pipeline_override": {
-						"!Alchemy_Entry": {"next": "!静默沙盘炼金_Entry"}
-					}
-				}
-			]
-		},
 		"CustomServer_List": {
 			"cases": [
 				{
@@ -1506,6 +1481,22 @@
 					}
 				}
 			]
+		},
+		"目标梯队一号位人形": {
+			"name": "一号位人形名称",
+			"type": "input",
+			"inputs": [
+				{
+					"type": "input",
+					"name": "人形名称",
+					"description": "填写梯队一号位人形的名称",
+					"default": "布伦·坦",
+					"pipeline_type": "string"
+				}
+			],
+			"pipeline_override": {
+				"public梯队部署_检测梯队人形": {"expected": "{人形名称}"}
+			}
 		}
 	}
 }

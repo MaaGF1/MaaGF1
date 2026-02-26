@@ -97,7 +97,34 @@ jobs:
           echo "maafw_version=$maafw_ver" >> $GITHUB_OUTPUT
           echo "Target maafw version: $maafw_ver"
 
+      # --- Cache Mechanism for Python Dependencies ---
+      # 1. Create
+      - name: Create Virtual Environment
+        run: python -m venv venv
+
+      # 2. Activate (Add venv/Scripts to PATH)
+      # all subsequent 'python' commands will automatically use the interpreter provided by venv.
+      - name: Activate Virtual Environment
+        shell: bash
+        run: echo "${{ github.workspace }}/venv/Scripts" >> $GITHUB_PATH
+
+      # 3. Cache
+      - name: Cache Virtual Environment
+        id: cache-venv
+        uses: actions/cache@v4
+        with:
+          path: venv
+          # Key:
+          # 1. OS & Arch: Basic Environment;
+          # 2. mk/.conf: MaaFw's Version;
+          # 3. install.yml: Versions such as requests and pyinstaller, which are hardcoded in YAML.
+          key: venv-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('mk/.conf') }}-${{ hashFiles('.github/workflows/install.yml') }}
+          restore-keys: |
+            pip-${{ matrix.os }}-${{ matrix.arch }}-
+
+      # 4. Install Deps (if cache misses)
       - name: Install Python dependencies
+        if: steps.cache-venv.outputs.cache-hit != 'true'
         shell: bash
         run: |
           python -m pip install --upgrade pip
@@ -115,7 +142,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Cache Mechanism Implementation
+      # --- Cache Mechanism for MFAAvalonia ---
       - name: Cache MFAAvalonia
         id: cache-mfa
         uses: actions/cache@v4
@@ -140,9 +167,22 @@ jobs:
         shell: bash
         run: find deps/bin -name "*.zip" -type f -delete
 
+      # --- Cache Mechanism for Agent Compilation ---
+      # Only runs if variant is with-agent.
+      # Hashes all python files in agent directory to detect changes.
+      - name: Cache Agent Build
+        if: matrix.variant == 'with-agent'
+        id: cache-agent
+        uses: actions/cache@v4
+        with:
+          path: agent/dist
+          key: agent-build-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('agent/**/*.py', 'agent/mk/*.py', 'agent/*.conf') }}
+
       - name: Run Install Script
         shell: bash
         run: |
+          # install.py will check if agent/dist exists (restored from cache)
+          # If it exists, it skips the build process.
           python ./mk/install.py ${{ needs.meta.outputs.tag }} --variant ${{ matrix.variant }}
 
       - name: Generate Build Report
@@ -175,6 +215,62 @@ jobs:
         with:
           name: ${{ steps.artifact_name.outputs.name }}
           path: "install"
+
+  # Runtime Replace (Luna Build)
+  runtime-replace:
+    needs: [meta, install]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Read Luna Configuration
+        id: config
+        run: |
+          repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['luna']['repo'])")
+          tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['luna']['tag'])")
+          echo "repo=$repo" >> $GITHUB_OUTPUT
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          echo "Luna Config: Repo=$repo, Tag=$tag"
+
+      # 1. Download the base artifact (x86_64, with-agent)
+      - name: Download Base Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: MaaGF1-GUI-${{ needs.meta.outputs.tag }}-x86_64-Agent
+          path: base_artifact
+
+      # 2. Download the Luna MaaFramework
+      - name: Download Luna MaaFramework
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: ${{ steps.config.outputs.repo }}
+          tag: ${{ steps.config.outputs.tag }}
+          fileName: "MAA-win-x86_64-*.zip"
+          out-file-path: "deps_luna"
+          extract: false # Keep it zipped for the script to handle
+
+      # 3. Run the replacement script
+      - name: Execute Runtime Replace
+        run: |
+          # Find the downloaded zip file
+          LUNA_ZIP=$(find deps_luna -name "MAA-win-x86_64-*.zip" | head -n 1)
+          
+          python mk/runtime_replace.py \
+            --base base_artifact \
+            --luna-pkg "$LUNA_ZIP" \
+            --output install_luna
+
+      # 4. Upload the new artifact
+      # Note: We upload the directory. The release job's zip_assets script handles zipping folders starting with MaaGF1-GUI
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaaGF1-GUI-${{ needs.meta.outputs.tag }}-x86_64-Luna
+          path: install_luna
 
   build-summary:
     if: always()
@@ -213,8 +309,7 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    # Added package-resources to needs
-    needs: [install, package-resources, changelog, meta]
+    needs: [install, package-resources, runtime-replace, changelog, meta]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

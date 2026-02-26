@@ -82,8 +82,11 @@ function hook() {
             // args[0] is source string (Raw JSON)
             // args[1] is key string
             var strContent = getCSharpString(args[0]);
+            var strKey = getCSharpString(args[1]);
             
             if (strContent && strContent.length > 0) {
+                console.log("[C2S] Key used: " + strKey);
+
                 // If the string looks like JSON (starts with { or [), send it
                 if (strContent.trim().charAt(0) === '{' || strContent.trim().charAt(0) === '[') {
                     send({ id: "C2S", content: strContent });

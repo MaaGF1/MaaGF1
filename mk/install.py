@@ -100,16 +100,21 @@ def install_agent(variant: str):
             )
     
     elif variant == "with-agent":
-        # Compile and copy exe
-        build_script = AGENT_MK_DIR / "build.py"
-        if not build_script.exists():
-            print(f"Error: Build script not found at {build_script}")
-            sys.exit(1)
-            
-        print("Executing agent build script...")
-        # Execute build.py in a subprocess to ensure clean environment or just import it
-        # Using subprocess is safer for PyInstaller to avoid global state issues
-        subprocess.check_call([sys.executable, str(build_script)])
+        # Check if pre-built artifact exists (from Cache)
+        # Assuming the build script outputs to agent/dist/maa_agent.exe
+        prebuilt_exe = AGENT_DIR / "dist" / "maa_agent.exe"
+        
+        if prebuilt_exe.exists():
+            print(f"Found cached agent build at {prebuilt_exe}. Skipping compilation.")
+        else:
+            # Compile
+            build_script = AGENT_MK_DIR / "build.py"
+            if not build_script.exists():
+                print(f"Error: Build script not found at {build_script}")
+                sys.exit(1)
+                
+            print("Executing agent build script...")
+            subprocess.check_call([sys.executable, str(build_script)])
         
         # Copy artifacts
         src_dist = AGENT_DIR / "dist"
@@ -119,12 +124,12 @@ def install_agent(variant: str):
             print(f"Copying compiled agent from {src_dist}")
             shutil.copytree(src_dist, dest_dist, dirs_exist_ok=True)
             
-            # Also copy agent.conf if needed, usually it's outside the exe
+            # Also copy agent.conf if needed
             src_conf = AGENT_DIR / "agent.conf"
             if src_conf.exists():
                 shutil.copy2(src_conf, dest_agent_dir)
         else:
-            print("Error: Compiled artifacts not found after build.")
+            print("Error: Compiled artifacts not found after build/cache check.")
             sys.exit(1)
 
 def install_tools():

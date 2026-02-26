@@ -104,22 +104,11 @@
 		"recognition": "OCR",
 		"roi": [110, 575, 142, 57],
 		"expected": "卷积核",
-		"action": "Command",
-		"exec": "powershell",
-		"args": [
-			"-ExecutionPolicy",
-			"Bypass",
-			"-File",
-			"{RESOURCE_DIR}/../tools/scroll.ps1",
-			"-ScrollCount",
-			"40",
-			"-Direction",
-			"down",
-			"-MouseX",
-			"1200",
-			"-MouseY",
-			"700"
-		],
+		"action": "Scroll",
+		"target": [500, 500],
+		// Note: 理论上来说，应该使用`"dy": -120*N`的方式直接实现发送N次向下滑动，但是由于某种神秘力量(不知道为什么)，因此这里需要使用repeat*times的方式实现
+		"dy": -120,
+		"repeat": 100,
 		"post_delay": 1400,
 		"next": [
 			"ad逃亡_滑动2"
