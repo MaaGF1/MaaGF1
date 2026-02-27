@@ -1,0 +1,27 @@
+import os
+
+# Compile Config
+
+env = Environment(TARGET_ARCH='amd64')
+env.Append(CCFLAGS=['/O2', '/EHsc', '/W3'])
+
+# Include
+env.Append(CPPPATH=[
+    '#lib/minhook/include',
+    '#src'
+])
+
+# SRC File
+sources = [
+    'src/main.cpp',
+    'lib/minhook/src/buffer.c',
+    'lib/minhook/src/hook.c',
+    'lib/minhook/src/trampoline.c',
+    'lib/minhook/src/hde/hde64.c'
+]
+
+# Output DLL (lib) to `build/version`
+dll = env.SharedLibrary(target='build/version', source=sources)
+
+# Auto clean
+env.Clean(dll, 'build')
