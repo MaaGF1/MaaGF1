@@ -1,4 +1,4 @@
-# tools/hack/reward_gun_trimmer/main.py
+# tools/hack/trimmer/turn_end/main.py
 
 import frida
 import sys
@@ -17,7 +17,7 @@ def on_message(message, data):
         if msg_type == 'error':
             print(f"[Frida Error] {msg_text}")
         elif msg_type == 'info':
-            print(f"[Frida] {msg_text}")
+            print(f"[Frida Info] {msg_text}")
         else:
             print(f"[Frida Raw] {message}")
     else:
@@ -51,8 +51,8 @@ def main():
     script.on('message', on_message)
     script.load()
     
-    print("[*] Settlement Accelerator Running (Control Flow Hijacked)...")
-    print("[*] Waiting for UI trigger events...")
+    print("[*] Map Speed-Up Engine Running (Animations & Camera Disabled)...")
+    print("[*] Waiting for map events...")
     sys.stdin.read()
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-// tools/hack/reward_gun_trimmer/hook_mitm.js
+// tools/hack/trimmer/reward_gun/hook_mitm.js
 
 // --- Game Logic API ---
 var addr_InitGunInfo    = 5437312;  // CommonGetNewGunController$$InitGunInfo
