@@ -2,7 +2,7 @@
  * @file src/main.cpp
  * @author SoM
  * @brief Native IL2CPP Injection payload (Version.dll Proxy)
- * @version 0.2
+ * @version 0.3
  * @date 2026-02-27
  * * @copyright Copyright (c) 2026
  * */
@@ -31,6 +31,24 @@
  #include <string.h>
  #include "MinHook.h"
  #include "offsets.h"
+ 
+ // ==============================================================================
+ // KERNEL-STYLE CONFIGURATION MACROS
+ // ==============================================================================
+ 
+ #ifdef ENABLE_DEBUG_CONSOLE
+     #define INIT_CONSOLE() \
+         do { \
+             AllocConsole(); \
+             FILE* fDummy; \
+             freopen_s(&fDummy, "CONOUT$", "w", stdout); \
+             freopen_s(&fDummy, "CONOUT$", "w", stderr); \
+         } while(0)
+     #define LOG(...) printf(__VA_ARGS__)
+ #else
+     #define INIT_CONSOLE() do {} while(0)
+     #define LOG(...)       do {} while(0)
+ #endif
  
  // ==============================================================================
  // TYPE DEFINITIONS
@@ -70,7 +88,7 @@
  
  // --- REWARD GUN ---
  void hk_InitGunInfo(void* __this, void* gun, void* action, void* method) {
-     printf("[Native] >> UI Initialization Intercepted!\n");
+     LOG("[Native] >> UI Initialization Intercepted!\n");
  
      if (action != nullptr) {
          __try {
@@ -80,10 +98,10 @@
              void* target = (void*)(*(uintptr_t*)(action_ptr + 0x20));
              if (invoke_impl) {
                  invoke_impl(target);
-                 printf("[Native] [1/4] Faked Callback Invoke sent.\n");
+                 LOG("[Native] [1/4] Faked Callback Invoke sent.\n");
              }
          } __except(EXCEPTION_EXECUTE_HANDLER) {
-             printf("[Native Error] Callback invoke crashed!\n");
+             LOG("[Native Error] Callback invoke crashed!\n");
          }
      }
  
@@ -92,29 +110,29 @@
          __try {
              if (get_gameObject) {
                  gameObject = get_gameObject(__this, nullptr);
-                 if (gameObject) printf("[Native] [2/4] get_gameObject Success: 0x%p\n", gameObject);
+                 if (gameObject) LOG("[Native] [2/4] get_gameObject Success: 0x%p\n", gameObject);
              }
          } __except(EXCEPTION_EXECUTE_HANDLER) {
-             printf("[Native Error] get_gameObject crashed!\n");
+             LOG("[Native Error] get_gameObject crashed!\n");
          }
  
          if (gameObject != nullptr) {
              __try {
                  if (SetActive) {
                      SetActive(gameObject, 0, nullptr);
-                     printf("[Native] [3/4] SetActive(false) Success.\n");
+                     LOG("[Native] [3/4] SetActive(false) Success.\n");
                  }
              } __except(EXCEPTION_EXECUTE_HANDLER) {
-                 printf("[Native Error] SetActive crashed!\n");
+                 LOG("[Native Error] SetActive crashed!\n");
              }
  
              __try {
                  if (Destroy) {
                      Destroy(gameObject, nullptr);
-                     printf("[Native] [4/4] Destroy Success.\n");
+                     LOG("[Native] [4/4] Destroy Success.\n");
                  }
              } __except(EXCEPTION_EXECUTE_HANDLER) {
-                 printf("[Native Error] Destroy crashed!\n");
+                 LOG("[Native Error] Destroy crashed!\n");
              }
          }
      }
@@ -127,9 +145,9 @@
              // Instantly trigger the animation end events to deceive the state machine
              if (p_SpotFinish2) p_SpotFinish2(__this, nullptr);
              if (p_SpotFinish1) p_SpotFinish1(__this, nullptr);
-             printf("[Native] Spot Animation skipped & Finish Event faked.\n");
+             LOG("[Native] Spot Animation skipped & Finish Event faked.\n");
          } __except(EXCEPTION_EXECUTE_HANDLER) {
-             printf("[Native Error] Spot Finish fake failed!\n");
+             LOG("[Native Error] Spot Finish fake failed!\n");
          }
      }
  }
@@ -140,9 +158,9 @@
      if (__this != nullptr) {
          __try {
              if (p_TurnDisact) p_TurnDisact(__this, nullptr);
-             printf("[Native] Turn Animation fast-forwarded to DisactiveMain.\n");
+             LOG("[Native] Turn Animation fast-forwarded to DisactiveMain.\n");
          } __except(EXCEPTION_EXECUTE_HANDLER) {
-             printf("[Native Error] Turn fast-forward failed!\n");
+             LOG("[Native Error] Turn fast-forward failed!\n");
          }
      }
  }
@@ -155,7 +173,7 @@
              o_MoveCamera(__this, target, move, 0.0f, 0.0f, recordPos, changescale, setscale, handle, method);
          }
      } __except(EXCEPTION_EXECUTE_HANDLER) {
-         printf("[Native Error] MoveCamera hook failed!\n");
+         LOG("[Native Error] MoveCamera hook failed!\n");
      }
  }
  
@@ -164,12 +182,9 @@
  // ==============================================================================
  
  DWORD WINAPI ApplyCPUOptimization(LPVOID lpParam) {
-     AllocConsole();
-     FILE* fDummy;
-     freopen_s(&fDummy, "CONOUT$", "w", stdout);
-     freopen_s(&fDummy, "CONOUT$", "w", stderr);
+     INIT_CONSOLE();
  
-     printf("[*] Initializing Engine-Level Annihilation Hook via version.dll...\n");
+     LOG("[*] Initializing Engine-Level Annihilation Hook via version.dll...\n");
  
      HMODULE hGameAssembly = nullptr;
      while (!(hGameAssembly = GetModuleHandleA("GameAssembly.dll"))) {
@@ -177,7 +192,7 @@
      }
      
      uintptr_t baseAddr = (uintptr_t)hGameAssembly;
-     printf("[*] GameAssembly.dll loaded at 0x%p\n", (void*)baseAddr);
+     LOG("[*] GameAssembly.dll loaded at 0x%p\n", (void*)baseAddr);
  
      // --- Resolve Absolute Addresses ---
      get_gameObject = (get_gameObject_t)(baseAddr + OFFSET_get_gameObject);
@@ -196,9 +211,9 @@
          uint8_t patch[] = { 0x31, 0xC0, 0xC3 };
          memcpy(pIsPlay, patch, 3);
          VirtualProtect(pIsPlay, 3, oldProtect, &oldProtect);
-         printf("[+] Memory Patch Applied: Turn_IsPlay bypassed.\n");
+         LOG("[+] Memory Patch Applied: Turn_IsPlay bypassed.\n");
      } else {
-         printf("[-] Failed to unprotect memory for Turn_IsPlay patch.\n");
+         LOG("[-] Failed to unprotect memory for Turn_IsPlay patch.\n");
      }
  
      // --- Install Hooks ---
@@ -230,9 +245,9 @@
          MH_CreateHook((LPVOID)addr_MoveCamera, &hk_MoveCamera, (LPVOID*)&o_MoveCamera);
          MH_EnableHook((LPVOID)addr_MoveCamera);
  
-         printf("[*] All optimizations (Reward Gun + Turn End) are ACTIVE.\n");
+         LOG("[*] All optimizations (Reward Gun + Turn End) are ACTIVE.\n");
      } else {
-         printf("[-] MinHook initialization failed.\n");
+         LOG("[-] MinHook initialization failed.\n");
      }
  
      return 0;

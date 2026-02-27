@@ -1,9 +1,17 @@
 import os
 
-# Compile Config
-
 env = Environment(TARGET_ARCH='amd64')
-env.Append(CCFLAGS=['/O2', '/EHsc', '/W3'])
+
+# Fetch the mode argument, default to 'release'
+mode = ARGUMENTS.get('mode', 'release')
+
+if mode == 'debug':
+    # Debug mode: Disable optimization (/Od), inject macro
+    env.Append(CCFLAGS=['/Od', '/EHsc', '/W3'])
+    env.Append(CPPDEFINES=['ENABLE_DEBUG_CONSOLE'])
+else:
+    # Release mode: Maximize speed optimization (/O2)
+    env.Append(CCFLAGS=['/O2', '/EHsc', '/W3'])
 
 # Include
 env.Append(CPPPATH=[
