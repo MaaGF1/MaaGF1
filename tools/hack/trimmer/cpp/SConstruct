@@ -1,5 +1,26 @@
 import os
+import sys
+import subprocess
 
+# =========================================================================
+# PRE-BUILD STEP: Generate Version Info & Offsets (CMake CONFIGURE_FILE Equivalent)
+# =========================================================================
+print("[*] SCons: Executing pre-build steps...")
+gen_script = os.path.join('mk', 'gen_offsets.py')
+if os.path.exists(gen_script):
+    try:
+        subprocess.check_call([sys.executable, gen_script])
+    except subprocess.CalledProcessError as e:
+        print(f"[-] Pre-build script failed with code {e.returncode}")
+        Exit(1)
+else:
+    print(f"[-] Pre-build script {gen_script} not found! Skipping generation.")
+
+print("-" * 50)
+
+# =========================================================================
+# SCONS ENVIRONMENT SETUP
+# =========================================================================
 env = Environment(TARGET_ARCH='amd64')
 
 # Fetch the mode argument, default to 'release'
