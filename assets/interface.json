@@ -4,10 +4,11 @@
 	"url": "https://github.com/MaaGF1/MaaGF1",
 	"interface_version": 2,
 	"version": "v1.11.0-alpha.1",
-	"title": "$MaaGF1_Title",
-	"welcome": "[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/",
+	"title": "$_MaaGF1_Title",
 	"mirrorchyan_rid": null,
 	"mirrorchyan_multiplatform": false,
+	"license": "$_License_URL",
+	"description": "$_Description",
 	"controller": [
 		{
 			"name": "Desktop",
@@ -23,11 +24,13 @@
 	],
 	"resource": [
 		{
-			"name": "国服",
+			"name": "Resource_CN",
+			"label": "$_Resource_Label_CN",
 			"path": ["{PROJECT_DIR}/resource/"]
 		},
 		{
-			"name": "美服",
+			"name": "Resource_US",
+			"label": "$_Resource_Label_US",
 			"path": [
 				"{PROJECT_DIR}/resource/",
 				"{PROJECT_DIR}/resource_en/"
@@ -41,6 +44,7 @@
 	"task": [
 		{
 			"name": "1.经验 - 13-4循环",
+			"label": "$_1_Experience_134_Label",
 			"entry": "!134总流程",
 			"check": false,
 			"doc": "请在第十三战役-普通界面或者进入13-4地图后的界面运行， **要求地图缩放到最小** ，[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",

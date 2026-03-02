@@ -1,3 +1,8 @@
 {
-	"MaaGF1_Title": "MaaGF1"
+	"_MaaGF1_Title": "MaaGF1",
+	"_License_URL": "[MIT License](https://github.com/MaaGF1/MaaGF1/blob/main/LICENSE)",
+	"_Description": "MaaGFL is Maa Assistant for Girls' Frontline",
+	"_Resource_Label_CN": "CN Server",
+	"_Resource_Label_US": "US Server",
+	"_1_Experience_134_Label": "1.Exp - 13-4 Dragging Loop"
 }
