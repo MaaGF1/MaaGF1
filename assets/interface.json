@@ -164,7 +164,7 @@
 			"entry": "!莫比乌斯带上的逃亡",
 			"check": false,
 			"doc": "⚠️在主界面 或 常驻活动-卷积核界面运行[点击这里浏览器打开操作手册](https://maagf1.github.io/docs/)",
-			"option": ["0元购关卡", "拆解N次后返回"],
+			"option": ["0元购关卡", "拆解N次后返回", "自动建造"],
 			"repeatable": true,
 			"repeat_count": -1
 		},
