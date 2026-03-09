@@ -8,8 +8,31 @@ permissions:
   contents: write
 
 jobs:
+  check-config:
+    name: Check Append Configuration
+    runs-on: ubuntu-latest
+    outputs:
+      append_enable: ${{ steps.config.outputs.append_enable }}
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          
+      - name: Read Configuration
+        id: config
+        shell: bash
+        run: |
+          # Read append.enable from .conf, default to false
+          append_enable=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c.get('append', 'enable', fallback='false').lower())")
+          echo "append_enable=$append_enable" >> $GITHUB_OUTPUT
+          echo "Append Assets Enabled: $append_enable"
+
   append-external-artifacts:
     name: Append Docs & LogDog
+    needs: check-config
+    # Only run if enable=true in mk/.conf
+    if: ${{ needs.check-config.outputs.append_enable == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
@@ -22,15 +45,15 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Read Configuration
+      - name: Read Repos Configuration
         id: config
         shell: bash
         run: |
-          logdog_repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['logdog_repo'])")
-          logdog_tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['logdog_tag'])")
+          logdog_repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['append']['logdog_repo'])")
+          logdog_tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['append']['logdog_tag'])")
           
-          docs_repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['docs_repo'])")
-          docs_tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['install']['docs_tag'])")
+          docs_repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['append']['docs_repo'])")
+          docs_tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['append']['docs_tag'])")
           
           echo "logdog_repo=$logdog_repo" >> $GITHUB_OUTPUT
           echo "logdog_tag=$logdog_tag" >> $GITHUB_OUTPUT

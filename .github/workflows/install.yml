@@ -42,9 +42,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - id: check_luna
+        name: Check Luna Enable Status
+        run: |
+          # Read luna.enable from .conf, default to false if not found
+          luna_enable=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c.get('luna', 'enable', fallback='false').lower())")
+          echo "luna_enable=$luna_enable" >> $GITHUB_OUTPUT
+          echo "Luna build enabled: $luna_enable"
+
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
+      luna_enable: ${{ steps.check_luna.outputs.luna_enable }}
 
   # Package Resources independently
   package-resources:
@@ -219,6 +228,8 @@ jobs:
   # Runtime Replace (Luna Build)
   runtime-replace:
     needs: [meta, install]
+    # Check if Luna build is enabled in .conf
+    if: ${{ needs.meta.outputs.luna_enable == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -308,7 +319,14 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
 
   release:
-    if: ${{ needs.meta.outputs.is_release == 'true' }}
+    # Use strict evaluation to prevent skipping if runtime-replace is intentionally skipped
+    if: |
+      always() && 
+      needs.meta.outputs.is_release == 'true' && 
+      needs.install.result == 'success' && 
+      needs.package-resources.result == 'success' && 
+      needs.changelog.result == 'success' &&
+      (needs.runtime-replace.result == 'success' || needs.runtime-replace.result == 'skipped')
     needs: [install, package-resources, runtime-replace, changelog, meta]
     runs-on: ubuntu-latest
     steps:
