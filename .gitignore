@@ -452,6 +452,7 @@ debug
 
 # Hack
 tools/hack/**/*.json
+*.gz
 
 # Scons
 .sconsign.dblite
