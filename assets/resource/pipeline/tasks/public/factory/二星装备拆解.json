@@ -56,6 +56,7 @@
 		"template": "storage/navi.png",
 		"action": "LongPress",
 		"duration": 20,
+		"target": [216, 73, 0, 0],
 		"pre_delay": 800,
 		"post_wait_freezes": 200,
 		"next": [
