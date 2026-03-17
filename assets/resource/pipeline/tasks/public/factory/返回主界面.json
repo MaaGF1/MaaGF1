@@ -1,7 +1,9 @@
 {
 	"!返回主界面": {
 		"focus": {"Node.Recognition.Succeeded": "时间满足"},
-		"rate_limit": 4000,
+		"rate_limit": 5000,
+		"post_delay": 5000,
+		"timeout": 90000,
 		"next": [
 			"[JumpBack]后勤",
 			"zdjz_开始",
