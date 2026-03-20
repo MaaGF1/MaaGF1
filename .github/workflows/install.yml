@@ -230,7 +230,7 @@ jobs:
     needs: [meta, install]
     # Check if Luna build is enabled in .conf
     if: ${{ needs.meta.outputs.luna_enable == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: windows-latest 
     steps:
       - uses: actions/checkout@v4
 
@@ -238,9 +238,17 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          
+      # Pip install
+      - name: Install PyInstaller and dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller frida
 
       - name: Read Luna Configuration
         id: config
+        shell: bash
         run: |
           repo=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['luna']['repo'])")
           tag=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('mk/.conf'); print(c['luna']['tag'])")
@@ -267,6 +275,8 @@ jobs:
 
       # 3. Run the replacement script
       - name: Execute Runtime Replace
+        # Bash to use `find`
+        shell: bash
         run: |
           # Find the downloaded zip file
           LUNA_ZIP=$(find deps_luna -name "MAA-win-x86_64-*.zip" | head -n 1)
