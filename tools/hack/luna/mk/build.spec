@@ -4,30 +4,24 @@ import sys
 from pathlib import Path
 
 SPEC_DIR = Path(os.getcwd()).resolve()
-AGENT_ROOT = SPEC_DIR.parent
+LUNA_ROOT = SPEC_DIR.parent
+SRC_DIR = LUNA_ROOT / 'src'
 
-if str(AGENT_ROOT) not in sys.path:
-    sys.path.insert(0, str(AGENT_ROOT))
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 block_cipher = None
 
 a = Analysis(
-    [str(AGENT_ROOT / 'main.py')], 
-    pathex=[str(AGENT_ROOT)],
+    [str(SRC_DIR / 'main.py')], 
+    pathex=[str(SRC_DIR)],
     binaries=[],
     datas=[
-        (str(AGENT_ROOT / 'agent.conf'), '.'),
+        (str(SRC_DIR / 'hook.js'), '.'),
     ],
     hiddenimports=[
-        'maa', 
-        'maa.agent.agent_server',
-        'maa.toolkit',
-        'my_reco',
-        'action',
-        'server',
-        'config',
-        'utils',
-        'utils.config',
+        'frida',
+        'tkinter',
     ],
     hookspath=[],
     hooksconfig={},
@@ -39,32 +33,34 @@ a = Analysis(
     noarchive=False,
 )
 
-pyd = []
-for d in a.datas:
-    if 'pyconfig' not in d[0]:
-        pyd.append(d)
-
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
+# Generate as directory (--onedir) instead of a single file for faster startup
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
-    name='maa_agent',
+    exclude_binaries=True,
+    name='luna',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
-    console=True,
+    console=False, # Set to False to hide background CMD window on Windows
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=None,
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='luna'
 )

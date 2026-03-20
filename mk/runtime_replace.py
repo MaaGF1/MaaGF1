@@ -4,7 +4,11 @@ import shutil
 import argparse
 import sys
 import zipfile
+import subprocess
 from pathlib import Path
+
+# Provide a root path reference
+PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 
 def parse_args():
     parser = argparse.ArgumentParser(description="MaaGFL Runtime Replacer (Luna Build)")
@@ -82,6 +86,35 @@ def update_interface_json(base_dir: Path):
         print(f"Error updating interface.json: {e}")
         sys.exit(1)
 
+def build_and_copy_luna_gui(output_path: Path):
+    """
+    Builds the luna tool using PyInstaller and copies it to the target root.
+    """
+    luna_dir = PROJECT_ROOT / "tools" / "hack" / "luna"
+    build_script = luna_dir / "mk" / "build.py"
+    
+    if not build_script.exists():
+        print(f"Error: Luna build script not found at {build_script}")
+        sys.exit(1)
+
+    print("Building Luna GUI application...")
+    try:
+        subprocess.check_call([sys.executable, str(build_script)])
+    except subprocess.CalledProcessError as e:
+        print(f"Error building Luna GUI: {e}")
+        sys.exit(1)
+        
+    luna_dist = luna_dir / "dist" / "luna"
+    if not luna_dist.exists():
+        print(f"Error: Luna build output not found at {luna_dist}")
+        sys.exit(1)
+        
+    print(f"Copying Luna artifacts from {luna_dist} to {output_path}...")
+    # Using dirs_exist_ok=True to merge _internal folder into root 
+    # and place luna.exe directly next to MaaGFL GUI exe.
+    shutil.copytree(luna_dist, output_path, dirs_exist_ok=True)
+    print("Luna GUI integration complete.")
+
 def main():
     args = parse_args()
     base_path = Path(args.base)
@@ -108,6 +141,9 @@ def main():
 
     # 3. Modify JSON
     update_interface_json(output_path)
+    
+    # 4. Compile and append Luna executable
+    build_and_copy_luna_gui(output_path)
 
     print(f"[OK] Runtime replace completed. Output: {output_path}")
 

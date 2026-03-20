@@ -1,115 +1,123 @@
-import frida
+import tkinter as tk
+from tkinter import ttk
+import threading
 import sys
-import time
-import os
-from ipc import NamedPipeServer
+from core import LunaService
 
-# Configuration
-TARGET_PROCESS = "GrilsFrontLine.exe"
-PIPE_NAME = "MaaLunaPipe"
-SCRIPT_PATH = os.path.join(os.path.dirname(__file__), "hook.js")
+class RedirectText:
+    def __init__(self, text_ctrl):
+        self.text_ctrl = text_ctrl
 
-global_script = None
+    def write(self, string):
+        self.text_ctrl.insert(tk.END, string)
+        self.text_ctrl.see(tk.END)
 
-def on_frida_message(message, data):
-    if message['type'] == 'send':
-        payload = message['payload']
-        if isinstance(payload, dict) and payload.get('type') == 'error':
-             print(f"[!] Hook Error: {payload.get('stack')}")
-        else:
-             print(f"[*] Frida: {payload}")
-    elif message['type'] == 'error':
-        print(f"[!] Frida Error: {message['stack']}")
+    def flush(self):
+        pass
 
-def pipe_handler(msg):
-    """
-    Protocol:
-    "MOVE x y"       -> Returns "OK"
-    "WHEEL delta x y" -> Returns "OK" (delta usually 120 or -120)
-    """
-    global global_script
-
-    print(f"[IPC DEBUG] Received raw message: '{msg}'")
-
-    if not global_script:
-        print("[IPC DEBUG] Error: Global script is not loaded!")
-        return "ERR_NO_SCRIPT"
-
-    try:
-        parts = msg.split()
-        if not parts:
-            return "ERR_EMPTY"
-
-        cmd = parts[0]
-
-        if cmd == 'MOVE' and len(parts) == 3:
-            x, y = int(parts[1]), int(parts[2])
-            # print(f"[IPC DEBUG] Processing MOVE: {x}, {y}")
-            global_script.post({'type': 'UPDATE_POS', 'x': x, 'y': y})
-            return "OK"
-            
-        elif cmd == 'WHEEL' and len(parts) >= 4:
-            # Format: WHEEL delta x y
-            delta = int(parts[1])
-            x = int(parts[2])
-            y = int(parts[3])
-            
-            print(f"[IPC DEBUG] Processing WHEEL >>> Delta: {delta}, Pos: ({x}, {y})")
-            
-            # Update pos first, then inject wheel
-            global_script.post({'type': 'UPDATE_POS', 'x': x, 'y': y})
-            global_script.post({'type': 'SIMULATE_WHEEL', 'delta': delta})
-            return "OK"
-
-        else:
-            print(f"[IPC DEBUG] Warning: Unknown or invalid command format: {msg}")
-            return "ERR_INVALID_CMD"
-
-    except Exception as e:
-        print(f"[!] Handler Exception: {e}")
-        return "ERR_EXCEPTION"
-
-def main():
-    global global_script
-
-    print(f"[*] Luna Service Starting...")
-    print(f"[*] Target Process: {TARGET_PROCESS}")
-    
-    # 1. Start Pipe Server
-    server = NamedPipeServer(PIPE_NAME, pipe_handler)
-    server.start()
-
-    # 2. Attach Frida
-    session = None
-    while True:
-        try:
-            session = frida.attach(TARGET_PROCESS)
-            print(f"[+] Attached to {TARGET_PROCESS}")
-            break
-        except Exception as e:
-            print(f"[.] Waiting for process... ({e})")
-            time.sleep(2)
-
-    try:
-        with open(SCRIPT_PATH, "r", encoding="utf-8") as f:
-            jscode = f.read()
-            
-        global_script = session.create_script(jscode)
-        global_script.on('message', on_frida_message)
-        global_script.load()
-        print(f"[+] Hook loaded. Pipe '\\\\.\\pipe\\{PIPE_NAME}' ready.")
+class LunaGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("MaaGFL Luna Injector")
+        self.root.geometry("500x350")
         
-        # Keep main thread alive
-        sys.stdin.read()
+        self.service = None
+        self.worker_thread = None
 
-    except KeyboardInterrupt:
-        print("[*] Stopping...")
-    except Exception as e:
-        print(f"[!] Error: {e}")
-    finally:
-        if session:
-            session.detach()
-        # Pipe server thread will die with process
+        self._build_ui()
+        
+        # Redirect stdout
+        sys.stdout = RedirectText(self.log_text)
+        sys.stderr = RedirectText(self.log_text)
 
-if __name__ == '__main__':
-    main()
+        print("Luna GUI Initialized. Ready to inject.")
+
+    def _build_ui(self):
+        frame_top = tk.Frame(self.root, padx=10, pady=10)
+        frame_top.pack(fill=tk.X)
+
+        # Target Process
+        tk.Label(frame_top, text="Target Process:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        self.combo_process = ttk.Combobox(frame_top, values=["GrilsFrontLine.exe", "MaaGFL.exe", "Unity.exe"], width=25)
+        self.combo_process.current(0)
+        self.combo_process.grid(row=0, column=1, padx=10, pady=5)
+
+        # Pipe Name
+        tk.Label(frame_top, text="Pipe Name:").grid(row=1, column=0, sticky=tk.W, pady=5)
+        self.entry_pipe = tk.Entry(frame_top, width=28)
+        self.entry_pipe.insert(0, "MaaLunaPipe")
+        self.entry_pipe.grid(row=1, column=1, padx=10, pady=5)
+
+        # Buttons
+        frame_btn = tk.Frame(self.root, pady=5)
+        frame_btn.pack(fill=tk.X)
+        
+        self.btn_start = tk.Button(frame_btn, text="Start Injection", width=15, command=self.start_service)
+        self.btn_start.pack(side=tk.LEFT, padx=10)
+
+        self.btn_stop = tk.Button(frame_btn, text="Stop Injection", width=15, command=self.stop_service, state=tk.DISABLED)
+        self.btn_stop.pack(side=tk.LEFT, padx=10)
+
+        self.btn_refresh = tk.Button(frame_btn, text="Refresh/Restart", width=15, command=self.restart_service)
+        self.btn_refresh.pack(side=tk.LEFT, padx=10)
+
+        # Log Console
+        frame_log = tk.Frame(self.root, padx=10, pady=10)
+        frame_log.pack(fill=tk.BOTH, expand=True)
+        
+        self.log_text = tk.Text(frame_log, wrap=tk.WORD, state=tk.NORMAL)
+        scrollbar = tk.Scrollbar(frame_log, command=self.log_text.yview)
+        self.log_text.configure(yscrollcommand=scrollbar.set)
+        
+        self.log_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    def _run_service(self, process_name, pipe_name):
+        self.service = LunaService(process_name, pipe_name)
+        success = self.service.start()
+        if not success:
+            # If start failed, reset buttons
+            self.root.after(0, self._set_gui_state, tk.NORMAL)
+
+    def start_service(self):
+        process_name = self.combo_process.get()
+        pipe_name = self.entry_pipe.get()
+        
+        if not process_name or not pipe_name:
+            print("[!] Process name and Pipe name cannot be empty.")
+            return
+
+        self._set_gui_state(tk.DISABLED)
+        
+        self.worker_thread = threading.Thread(target=self._run_service, args=(process_name, pipe_name))
+        self.worker_thread.daemon = True
+        self.worker_thread.start()
+
+    def stop_service(self):
+        if self.service:
+            self.service.stop()
+        self._set_gui_state(tk.NORMAL)
+
+    def restart_service(self):
+        self.stop_service()
+        self.root.after(500, self.start_service) # brief delay to allow cleanup
+
+    def _set_gui_state(self, start_state):
+        self.btn_start.config(state=start_state)
+        self.entry_pipe.config(state=start_state)
+        self.combo_process.config(state=start_state)
+        
+        stop_state = tk.NORMAL if start_state == tk.DISABLED else tk.DISABLED
+        self.btn_stop.config(state=stop_state)
+
+def on_closing():
+    if getattr(app, 'service', None):
+        app.service.stop()
+    root.destroy()
+    sys.exit(0)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = LunaGUI(root)
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    root.mainloop()
