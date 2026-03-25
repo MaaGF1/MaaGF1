@@ -26,9 +26,11 @@ MaaGF1 是基于 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 的、�
 
 ## 三、其他工具
 
-1. [MaaFramework Watchdog](https://github.com/MaaGF1/logdog)
-2. [MaaPipeline Formatter](https://github.com/MaaGF1/MaaPipeline-Format)
-3. [MaaPipeline Formatter VSCode](https://github.com/MaaGF1/MaaPipeline-Format-VSCode)
+1. [MaaGF1主页](https://github.com/MaaGF1)
+2. [少女前线地图](https://github.com/MaaGF1/maps)
+	- [zh-CN](https://maagf1.github.io/maps/)
+	- [en-US](https://randomqwerty.github.io/gflmaps/)
+3. [MaaFramework Watchdog](https://github.com/MaaGF1/logdog)
 
 ## 四、反馈与贡献
 
@@ -40,7 +42,7 @@ MaaGF1 是基于 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 的、�
 ### 5.1 开源项目
 
 1. [MaaFramework](https://github.com/MaaXYZ/MaaFramework)
-2. [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia)
+2. [MFAAvalonia](https://github.com/MaaXYZ/MFAAvalonia)
 3. [FMddl-MAAutoGirlsFrontLine](https://github.com/Fufu-OuO/FMddl-MAAutoGirlsFrontLine)
 
 ### 5.2 贡献者墙
