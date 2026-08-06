@@ -82,7 +82,6 @@
 		]
 	},
 	"逃亡_进入卷积核": {
-		"max_hit": 2,
 		"recognition": "OCR",
 		"roi": [527, 134, 138, 53],
 		"expected": ["卷积核", "积核"],
@@ -90,7 +89,7 @@
 		"target": [1047, 493, 132, 41],
 		"duration": 10,
 		"pre_delay": 1500,
-		"post_delay": 1000,
+		"post_delay": 2000,
 		"next": [
 			"逃亡_进入卷积核",
 			"逃亡_识别假打捞关",
@@ -129,6 +128,21 @@
 		"post_delay": 400,
 		"next": [
 			"逃亡_识别假打捞关",
+			"逃亡_边缘检测",
+			"逃亡_滑动3"
+		]
+	},
+	"逃亡_边缘检测": {
+		"recognition": "TemplateMatch",
+		"roi": [707, 368, 339, 218],
+		"threshold": 0.85,
+		"template": "combat/resourceRecovery/卷积核/逃亡_边缘检测.png",
+		"duration": 20,
+		"action": "LongPress",
+		"target": [122, 503, 1, 1],
+		"post_delay": 1000,
+		"next": [
+			"逃亡_进入卷积核关卡",
 			"逃亡_滑动3"
 		]
 	},
@@ -136,6 +150,7 @@
 		"recognition": "TemplateMatch",
 		"roi": [410, 670, 571, 50],
 		"template": "combat/resourceRecovery/卷积核/卷积核打捞图.png",
+		"threshold": 0.62,
 		"duration": 20,
 		"action": "LongPress",
 		"target_offset": [173, -138, 0, 0],
@@ -242,6 +257,7 @@
 			"逃亡_开始作战",
 			"逃亡_识别卷积核",
 			"[JumpBack]public二星人形回收_人形回收",
+			"[JumpBack]public_返回战斗界面",
 			"[JumpBack]public_关卡结算点击1"
 		]
 	}

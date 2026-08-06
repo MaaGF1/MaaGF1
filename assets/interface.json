@@ -742,7 +742,12 @@
 				{
 					"name": "莫比乌斯带上的逃亡(普通难度)",
 					"pipeline_override": {
-						"public_关卡结算点击5": {"post_delay": 500}
+						"public_关卡结算点击5": {"post_delay": 500},
+						"逃亡_识别卷积核": {
+							"next": [
+								"逃亡_进入卷积核"
+							]
+						}
 					}
 				},
 				{
