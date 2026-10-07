@@ -131,9 +131,12 @@
 		]
 	},
 	"81N战斗_执行计划": {
-		"recognition": "OCR",
-		"roi": [992, 659, 69, 54],
-		"expected": ["1"],
+		"recognition": "TemplateMatch",
+		"roi": [961, 606, 126, 113],
+		"template": "combat/levelUp/8-1N/Gap1.png",
+		"threshold": 0.7,
+		"green_mask": true,
+		"rate_limit": 200,
 		"action": "LongPress",
 		"duration": 20,
 		"target": [1111, 633, 69, 43],
