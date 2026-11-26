@@ -1,402 +1,253 @@
 {
-  "!循演战役普通打捞": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "循演战役普通打捞_主界面点击战斗",
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动至选择的打捞关卡",
-      "循演战役普通打捞_点击普通模式",
-      "循演战役普通打捞_作战任务",
-      "循演战役普通打捞_开始作战"
-    ]
-  },
-  "循演战役普通打捞_主界面点击战斗": {
-    "recognition": "OCR",
-    "roi": [
-      762,
-      334,
-      312,
-      181
-    ],
-    "expected": "战斗",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动至选择的打捞关卡",
-      "循演战役普通打捞_作战任务",
-      "循演战役普通打捞_主界面点击战斗"
-    ]
-  },
-  "循演战役普通打捞_作战任务": {
-    "recognition": "OCR",
-    "roi": [
-      20,
-      105,
-      162,
-      367
-    ],
-    "expected": "作战任务",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动至选择的打捞关卡"
-    ]
-  },
-  "循演战役普通打捞_点击普通模式": {
-    "recognition": "OCR",
-    "roi": [
-      492,
-      121,
-      256,
-      83
-    ],
-    "expected": "循演",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      961,
-      182,
-      27,
-      17
-    ],
-    "post_delay": 1000,
-    "next": [
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动至选择的打捞关卡",
-      "循演战役普通打捞_点击普通模式"
-    ]
-  },
-  "循演战役普通打捞_滑动至选择的打捞关卡": {
-    "recognition": "OCR",
-    "roi": [
-      623,
-      261,
-      92,
-      448
-    ],
-    "expected": "数据",
-    "action": "Swipe",
-    "begin": [
-      796,
-      567,
-      1,
-      1
-    ],
-    "end": [
-      795,
-      418,
-      1,
-      1
-    ],
-    "post_delay": 1000,
-    "next": [
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动2",
-      "循演战役普通打捞_滑动至选择的打捞关卡"
-    ]
-  },
-  "循演战役普通打捞_滑动2": {
-    "recognition": "DirectHit",
-    "action": "Swipe",
-    "begin": [
-      796,
-      567,
-      1,
-      1
-    ],
-    "end": [
-      795,
-      418,
-      1,
-      1
-    ],
-    "post_delay": 1000,
-    "next": [
-      "循演战役普通打捞_点击打捞关卡",
-      "循演战役普通打捞_滑动2"
-    ]
-  },
-  "循演战役普通打捞_点击打捞关卡": {
-    "recognition": "OCR",
-    "roi": [
-      621,
-      261,
-      195,
-      454
-    ],
-    "expected": "数据接口",
-    "action": "LongPress",
-    "duration": 20,
-    "pre_delay": 100,
-    "next": [
-      "循演战役普通打捞_进入打捞关卡",
-      "循演战役普通打捞_点击打捞关卡"
-    ]
-  },
-  "循演战役普通打捞_进入打捞关卡": {
-    "recognition": "OCR",
-    "roi": [
-      467,
-      149,
-      182,
-      98
-    ],
-    "expected": "数据接口",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      952,
-      571,
-      54,
-      32
-    ],
-    "next": [
-      "循演战役普通打捞_点击机场",
-      "循演战役普通打捞_进入打捞关卡"
-    ]
-  },
-  "循演战役普通打捞_点击机场": {
-    "recognition": "OCR",
-    "roi": [
-      20,
-      597,
-      149,
-      65
-    ],
-    "expected": "计划",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      410,
-      509,
-      10,
-      11
-    ],
-    "next": [
-      "循演战役普通打捞_开始作战",
-      "循演战役普通打捞_点击机场",
-      "[JumpBack]!public梯队部署"
-    ]
-  },
-  "循演战役普通打捞_开始作战": {
-    "recognition": "OCR",
-    "roi": [
-      1016,
-      613,
-      235,
-      84
-    ],
-    "expected": "开始",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_点击梯队",
-      "循演战役普通打捞_开始作战"
-    ]
-  },
-  "循演战役普通打捞_点击梯队": {
-    "recognition": "OCR",
-    "roi": [
-      1076,
-      596,
-      197,
-      118
-    ],
-    "expected": "结束",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      410,
-      509,
-      10,
-      11
-    ],
-    "next": [
-      "循演战役普通打捞_补给梯队",
-      "循演战役普通打捞_点击梯队"
-    ]
-  },
-  "循演战役普通打捞_补给梯队": {
-    "recognition": "OCR",
-    "roi": [
-      1074,
-      507,
-      191,
-      94
-    ],
-    "expected": "补给",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_进入计划模式",
-      "循演战役普通打捞_补给梯队"
-    ]
-  },
-  "循演战役普通打捞_进入计划模式": {
-    "recognition": "OCR",
-    "roi": [
-      7,
-      604,
-      149,
-      50
-    ],
-    "expected": "计划",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_计划点1",
-      "循演战役普通打捞_进入计划模式"
-    ]
-  },
-  "循演战役普通打捞_计划点1": {
-    "recognition": "OCR",
-    "roi": [
-      1086,
-      610,
-      184,
-      106
-    ],
-    "expected": "执行",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      416,
-      510,
-      10,
-      9
-    ],
-    "next": [
-      "循演战役普通打捞_计划点2"
-    ]
-  },
-  "循演战役普通打捞_计划点2": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      513,
-      314,
-      12,
-      4
-    ],
-    "next": [
-      "循演战役普通打捞_计划点3"
-    ]
-  },
-  "循演战役普通打捞_计划点3": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      714,
-      309,
-      16,
-      11
-    ],
-    "next": [
-      "循演战役普通打捞_计划点4"
-    ]
-  },
-  "循演战役普通打捞_计划点4": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      914,
-      310,
-      15,
-      12
-    ],
-    "post_delay": 500,
-    "next": [
-      "循演战役普通打捞_下一回合",
-      "循演战役普通打捞_进入计划模式"
-    ]
-  },
-  "循演战役普通打捞_下一回合": {
-    "recognition": "OCR",
-    "roi": [
-      1059,
-      478,
-      221,
-      144
-    ],
-    "expected": [
-      "下一回合",
-      "下",
-      "回"
-    ],
-    "action": "LongPress",
-    "duration": 15,
-    "post_delay": 500,
-    "next": [
-      "循演战役普通打捞_执行计划",
-      "循演战役普通打捞_下一回合"
-    ]
-  },
-  "循演战役普通打捞_执行计划": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "target": [
-      1152,
-      644,
-      53,
-      30
-    ],
-    "duration": 15,
-    "timeout": 300000,
-    "rate_limit": 2000,
-    "next": [
-      "循演战役普通打捞_再次作战"
-    ]
-  },
-  "循演战役普通打捞_再次作战": {
-    "recognition": "OCR",
-    "roi": [
-      366,
-      609,
-      98,
-      32
-    ],
-    "expected": "再次作战",
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "循演战役普通打捞_再战点击"
-    ]
-  },
-  "循演战役普通打捞_再战点击": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      374,
-      617,
-      46,
-      14
-    ],
-    "next": [
-      "循演战役普通打捞_开始作战",
-      "循演人形回收补充",
-      "循演战役普通打捞_再战点击"
-    ]
-  },
-  "循演人形回收补充": {
-    "recognition": "OCR",
-    "expected": "人形回收",
-    "roi": [
-      194,
-      264,
-      897,
-      155
-    ],
-    "action": "DoNothing",
-    "next": [
-      "循演战役普通打捞_点击普通模式",
-      "[JumpBack]public二星人形回收_人形回收"
-    ]
-  }
+	"!循演战役普通打捞": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"循演战役普通打捞_主界面点击战斗",
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动至选择的打捞关卡",
+			"循演战役普通打捞_点击普通模式",
+			"循演战役普通打捞_作战任务",
+			"循演战役普通打捞_开始作战"
+		]
+	},
+	"循演战役普通打捞_主界面点击战斗": {
+		"recognition": "OCR",
+		"roi": [762, 334, 312, 181],
+		"expected": "战斗",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动至选择的打捞关卡",
+			"循演战役普通打捞_作战任务",
+			"循演战役普通打捞_主界面点击战斗"
+		]
+	},
+	"循演战役普通打捞_作战任务": {
+		"recognition": "OCR",
+		"roi": [20, 105, 162, 367],
+		"expected": "作战任务",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动至选择的打捞关卡"
+		]
+	},
+	"循演战役普通打捞_点击普通模式": {
+		"recognition": "OCR",
+		"roi": [492, 121, 256, 83],
+		"expected": "循演",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [961, 182, 27, 17],
+		"post_delay": 1000,
+		"next": [
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动至选择的打捞关卡",
+			"循演战役普通打捞_点击普通模式"
+		]
+	},
+	"循演战役普通打捞_滑动至选择的打捞关卡": {
+		"recognition": "OCR",
+		"roi": [623, 261, 92, 448],
+		"expected": "数据",
+		"action": "Swipe",
+		"begin": [796, 567, 1, 1],
+		"end": [795, 418, 1, 1],
+		"post_delay": 1000,
+		"next": [
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动2",
+			"循演战役普通打捞_滑动至选择的打捞关卡"
+		]
+	},
+	"循演战役普通打捞_滑动2": {
+		"recognition": "DirectHit",
+		"action": "Swipe",
+		"begin": [796, 567, 1, 1],
+		"end": [795, 418, 1, 1],
+		"post_delay": 1000,
+		"next": [
+			"循演战役普通打捞_点击打捞关卡",
+			"循演战役普通打捞_滑动2"
+		]
+	},
+	"循演战役普通打捞_点击打捞关卡": {
+		"recognition": "OCR",
+		"roi": [621, 261, 195, 454],
+		"expected": "数据接口",
+		"action": "LongPress",
+		"duration": 20,
+		"pre_delay": 100,
+		"next": [
+			"循演战役普通打捞_进入打捞关卡",
+			"循演战役普通打捞_点击打捞关卡"
+		]
+	},
+	"循演战役普通打捞_进入打捞关卡": {
+		"recognition": "OCR",
+		"roi": [467, 149, 182, 98],
+		"expected": "数据接口",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [952, 571, 54, 32],
+		"next": [
+			"循演战役普通打捞_点击机场",
+			"循演战役普通打捞_进入打捞关卡"
+		]
+	},
+	"循演战役普通打捞_点击机场": {
+		"recognition": "OCR",
+		"roi": [20, 597, 149, 65],
+		"expected": "计划",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [410, 509, 10, 11],
+		"next": [
+			"循演战役普通打捞_开始作战",
+			"循演战役普通打捞_点击机场",
+			"[JumpBack]!public梯队部署"
+		]
+	},
+	"循演战役普通打捞_开始作战": {
+		"recognition": "OCR",
+		"roi": [1016, 613, 235, 84],
+		"expected": "开始",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_点击梯队",
+			"循演战役普通打捞_开始作战"
+		]
+	},
+	"循演战役普通打捞_点击梯队": {
+		"recognition": "OCR",
+		"roi": [1076, 596, 197, 118],
+		"expected": "结束",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [410, 509, 10, 11],
+		"next": [
+			"循演战役普通打捞_补给梯队",
+			"循演战役普通打捞_点击梯队"
+		]
+	},
+	"循演战役普通打捞_补给梯队": {
+		"recognition": "OCR",
+		"roi": [1074, 507, 191, 94],
+		"expected": "补给",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_进入计划模式",
+			"循演战役普通打捞_补给梯队"
+		]
+	},
+	"循演战役普通打捞_进入计划模式": {
+		"recognition": "OCR",
+		"roi": [7, 604, 149, 50],
+		"expected": "计划",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_计划点1",
+			"循演战役普通打捞_进入计划模式"
+		]
+	},
+	"循演战役普通打捞_计划点1": {
+		"recognition": "OCR",
+		"roi": [1086, 610, 184, 106],
+		"expected": "执行",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [416, 510, 10, 9],
+		"next": [
+			"循演战役普通打捞_计划点2"
+		]
+	},
+	"循演战役普通打捞_计划点2": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [513, 314, 12, 4],
+		"next": [
+			"循演战役普通打捞_计划点3"
+		]
+	},
+	"循演战役普通打捞_计划点3": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [714, 309, 16, 11],
+		"next": [
+			"循演战役普通打捞_计划点4"
+		]
+	},
+	"循演战役普通打捞_计划点4": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [914, 310, 15, 12],
+		"post_delay": 500,
+		"next": [
+			"循演战役普通打捞_下一回合",
+			"循演战役普通打捞_进入计划模式"
+		]
+	},
+	"循演战役普通打捞_下一回合": {
+		"recognition": "OCR",
+		"roi": [1059, 478, 221, 144],
+		"expected": ["下一回合", "下", "回"],
+		"action": "LongPress",
+		"duration": 15,
+		"post_delay": 500,
+		"next": [
+			"循演战役普通打捞_执行计划",
+			"循演战役普通打捞_下一回合"
+		]
+	},
+	"循演战役普通打捞_执行计划": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"target": [1152, 644, 53, 30],
+		"duration": 15,
+		"timeout": 300000,
+		"rate_limit": 2000,
+		"next": [
+			"循演战役普通打捞_再次作战"
+		]
+	},
+	"循演战役普通打捞_再次作战": {
+		"recognition": "OCR",
+		"roi": [366, 609, 98, 32],
+		"expected": "再次作战",
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"循演战役普通打捞_再战点击"
+		]
+	},
+	"循演战役普通打捞_再战点击": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"duration": 20,
+		"target": [374, 617, 46, 14],
+		"next": [
+			"循演战役普通打捞_开始作战",
+			"循演人形回收补充",
+			"循演战役普通打捞_再战点击"
+		]
+	},
+	"循演人形回收补充": {
+		"recognition": "OCR",
+		"expected": "人形回收",
+		"roi": [194, 264, 897, 155],
+		"action": "DoNothing",
+		"next": [
+			"循演战役普通打捞_点击普通模式",
+			"[JumpBack]public二星人形回收_人形回收"
+		]
+	}
 }

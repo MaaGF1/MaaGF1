@@ -1,588 +1,436 @@
 {
-  "!重启后登录游戏至主界面": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_识别前线协议",
-      "重启初始化_点击游戏开始位置",
-      "重启初始化_点击屏幕开始"
-    ]
-  },
-  "!初始化正在进行的战役": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_返回作战判定"
-    ]
-  },
-  "重启初始化_点击屏幕开始": {
-    "recognition": "OCR",
-    "roi": [
-      480,
-      580,
-      320,
-      100
-    ],
-    "expected": "点击屏幕开始",
-    "action": "Click",
-    "post_delay": 0,
-    "next": [
-      "重启初始化_点击游戏开始位置"
-    ],
-    "pre_delay": 1000,
-    "target": [
-      640,
-      581,
-      1,
-      1
-    ],
-    "timeout": 5000,
-    "on_error": [
-      "重启初始化_点击屏幕开始_重试"
-    ]
-  },
-  "重启初始化_点击游戏开始位置": {
-    "recognition": "TemplateMatch",
-    "template": "restart_init/眼睛.png",
-    "roi": [
-      0,
-      0,
-      120,
-      120
-    ],
-    "action": "Click",
-    "target": [
-      535,
-      600,
-      220,
-      70
-    ],
-    "post_delay": 30000,
-    "timeout": 5000,
-    "next": [
-      "重启初始化_签到检测"
-    ],
-    "on_error": [
-      "重启初始化_签到结束"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_全体出征判定": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_全体出征",
-      "重启初始化_返回作战判定"
-    ]
-  },
-  "重启初始化_全体出征": {
-    "recognition": "OCR",
-    "roi": [
-      1030,
-      640,
-      250,
-      80
-    ],
-    "expected": "全体出征",
-    "action": "Click",
-    "post_delay": 1000,
-    "next": [
-      "重启初始化_确认全体出征"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_确认全体出征": {
-    "recognition": "OCR",
-    "roi": [
-      650,
-      460,
-      190,
-      70
-    ],
-    "expected": "确定",
-    "action": "Click",
-    "post_delay": 10000,
-    "next": [
-      "重启初始化_返回作战判定"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_返回作战判定": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_点击返回作战",
-      "重启初始化_结束"
-    ]
-  },
-  "重启初始化_点击返回作战": {
-    "recognition": "OCR",
-    "roi": [
-      1080,
-      500,
-      200,
-      100
-    ],
-    "expected": [
-      "返回作战",
-      "返回战斗",
-      "RESUME"
-    ],
-    "action": "Click",
-    "post_delay": 30000,
-    "next": [
-      "重启初始化_第五步判定"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_结束": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": []
-  },
-  "重启初始化_点击终止作战入口": {
-    "recognition": "OCR",
-    "roi": [
-      120,
-      30,
-      320,
-      120
-    ],
-    "expected": "作战",
-    "action": "Click",
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_确认终止作战"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_确认终止作战": {
-    "recognition": "TemplateMatch",
-    "template": "restart_init/终止作战2.png",
-    "roi": [
-      620,
-      420,
-      320,
-      160
-    ],
-    "threshold": 0.75,
-    "action": "Click",
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_连续ESC_01"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_返回作战任务界面": {
-    "recognition": "OCR",
-    "roi": [
-      0,
-      100,
-      180,
-      110
-    ],
-    "expected": "作战任务",
-    "action": "Click",
-    "target": [
-      65,
-      45,
-      55,
-      60
-    ],
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_识别前线协议"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_识别前线协议": {
-    "recognition": "OCR",
-    "roi": [
-      0,
-      520,
-      320,
-      120
-    ],
-    "expected": "前线协议",
-    "action": "DoNothing",
-    "post_delay": 1000,
-    "next": []
-  },
-  "重启初始化_第五步判定": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_点击终止作战入口",
-      "重启初始化_战斗结算检测",
-      "重启初始化_等待战斗"
-    ]
-  },
-  "重启初始化_战斗结算检测": {
-    "recognition": "OCR",
-    "roi": [
-      0,
-      40,
-      280,
-      100
-    ],
-    "expected": [
-      "战斗结算",
-      "战斗结",
-      "战斗",
-      "结算",
-      "BATTLE SETTLEMENT",
-      "BATTLESETTLEMENT",
-      "SETTLEMENT"
-    ],
-    "action": "DoNothing",
-    "post_delay": 1000,
-    "next": [
-      "重启初始化_结算点击1"
-    ]
-  },
-  "重启初始化_等待战斗": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "pre_delay": 10000,
-    "next": [
-      "重启初始化_等待战斗_检测灭",
-      "重启初始化_等待战斗_未检测灭"
-    ]
-  },
-  "重启初始化_等待战斗_检测灭": {
-    "recognition": "OCR",
-    "roi": [
-      860,
-      674,
-      69,
-      45
-    ],
-    "expected": "灭",
-    "action": "LongPress",
-    "duration": 50,
-    "post_delay": 20000,
-    "next": [
-      "重启初始化_第五步判定"
-    ]
-  },
-  "重启初始化_等待战斗_未检测灭": {
-    "recognition": "OCR",
-    "roi": [
-      860,
-      674,
-      69,
-      45
-    ],
-    "expected": "灭",
-    "inverse": true,
-    "action": "DoNothing",
-    "post_delay": 30000,
-    "next": [
-      "重启初始化_第五步判定"
-    ]
-  },
-  "重启初始化_结算点击1": {
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      332,
-      591,
-      1,
-      1
-    ],
-    "post_delay": 40,
-    "next": [
-      "重启初始化_结算点击2"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_结算点击2": {
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      332,
-      591,
-      1,
-      1
-    ],
-    "post_delay": 40,
-    "next": [
-      "重启初始化_结算点击3"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_结算点击3": {
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      332,
-      591,
-      1,
-      1
-    ],
-    "post_delay": 40,
-    "next": [
-      "重启初始化_结算点击4"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_结算点击4": {
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      332,
-      591,
-      1,
-      1
-    ],
-    "post_delay": 40,
-    "next": [
-      "重启初始化_结算点击5"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_结算点击5": {
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      332,
-      591,
-      1,
-      1
-    ],
-    "post_delay": 30000,
-    "next": [
-      "重启初始化_第五步判定"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_意外离线判定": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_检测意外离线",
-      "重启初始化_全体出征判定"
-    ]
-  },
-  "重启初始化_检测意外离线": {
-    "recognition": "OCR",
-    "roi": [
-      300,
-      350,
-      700,
-      150
-    ],
-    "expected": [
-      "重连战斗",
-      "意外离线",
-      "外离线",
-      "离线",
-      "去线"
-    ],
-    "action": "DoNothing",
-    "post_delay": 500,
-    "next": [
-      "重启初始化_点击离线关闭",
-      "重启初始化_全体出征判定"
-    ]
-  },
-  "重启初始化_点击离线关闭": {
-    "recognition": "OCR",
-    "roi": [
-      520,
-      500,
-      240,
-      130
-    ],
-    "expected": [
-      "关闭",
-      "关"
-    ],
-    "action": "LongPress",
-    "duration": 50,
-    "target": [
-      640,
-      548,
-      1,
-      1
-    ],
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_全体出征判定"
-    ],
-    "pre_delay": 500
-  },
-  "重启初始化_导航后全体出征判定": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "next": [
-      "重启初始化_全体出征",
-      "重启初始化_识别前线协议"
-    ]
-  },
-  "重启初始化_连续ESC_01": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_02"
-    ]
-  },
-  "重启初始化_连续ESC_02": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_03"
-    ]
-  },
-  "重启初始化_连续ESC_03": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_04"
-    ]
-  },
-  "重启初始化_连续ESC_04": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_05"
-    ]
-  },
-  "重启初始化_连续ESC_05": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_06"
-    ]
-  },
-  "重启初始化_连续ESC_06": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_07"
-    ]
-  },
-  "重启初始化_连续ESC_07": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_08"
-    ]
-  },
-  "重启初始化_连续ESC_08": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_09"
-    ]
-  },
-  "重启初始化_连续ESC_09": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 500,
-    "next": [
-      "重启初始化_连续ESC_10"
-    ]
-  },
-  "重启初始化_连续ESC_10": {
-    "recognition": "DirectHit",
-    "action": "Key",
-    "key": 27,
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_导航后全体出征判定"
-    ]
-  },
-  "重启初始化_点击屏幕开始_重试": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "pre_delay": 1000,
-    "timeout": 60000,
-    "next": [
-      "重启初始化_点击游戏开始位置",
-      "重启初始化_点击屏幕开始"
-    ],
-    "on_error": [
-      "重启初始化_点击屏幕开始_重试"
-    ]
-  },
-  "重启初始化_签到检测": {
-    "recognition": "OCR",
-    "roi": [
-      76,
-      206,
-      182,
-      51
-    ],
-    "expected": [
-      "签到成功"
-    ],
-    "action": "Click",
-    "target": [
-      653,
-      675,
-      2,
-      2
-    ],
-    "post_delay": 1000,
-    "timeout": 2000,
-    "next": [
-      "重启初始化_签到检测"
-    ],
-    "on_error": [
-      "重启初始化_签到结束"
-    ]
-  },
-  "重启初始化_签到结束": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "post_delay": 5000,
-    "next": [
-      "重启初始化_活动返回"
-    ],
-    "timeout": 5000,
-    "on_error": [
-      "重启初始化_意外离线判定"
-    ]
-  },
-  "重启初始化_活动返回": {
-    "recognition": "OCR",
-    "roi": [
-      232,
-      15,
-      81,
-      45
-    ],
-    "expected": [
-      "活动"
-    ],
-    "action": "Click",
-    "target": [
-      77,
-      33,
-      3,
-      3
-    ],
-    "post_delay": 1000,
-    "next": [
-      "重启初始化_意外离线判定"
-    ]
-  }
+	"!重启后登录游戏至主界面": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_识别前线协议",
+			"重启初始化_点击游戏开始位置",
+			"重启初始化_点击屏幕开始"
+		]
+	},
+	"!初始化正在进行的战役": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_返回作战判定"
+		]
+	},
+	"重启初始化_点击屏幕开始": {
+		"recognition": "OCR",
+		"roi": [480, 580, 320, 100],
+		"expected": "点击屏幕开始",
+		"action": "Click",
+		"post_delay": 0,
+		"next": [
+			"重启初始化_点击游戏开始位置"
+		],
+		"pre_delay": 1000,
+		"target": [640, 581, 1, 1],
+		"timeout": 5000,
+		"on_error": [
+			"重启初始化_点击屏幕开始_重试"
+		]
+	},
+	"重启初始化_点击游戏开始位置": {
+		"recognition": "TemplateMatch",
+		"template": "restart_init/眼睛.png",
+		"roi": [0, 0, 120, 120],
+		"action": "Click",
+		"target": [535, 600, 220, 70],
+		"post_delay": 30000,
+		"timeout": 5000,
+		"next": [
+			"重启初始化_签到检测"
+		],
+		"on_error": [
+			"重启初始化_签到结束"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_全体出征判定": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_全体出征",
+			"重启初始化_返回作战判定"
+		]
+	},
+	"重启初始化_全体出征": {
+		"recognition": "OCR",
+		"roi": [1030, 640, 250, 80],
+		"expected": "全体出征",
+		"action": "Click",
+		"post_delay": 1000,
+		"next": [
+			"重启初始化_确认全体出征"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_确认全体出征": {
+		"recognition": "OCR",
+		"roi": [650, 460, 190, 70],
+		"expected": "确定",
+		"action": "Click",
+		"post_delay": 10000,
+		"next": [
+			"重启初始化_返回作战判定"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_返回作战判定": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_点击返回作战",
+			"重启初始化_结束"
+		]
+	},
+	"重启初始化_点击返回作战": {
+		"recognition": "OCR",
+		"roi": [1080, 500, 200, 100],
+		"expected": ["返回作战", "返回战斗", "RESUME"],
+		"action": "Click",
+		"post_delay": 30000,
+		"next": [
+			"重启初始化_第五步判定"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_结束": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"重启初始化_点击终止作战入口": {
+		"recognition": "OCR",
+		"roi": [120, 30, 320, 120],
+		"expected": "作战",
+		"action": "Click",
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_确认终止作战"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_确认终止作战": {
+		"recognition": "TemplateMatch",
+		"template": "restart_init/终止作战2.png",
+		"roi": [620, 420, 320, 160],
+		"threshold": 0.75,
+		"action": "Click",
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_连续ESC_01"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_返回作战任务界面": {
+		"recognition": "OCR",
+		"roi": [0, 100, 180, 110],
+		"expected": "作战任务",
+		"action": "Click",
+		"target": [65, 45, 55, 60],
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_识别前线协议"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_识别前线协议": {
+		"recognition": "OCR",
+		"roi": [0, 520, 320, 120],
+		"expected": "前线协议",
+		"action": "DoNothing",
+		"post_delay": 1000,
+		"next": []
+	},
+	"重启初始化_第五步判定": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_点击终止作战入口",
+			"重启初始化_战斗结算检测",
+			"重启初始化_等待战斗"
+		]
+	},
+	"重启初始化_战斗结算检测": {
+		"recognition": "OCR",
+		"roi": [0, 40, 280, 100],
+		"expected": [
+			"战斗结算",
+			"战斗结",
+			"战斗",
+			"结算",
+			"BATTLE SETTLEMENT",
+			"BATTLESETTLEMENT",
+			"SETTLEMENT"
+		],
+		"action": "DoNothing",
+		"post_delay": 1000,
+		"next": [
+			"重启初始化_结算点击1"
+		]
+	},
+	"重启初始化_等待战斗": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"pre_delay": 10000,
+		"next": [
+			"重启初始化_等待战斗_检测灭",
+			"重启初始化_等待战斗_未检测灭"
+		]
+	},
+	"重启初始化_等待战斗_检测灭": {
+		"recognition": "OCR",
+		"roi": [860, 674, 69, 45],
+		"expected": "灭",
+		"action": "LongPress",
+		"duration": 50,
+		"post_delay": 20000,
+		"next": [
+			"重启初始化_第五步判定"
+		]
+	},
+	"重启初始化_等待战斗_未检测灭": {
+		"recognition": "OCR",
+		"roi": [860, 674, 69, 45],
+		"expected": "灭",
+		"inverse": true,
+		"action": "DoNothing",
+		"post_delay": 30000,
+		"next": [
+			"重启初始化_第五步判定"
+		]
+	},
+	"重启初始化_结算点击1": {
+		"action": "LongPress",
+		"duration": 10,
+		"target": [332, 591, 1, 1],
+		"post_delay": 40,
+		"next": [
+			"重启初始化_结算点击2"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_结算点击2": {
+		"action": "LongPress",
+		"duration": 10,
+		"target": [332, 591, 1, 1],
+		"post_delay": 40,
+		"next": [
+			"重启初始化_结算点击3"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_结算点击3": {
+		"action": "LongPress",
+		"duration": 10,
+		"target": [332, 591, 1, 1],
+		"post_delay": 40,
+		"next": [
+			"重启初始化_结算点击4"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_结算点击4": {
+		"action": "LongPress",
+		"duration": 10,
+		"target": [332, 591, 1, 1],
+		"post_delay": 40,
+		"next": [
+			"重启初始化_结算点击5"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_结算点击5": {
+		"action": "LongPress",
+		"duration": 10,
+		"target": [332, 591, 1, 1],
+		"post_delay": 30000,
+		"next": [
+			"重启初始化_第五步判定"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_意外离线判定": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_检测意外离线",
+			"重启初始化_全体出征判定"
+		]
+	},
+	"重启初始化_检测意外离线": {
+		"recognition": "OCR",
+		"roi": [300, 350, 700, 150],
+		"expected": ["重连战斗", "意外离线", "外离线", "离线", "去线"],
+		"action": "DoNothing",
+		"post_delay": 500,
+		"next": [
+			"重启初始化_点击离线关闭",
+			"重启初始化_全体出征判定"
+		]
+	},
+	"重启初始化_点击离线关闭": {
+		"recognition": "OCR",
+		"roi": [520, 500, 240, 130],
+		"expected": ["关闭", "关"],
+		"action": "LongPress",
+		"duration": 50,
+		"target": [640, 548, 1, 1],
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_全体出征判定"
+		],
+		"pre_delay": 500
+	},
+	"重启初始化_导航后全体出征判定": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"重启初始化_全体出征",
+			"重启初始化_识别前线协议"
+		]
+	},
+	"重启初始化_连续ESC_01": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_02"
+		]
+	},
+	"重启初始化_连续ESC_02": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_03"
+		]
+	},
+	"重启初始化_连续ESC_03": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_04"
+		]
+	},
+	"重启初始化_连续ESC_04": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_05"
+		]
+	},
+	"重启初始化_连续ESC_05": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_06"
+		]
+	},
+	"重启初始化_连续ESC_06": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_07"
+		]
+	},
+	"重启初始化_连续ESC_07": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_08"
+		]
+	},
+	"重启初始化_连续ESC_08": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_09"
+		]
+	},
+	"重启初始化_连续ESC_09": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 500,
+		"next": [
+			"重启初始化_连续ESC_10"
+		]
+	},
+	"重启初始化_连续ESC_10": {
+		"recognition": "DirectHit",
+		"action": "Key",
+		"key": 27,
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_导航后全体出征判定"
+		]
+	},
+	"重启初始化_点击屏幕开始_重试": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"pre_delay": 1000,
+		"timeout": 60000,
+		"next": [
+			"重启初始化_点击游戏开始位置",
+			"重启初始化_点击屏幕开始"
+		],
+		"on_error": [
+			"重启初始化_点击屏幕开始_重试"
+		]
+	},
+	"重启初始化_签到检测": {
+		"recognition": "OCR",
+		"roi": [76, 206, 182, 51],
+		"expected": ["签到成功"],
+		"action": "Click",
+		"target": [653, 675, 2, 2],
+		"post_delay": 1000,
+		"timeout": 2000,
+		"next": [
+			"重启初始化_签到检测"
+		],
+		"on_error": [
+			"重启初始化_签到结束"
+		]
+	},
+	"重启初始化_签到结束": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"post_delay": 5000,
+		"next": [
+			"重启初始化_活动返回"
+		],
+		"timeout": 5000,
+		"on_error": [
+			"重启初始化_意外离线判定"
+		]
+	},
+	"重启初始化_活动返回": {
+		"recognition": "OCR",
+		"roi": [232, 15, 81, 45],
+		"expected": ["活动"],
+		"action": "Click",
+		"target": [77, 33, 3, 3],
+		"post_delay": 1000,
+		"next": [
+			"重启初始化_意外离线判定"
+		]
+	}
 }

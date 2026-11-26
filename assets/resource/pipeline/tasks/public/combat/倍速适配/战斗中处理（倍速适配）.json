@@ -1,98 +1,60 @@
 {
-  "public_加速结算进入（倍速适配）": {
-    "recognition": "ColorMatch",
-    "roi": [
-      17,
-      640,
-      5,
-      15
-    ],
-    "upper": [
-      88,
-      86,
-      85
-    ],
-    "lower": [
-      88,
-      86,
-      85
-    ],
-    "action": "LongPress",
-    "duration": 10,
-    "target": [
-      372,
-      615,
-      1,
-      1
-    ],
-    "pre_delay": 100,
-    "post_delay": 20,
-    "next": [
-      "public_加速结算点击1（倍速适配）"
-    ]
-  },
-  "public_加速结算点击1（倍速适配）": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "target": [
-      372,
-      615,
-      1,
-      1
-    ],
-    "duration": 10,
-    "pre_delay": 10,
-    "post_delay": 20,
-    "next": [
-      "public_加速结算点击2（倍速适配）"
-    ]
-  },
-  "public_加速结算点击2（倍速适配）": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "target": [
-      372,
-      615,
-      1,
-      1
-    ],
-    "duration": 10,
-    "pre_delay": 10,
-    "post_delay": 20,
-    "next": [
-      "public_加速结算点击3（倍速适配）"
-    ]
-  },
-  "public_加速结算点击3（倍速适配）": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "target": [
-      372,
-      615,
-      1,
-      1
-    ],
-    "duration": 10,
-    "pre_delay": 10,
-    "post_delay": 20,
-    "next": [
-      "public_加速结算点击4（倍速适配）"
-    ]
-  },
-  "public_加速结算点击4（倍速适配）": {
-    "recognition": "DirectHit",
-    "action": "LongPress",
-    "target": [
-      472,
-      615,
-      1,
-      1
-    ],
-    "duration": 10,
-    "pre_delay": 10,
-    "next": [
-      "public_加速后等待"
-    ],
-    "post_delay": 100
-  }
+	"public_加速结算进入（倍速适配）": {
+		"recognition": "ColorMatch",
+		"roi": [17, 640, 5, 15],
+		"upper": [88, 86, 85],
+		"lower": [88, 86, 85],
+		"action": "LongPress",
+		"duration": 10,
+		"target": [372, 615, 1, 1],
+		"pre_delay": 100,
+		"post_delay": 20,
+		"next": [
+			"public_加速结算点击1（倍速适配）"
+		]
+	},
+	"public_加速结算点击1（倍速适配）": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"target": [372, 615, 1, 1],
+		"duration": 10,
+		"pre_delay": 10,
+		"post_delay": 20,
+		"next": [
+			"public_加速结算点击2（倍速适配）"
+		]
+	},
+	"public_加速结算点击2（倍速适配）": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"target": [372, 615, 1, 1],
+		"duration": 10,
+		"pre_delay": 10,
+		"post_delay": 20,
+		"next": [
+			"public_加速结算点击3（倍速适配）"
+		]
+	},
+	"public_加速结算点击3（倍速适配）": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"target": [372, 615, 1, 1],
+		"duration": 10,
+		"pre_delay": 10,
+		"post_delay": 20,
+		"next": [
+			"public_加速结算点击4（倍速适配）"
+		]
+	},
+	"public_加速结算点击4（倍速适配）": {
+		"recognition": "DirectHit",
+		"action": "LongPress",
+		"target": [472, 615, 1, 1],
+		"duration": 10,
+		"pre_delay": 10,
+		"next": [
+			"public_加速后等待"
+		],
+		"post_delay": 100
+	}
 }

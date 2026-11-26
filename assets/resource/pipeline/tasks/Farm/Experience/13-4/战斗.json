@@ -1,422 +1,272 @@
 {
-  "134战斗_开始作战前初始化": {
-    "recognition": "And",
-    "all_of": [
-      {
-        "sub_name": "team2",
-        "recognition": "TemplateMatch",
-        "roi": [
-          70,
-          468,
-          157,
-          108
-        ],
-        "threshold": 0.4,
-        "template": "combat/levelUp/13-4/map_team2.png"
-      },
-      {
-        "recognition": "OCR",
-        "roi": "team2",
-        "roi_offset": [
-          -4,
-          -4,
-          8,
-          8
-        ],
-        "expected": [
-          "2"
-        ],
-        "only_rec": true
-      }
-    ],
-    "box_index": 0,
-    "next": [
-      "134战斗_开始作战",
-      "[JumpBack]134地图初始化_拖到右上角"
-    ],
-    "on_error": [
-      "134部署_部署梯队"
-    ],
-    "timeout": 600000
-  },
-  "134战斗_开始作战": {
-    "recognition": "OCR",
-    "roi": [
-      944,
-      571,
-      335,
-      148
-    ],
-    "expected": [
-      "开始作战"
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "134战斗_点击2队单vv准备补给"
-    ],
-    "timeout": 600000
-  },
-  "134战斗_确认开始作战": {
-    "recognition": "OCR",
-    "roi": [
-      944,
-      571,
-      335,
-      148
-    ],
-    "expected": [
-      "结束"
-    ],
-    "next": [
-      "134战斗_点击2队单vv准备补给"
-    ]
-  },
-  "134战斗_点击2队单vv准备补给": {
-    "target": [
-      76,
-      533,
-      2,
-      20
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "pre_delay": 1000,
-    "next": [
-      "134战斗_开始作战假点击",
-      "134战斗_点击补给",
-      "134战斗_点击2队单vv准备补给"
-    ]
-  },
-  "134战斗_开始作战假点击": {
-    "recognition": "OCR",
-    "roi": [
-      700,
-      613,
-      169,
-      52
-    ],
-    "expected": [
-      "一键",
-      "修复"
-    ],
-    "target": [
-      1147,
-      627,
-      31,
-      18
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "134战斗_开始作战"
-    ]
-  },
-  "134战斗_点击补给": {
-    "recognition": "OCR",
-    "roi": [
-      1141,
-      535,
-      117,
-      55
-    ],
-    "expected": [
-      "补给"
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_delay": 500,
-    "next": [
-      "134战斗_点击1队图标",
-      "[JumpBack]134地图初始化_长按修正"
-    ]
-  },
-  "134战斗_点击1队图标": {
-    "target": [
-      697,
-      438,
-      26,
-      25
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_wait_freezes": 1,
-    "post_delay": 1000,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_1队选中判定",
-      "134战斗_出现妖精技能释放",
-      "134战斗_点击1队取消",
-      "134战斗_点击1队图标",
-      "[JumpBack]134地图初始化_长按修正"
-    ]
-  },
-  "134战斗_出现妖精技能释放": {
-    "recognition": "OCR",
-    "expected": [
-      "释放",
-      "取消"
-    ],
-    "roi": [
-      1075,
-      156,
-      204,
-      437
-    ],
-    "post_delay": 500,
-    "next": [
-      "134战斗_点击计划模式"
-    ]
-  },
-  "134战斗_点击1队取消": {
-    "recognition": "OCR",
-    "roi": [
-      1074,
-      601,
-      181,
-      73
-    ],
-    "expected": [
-      "取消"
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "next": [
-      "134战斗_取消后校验释放或取消"
-    ],
-    "timeout": 3000,
-    "on_error": [
-      "134战斗_点击1队图标"
-    ]
-  },
-  "134战斗_取消后校验释放或取消": {
-    "recognition": "OCR",
-    "expected": [
-      "释放",
-      "取消"
-    ],
-    "roi": [
-      1075,
-      156,
-      204,
-      437
-    ],
-    "action": "DoNothing",
-    "next": [
-      "134战斗_点击计划模式"
-    ]
-  },
-  "134战斗_点击计划模式": {
-    "target": [
-      61,
-      625,
-      28,
-      9
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_delay": 500,
-    "next": [
-      "134战斗_巡游者"
-    ]
-  },
-  "134战斗_巡游者": {
-    "target": [
-      614,
-      536,
-      9,
-      9
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_巡游者_确认",
-      "134战斗_巡游者"
-    ]
-  },
-  "134战斗_巡游者_确认": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      969,
-      650,
-      94,
-      69
-    ],
-    "template": [
-      "combat/levelUp/13-4/Gap3.png"
-    ],
-    "threshold": 0.8,
-    "green_mask": true,
-    "rate_limit": 200,
-    "next": []
-  },
-  "134战斗_胡蜂": {
-    "target": [
-      702,
-      629,
-      12,
-      7
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_胡蜂_确认",
-      "134战斗_胡蜂"
-    ]
-  },
-  "134战斗_胡蜂_确认": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      969,
-      650,
-      94,
-      69
-    ],
-    "template": [
-      "combat/levelUp/13-4/Gap0.png"
-    ],
-    "threshold": 0.8,
-    "green_mask": true,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_下一回合"
-    ]
-  },
-  "134战斗_钢狮": {
-    "target": [
-      698,
-      710,
-      24,
-      9
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_钢狮_确认",
-      "134战斗_钢狮"
-    ]
-  },
-  "134战斗_钢狮_确认": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      969,
-      650,
-      94,
-      69
-    ],
-    "template": [
-      "combat/levelUp/13-4/Gap0.png"
-    ],
-    "threshold": 0.7,
-    "green_mask": true,
-    "rate_limit": 200,
-    "next": [
-      "134战斗_下一回合"
-    ]
-  },
-  "134战斗_下一回合": {
-    "target": [
-      1162,
-      544,
-      28,
-      18
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_delay": 200,
-    "threshold": 0.8,
-    "next": [
-      "134战斗_下一回合_确认",
-      "134战斗_下一回合"
-    ]
-  },
-  "134战斗_下一回合_确认": {
-    "recognition": "OCR",
-    "roi": [
-      983,
-      525,
-      82,
-      54
-    ],
-    "expected": [
-      "取消"
-    ],
-    "rate_limit": 500,
-    "next": [
-      "134战斗_执行计划"
-    ]
-  },
-  "134战斗_终点": {
-    "target": [
-      609,
-      713,
-      21,
-      6
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_delay": 200,
-    "rate_limit": 200,
-    "green_mask": true,
-    "threshold": 0.8,
-    "next": [
-      "134战斗_终点_确认",
-      "134战斗_终点"
-    ]
-  },
-  "134战斗_终点_确认": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      969,
-      650,
-      94,
-      69
-    ],
-    "threshold": 0.8,
-    "template": [
-      "combat/levelUp/13-4/Gap-5.png"
-    ],
-    "green_mask": true,
-    "rate_limit": 500,
-    "next": [
-      "134战斗_执行计划"
-    ]
-  },
-  "134战斗_执行计划": {
-    "target": [
-      1105,
-      627,
-      153,
-      74
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "timeout": 600000,
-    "next": [
-      "134重置_提前再次作战",
-      "134重置_再次作战",
-      "[JumpBack]public_不中断计划"
-    ]
-  },
-  "134战斗_1队选中判定": {
-    "recognition": "OCR",
-    "roi": [
-      1140,
-      110,
-      140,
-      100
-    ],
-    "expected": [
-      "妖精",
-      "指令",
-      "妖精指令"
-    ],
-    "action": "DoNothing",
-    "next": [
-      "134战斗_出现妖精技能释放"
-    ]
-  }
+	"134战斗_开始作战前初始化": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"sub_name": "team2",
+				"recognition": "TemplateMatch",
+				"roi": [70, 468, 157, 108],
+				"threshold": 0.4,
+				"template": "combat/levelUp/13-4/map_team2.png"
+			},
+			{
+				"recognition": "OCR",
+				"roi": "team2",
+				"roi_offset": [-4, -4, 8, 8],
+				"expected": ["2"],
+				"only_rec": true
+			}
+		],
+		"box_index": 0,
+		"next": [
+			"134战斗_开始作战",
+			"[JumpBack]134地图初始化_拖到右上角"
+		],
+		"on_error": [
+			"134部署_部署梯队"
+		],
+		"timeout": 600000
+	},
+	"134战斗_开始作战": {
+		"recognition": "OCR",
+		"roi": [944, 571, 335, 148],
+		"expected": ["开始作战"],
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"134战斗_点击2队单vv准备补给"
+		],
+		"timeout": 600000
+	},
+	"134战斗_确认开始作战": {
+		"recognition": "OCR",
+		"roi": [944, 571, 335, 148],
+		"expected": ["结束"],
+		"next": [
+			"134战斗_点击2队单vv准备补给"
+		]
+	},
+	"134战斗_点击2队单vv准备补给": {
+		"target": [76, 533, 2, 20],
+		"action": "LongPress",
+		"duration": 20,
+		"pre_delay": 1000,
+		"next": [
+			"134战斗_开始作战假点击",
+			"134战斗_点击补给",
+			"134战斗_点击2队单vv准备补给"
+		]
+	},
+	"134战斗_开始作战假点击": {
+		"recognition": "OCR",
+		"roi": [700, 613, 169, 52],
+		"expected": ["一键", "修复"],
+		"target": [1147, 627, 31, 18],
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"134战斗_开始作战"
+		]
+	},
+	"134战斗_点击补给": {
+		"recognition": "OCR",
+		"roi": [1141, 535, 117, 55],
+		"expected": ["补给"],
+		"action": "LongPress",
+		"duration": 20,
+		"post_delay": 500,
+		"next": [
+			"134战斗_点击1队图标",
+			"[JumpBack]134地图初始化_长按修正"
+		]
+	},
+	"134战斗_点击1队图标": {
+		"target": [697, 438, 26, 25],
+		"action": "LongPress",
+		"duration": 20,
+		"post_wait_freezes": 1,
+		"post_delay": 1000,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_1队选中判定",
+			"134战斗_出现妖精技能释放",
+			"134战斗_点击1队取消",
+			"134战斗_点击1队图标",
+			"[JumpBack]134地图初始化_长按修正"
+		]
+	},
+	"134战斗_出现妖精技能释放": {
+		"recognition": "OCR",
+		"expected": ["释放", "取消"],
+		"roi": [1075, 156, 204, 437],
+		"post_delay": 500,
+		"next": [
+			"134战斗_点击计划模式"
+		]
+	},
+	"134战斗_点击1队取消": {
+		"recognition": "OCR",
+		"roi": [1074, 601, 181, 73],
+		"expected": ["取消"],
+		"action": "LongPress",
+		"duration": 20,
+		"next": [
+			"134战斗_取消后校验释放或取消"
+		],
+		"timeout": 3000,
+		"on_error": [
+			"134战斗_点击1队图标"
+		]
+	},
+	"134战斗_取消后校验释放或取消": {
+		"recognition": "OCR",
+		"expected": ["释放", "取消"],
+		"roi": [1075, 156, 204, 437],
+		"action": "DoNothing",
+		"next": [
+			"134战斗_点击计划模式"
+		]
+	},
+	"134战斗_点击计划模式": {
+		"target": [61, 625, 28, 9],
+		"action": "LongPress",
+		"duration": 20,
+		"post_delay": 500,
+		"next": [
+			"134战斗_巡游者"
+		]
+	},
+	"134战斗_巡游者": {
+		"target": [614, 536, 9, 9],
+		"action": "LongPress",
+		"duration": 20,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_巡游者_确认",
+			"134战斗_巡游者"
+		]
+	},
+	"134战斗_巡游者_确认": {
+		"recognition": "TemplateMatch",
+		"roi": [969, 650, 94, 69],
+		"template": [
+			"combat/levelUp/13-4/Gap3.png"
+		],
+		"threshold": 0.8,
+		"green_mask": true,
+		"rate_limit": 200,
+		"next": []
+	},
+	"134战斗_胡蜂": {
+		"target": [702, 629, 12, 7],
+		"action": "LongPress",
+		"duration": 20,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_胡蜂_确认",
+			"134战斗_胡蜂"
+		]
+	},
+	"134战斗_胡蜂_确认": {
+		"recognition": "TemplateMatch",
+		"roi": [969, 650, 94, 69],
+		"template": [
+			"combat/levelUp/13-4/Gap0.png"
+		],
+		"threshold": 0.8,
+		"green_mask": true,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_下一回合"
+		]
+	},
+	"134战斗_钢狮": {
+		"target": [698, 710, 24, 9],
+		"action": "LongPress",
+		"duration": 20,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_钢狮_确认",
+			"134战斗_钢狮"
+		]
+	},
+	"134战斗_钢狮_确认": {
+		"recognition": "TemplateMatch",
+		"roi": [969, 650, 94, 69],
+		"template": [
+			"combat/levelUp/13-4/Gap0.png"
+		],
+		"threshold": 0.7,
+		"green_mask": true,
+		"rate_limit": 200,
+		"next": [
+			"134战斗_下一回合"
+		]
+	},
+	"134战斗_下一回合": {
+		"target": [1162, 544, 28, 18],
+		"action": "LongPress",
+		"duration": 20,
+		"post_delay": 200,
+		"threshold": 0.8,
+		"next": [
+			"134战斗_下一回合_确认",
+			"134战斗_下一回合"
+		]
+	},
+	"134战斗_下一回合_确认": {
+		"recognition": "OCR",
+		"roi": [983, 525, 82, 54],
+		"expected": ["取消"],
+		"rate_limit": 500,
+		"next": [
+			"134战斗_执行计划"
+		]
+	},
+	"134战斗_终点": {
+		"target": [609, 713, 21, 6],
+		"action": "LongPress",
+		"duration": 20,
+		"post_delay": 200,
+		"rate_limit": 200,
+		"green_mask": true,
+		"threshold": 0.8,
+		"next": [
+			"134战斗_终点_确认",
+			"134战斗_终点"
+		]
+	},
+	"134战斗_终点_确认": {
+		"recognition": "TemplateMatch",
+		"roi": [969, 650, 94, 69],
+		"threshold": 0.8,
+		"template": [
+			"combat/levelUp/13-4/Gap-5.png"
+		],
+		"green_mask": true,
+		"rate_limit": 500,
+		"next": [
+			"134战斗_执行计划"
+		]
+	},
+	"134战斗_执行计划": {
+		"target": [1105, 627, 153, 74],
+		"action": "LongPress",
+		"duration": 20,
+		"timeout": 600000,
+		"next": [
+			"134重置_提前再次作战",
+			"134重置_再次作战",
+			"[JumpBack]public_不中断计划"
+		]
+	},
+	"134战斗_1队选中判定": {
+		"recognition": "OCR",
+		"roi": [1140, 110, 140, 100],
+		"expected": ["妖精", "指令", "妖精指令"],
+		"action": "DoNothing",
+		"next": [
+			"134战斗_出现妖精技能释放"
+		]
+	}
 }

@@ -266,12 +266,7 @@
 		"roi": [80, 150, 150, 200],
 		"template": "storage/navi_combat.png",
 		"action": "LongPress",
-    "target": [
-      143,
-      237,
-      1,
-      1
-    ],
+		"target": [143, 237, 1, 1],
 		"duration": 500,
 		"pre_delay": 1000,
 		"next": []

@@ -1328,7 +1328,9 @@
 		"roi": [1020, 590, 260, 130],
 		"expected": ["开始作战"],
 		"action": "DoNothing",
-		"next": ["跑步机_地图1队标记"]
+		"next": [
+			"跑步机_地图1队标记"
+		]
 	},
 	"跑步机_地图1队标记": {
 		"recognition": "OCR",
@@ -1336,7 +1338,9 @@
 		"expected": ["1"],
 		"only_rec": true,
 		"action": "DoNothing",
-		"next": ["跑步机_地图2队标记"]
+		"next": [
+			"跑步机_地图2队标记"
+		]
 	},
 	"跑步机_地图2队标记": {
 		"recognition": "OCR",

@@ -156,7 +156,7 @@
 		"next": [
 			"[JumpBack]ad逃亡_切换难度",
 			"ad逃亡_进入卷积核关卡",
-			"ad_retry_inc",
+			"ad_retry_inc"
 		]
 	},
 	"ad_retry_scheduler": {

@@ -1,177 +1,118 @@
 {
-  "134耗尽处理_检测耗尽": {
-    "recognition": "OCR",
-    "expected": [
-      "耗尽"
-    ],
-    "roi": [
-      502,
-      259,
-      330,
-      61
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "target": [
-      470,
-      490,
-      140,
-      50
-    ],
-    "post_delay": 500,
-    "next": [
-      "134耗尽处理_点击第二队"
-    ]
-  },
-  "134耗尽处理_点击第二队": {
-    "target": [
-      76,
-      533,
-      2,
-      20
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "pre_delay": 500,
-    "timeout": 3000,
-    "next": [
-      "134耗尽处理_点击撤离"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_点击撤离": {
-    "recognition": "OCR",
-    "roi": [
-      870,
-      600,
-      220,
-      90
-    ],
-    "expected": [
-      "撤离"
-    ],
-    "action": "LongPress",
-    "target": [
-      980,
-      640,
-      1,
-      1
-    ],
-    "duration": 20,
-    "post_delay": 500,
-    "rate_limit": 500,
-    "timeout": 3000,
-    "next": [
-      "134耗尽处理_等待确认撤离"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_等待确认撤离": {
-    "recognition": "DirectHit",
-    "action": "DoNothing",
-    "timeout": 5000,
-    "next": [
-      "134耗尽处理_点击确认撤离"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_点击确认撤离": {
-    "recognition": "OCR",
-    "roi": [
-      600,
-      430,
-      300,
-      140
-    ],
-    "expected": [
-      "确定"
-    ],
-    "action": "LongPress",
-    "target": [
-      750,
-      525,
-      1,
-      1
-    ],
-    "duration": 20,
-    "post_delay": 500,
-    "rate_limit": 500,
-    "timeout": 3000,
-    "next": [
-      "134耗尽处理_检测二队弹药模板"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_检测二队弹药模板": {
-    "recognition": "TemplateMatch",
-    "roi": [
-      80,
-      480,
-      220,
-      100
-    ],
-    "template": [
-      "combat/levelUp/13-4/supply_success_hud.png"
-    ],
-    "threshold": 0.8,
-    "action": "DoNothing",
-    "timeout": 3000,
-    "next": [
-      "134耗尽处理_点击第二队"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_终止检测": {
-    "recognition": "OCR",
-    "roi": [
-      120,
-      30,
-      320,
-      120
-    ],
-    "expected": [
-      "终止",
-      "作战"
-    ],
-    "action": "LongPress",
-    "duration": 20,
-    "post_delay": 1000,
-    "timeout": 10000,
-    "next": [
-      "134耗尽处理_确认终止作战"
-    ],
-    "on_error": [
-      "134耗尽处理_终止检测"
-    ]
-  },
-  "134耗尽处理_确认终止作战": {
-    "recognition": "TemplateMatch",
-    "template": "restart_init/终止作战2.png",
-    "roi": [
-      620,
-      420,
-      320,
-      160
-    ],
-    "threshold": 0.75,
-    "action": "LongPress",
-    "post_delay": 1000,
-    "timeout": 5000,
-    "next": [
-      "自动进入关卡_通用_进入战役"
-    ],
-    "on_error": [
-      "134耗尽处理_确认终止作战"
-    ]
-  }
+	"134耗尽处理_检测耗尽": {
+		"recognition": "OCR",
+		"expected": ["耗尽"],
+		"roi": [502, 259, 330, 61],
+		"action": "LongPress",
+		"duration": 20,
+		"target": [470, 490, 140, 50],
+		"post_delay": 500,
+		"next": [
+			"134耗尽处理_点击第二队"
+		]
+	},
+	"134耗尽处理_点击第二队": {
+		"target": [76, 533, 2, 20],
+		"action": "LongPress",
+		"duration": 20,
+		"pre_delay": 500,
+		"timeout": 3000,
+		"next": [
+			"134耗尽处理_点击撤离"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_点击撤离": {
+		"recognition": "OCR",
+		"roi": [870, 600, 220, 90],
+		"expected": ["撤离"],
+		"action": "LongPress",
+		"target": [980, 640, 1, 1],
+		"duration": 20,
+		"post_delay": 500,
+		"rate_limit": 500,
+		"timeout": 3000,
+		"next": [
+			"134耗尽处理_等待确认撤离"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_等待确认撤离": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"timeout": 5000,
+		"next": [
+			"134耗尽处理_点击确认撤离"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_点击确认撤离": {
+		"recognition": "OCR",
+		"roi": [600, 430, 300, 140],
+		"expected": ["确定"],
+		"action": "LongPress",
+		"target": [750, 525, 1, 1],
+		"duration": 20,
+		"post_delay": 500,
+		"rate_limit": 500,
+		"timeout": 3000,
+		"next": [
+			"134耗尽处理_检测二队弹药模板"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_检测二队弹药模板": {
+		"recognition": "TemplateMatch",
+		"roi": [80, 480, 220, 100],
+		"template": [
+			"combat/levelUp/13-4/supply_success_hud.png"
+		],
+		"threshold": 0.8,
+		"action": "DoNothing",
+		"timeout": 3000,
+		"next": [
+			"134耗尽处理_点击第二队"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_终止检测": {
+		"recognition": "OCR",
+		"roi": [120, 30, 320, 120],
+		"expected": ["终止", "作战"],
+		"action": "LongPress",
+		"duration": 20,
+		"post_delay": 1000,
+		"timeout": 10000,
+		"next": [
+			"134耗尽处理_确认终止作战"
+		],
+		"on_error": [
+			"134耗尽处理_终止检测"
+		]
+	},
+	"134耗尽处理_确认终止作战": {
+		"recognition": "TemplateMatch",
+		"template": "restart_init/终止作战2.png",
+		"roi": [620, 420, 320, 160],
+		"threshold": 0.75,
+		"action": "LongPress",
+		"post_delay": 1000,
+		"timeout": 5000,
+		"next": [
+			"自动进入关卡_通用_进入战役"
+		],
+		"on_error": [
+			"134耗尽处理_确认终止作战"
+		]
+	}
 }
