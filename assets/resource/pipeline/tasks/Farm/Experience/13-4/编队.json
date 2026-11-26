@@ -1,113 +1,248 @@
 {
-	"134编队_点击队伍编成": {
-		"roi": [141, 588, 231, 83],
-		"recognition": "OCR",
-		"expected": ["编成"],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"134编队_选择2队",
-			"134编队_点击队伍编成"
-		]
-	},
-	"134编队_选择2队": {
-		"recognition": "OCR",
-		"expected": "阵型编成",
-		"roi": [1067, 634, 212, 85],
-		"target": [37, 203, 47, 33],
-		"action": "LongPress",
-		"duration": 20,
-		"post_wait_freezes": 1,
-		"next": [
-			"134编队_显示全部",
-			"134编队_点击队伍编成",
-			"134编队_选择2队打手"
-		]
-	},
-	"134编队_选择2队打手": {
-		"target": [581, 351, 46, 78],
-		"action": "LongPress",
-		"duration": 20,
-		"post_wait_freezes": 1,
-		"next": [
-			"134编队_显示全部",
-			"134编队_点击队伍编成"
-		]
-	},
-	"134编队_显示全部": {
-		"recognition": "OCR",
-		"roi": [1044, 202, 207, 136],
-		"expected": ["显示全部"],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"134编队_选择收藏角色"
-		]
-	},
-	"134编队_选择收藏角色": {
-		"recognition": "OCR",
-		"roi": [830, 69, 243, 117],
-		"expected": ["显示", "收藏"],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"134编队_选择收藏角色确认"
-		]
-	},
-	"134编队_选择收藏角色确认": {
-		"recognition": "OCR",
-		"expected": ["确认"],
-		"roi": [892, 628, 109, 69],
-		"action": "LongPress",
-		"duration": 20,
-		"next": [
-			"134编队_点击队伍中的打手"
-		]
-	},
-	"134编队_点击队伍中的打手": {
-		"target": [64, 636, 50, 41],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 200,
-		"next": [
-			"134编队_点击1队打手"
-		]
-	},
-	"134编队_点击1队打手": {
-		"recognition": "TemplateMatch",
-		"template": "combat/levelUp/13-4/G_team1.png",
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 500,
-		"threshold": 0.8,
-		"green_mask": true,
-		"next": [
-			"134编队_确定"
-		]
-	},
-	"134编队_确定": {
-		"recognition": "OCR",
-		"roi": [1094, 591, 153, 93],
-		"expected": ["确定"],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 400,
-		"next": [
-			"134编队_确定",
-			"134编队_返回地图"
-		]
-	},
-	"134编队_返回地图": {
-		"recognition": "TemplateMatch",
-		"roi": [33, 0, 156, 166],
-		"template": "combat/levelUp/13-4/back2map.png",
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 1500,
-		"next": [
-			"134战斗_开始作战前初始化",
-			"134编队_返回地图",
-			"[JumpBack]134地图初始化_拖到右上角"
-		]
-	}
+  "134编队_点击队伍编成": {
+    "roi": [
+      141,
+      588,
+      231,
+      83
+    ],
+    "recognition": "OCR",
+    "expected": [
+      "编成"
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "next": [
+      "134编队_选择2队",
+      "134编队_点击队伍编成"
+    ]
+  },
+  "134编队_选择2队": {
+    "recognition": "OCR",
+    "expected": "阵型编成",
+    "roi": [
+      1067,
+      634,
+      212,
+      85
+    ],
+    "target": [
+      37,
+      203,
+      47,
+      33
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_wait_freezes": 1,
+    "next": [
+      "134编队_显示全部",
+      "134编队_点击队伍编成",
+      "134编队_选择2队打手"
+    ]
+  },
+  "134编队_选择2队打手": {
+    "target": [
+      581,
+      351,
+      46,
+      78
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_wait_freezes": 1,
+    "next": [
+      "134编队_显示全部",
+      "134编队_点击队伍编成"
+    ]
+  },
+  "134编队_显示全部": {
+    "recognition": "OCR",
+    "roi": [
+      1044,
+      202,
+      207,
+      136
+    ],
+    "expected": [
+      "显示全部"
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "next": [
+      "134编队_收藏已勾选",
+      "134编队_收藏未勾选"
+    ]
+  },
+  "134编队_选择收藏角色": {
+    "recognition": "OCR",
+    "roi": [
+      880,
+      105,
+      200,
+      55
+    ],
+    "expected": [
+      "显示",
+      "收藏"
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "target": [
+      895,
+      133,
+      14,
+      14
+    ],
+    "next": [
+      "134编队_收藏勾选校验"
+    ]
+  },
+  "134编队_收藏已勾选": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      875,
+      114,
+      54,
+      54
+    ],
+    "template": [
+      "combat/levelUp/13-4/favorite_checked.png"
+    ],
+    "threshold": 0.88,
+    "next": [
+      "134编队_选择收藏角色确认"
+    ]
+  },
+  "134编队_收藏未勾选": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      875,
+      114,
+      54,
+      54
+    ],
+    "template": [
+      "combat/levelUp/13-4/favorite_unchecked.png"
+    ],
+    "threshold": 0.88,
+    "action": "LongPress",
+    "duration": 20,
+    "target": [
+      895,
+      133,
+      14,
+      14
+    ],
+    "next": [
+      "134编队_收藏勾选校验"
+    ]
+  },
+  "134编队_收藏勾选校验": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      875,
+      114,
+      54,
+      54
+    ],
+    "template": [
+      "combat/levelUp/13-4/favorite_checked.png"
+    ],
+    "threshold": 0.88,
+    "timeout": 5000,
+    "next": [
+      "134编队_选择收藏角色确认"
+    ],
+    "on_error": [
+      "134编队_收藏未勾选"
+    ]
+  },
+  "134编队_选择收藏角色确认": {
+    "recognition": "OCR",
+    "expected": [
+      "确认"
+    ],
+    "roi": [
+      892,
+      628,
+      109,
+      69
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "next": [
+      "134编队_点击队伍中的打手"
+    ]
+  },
+  "134编队_点击队伍中的打手": {
+    "target": [
+      64,
+      636,
+      50,
+      41
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 200,
+    "next": [
+      "134编队_点击1队打手"
+    ]
+  },
+  "134编队_点击1队打手": {
+    "recognition": "TemplateMatch",
+    "template": "combat/levelUp/13-4/G_team1.png",
+    "action": "LongPress",
+    "duration": 20,
+    "target_offset": [
+      60,
+      -85,
+      0,
+      0
+    ],
+    "post_delay": 500,
+    "threshold": 0.8,
+    "green_mask": true,
+    "next": [
+      "134编队_确定"
+    ]
+  },
+  "134编队_确定": {
+    "recognition": "OCR",
+    "roi": [
+      1094,
+      591,
+      153,
+      93
+    ],
+    "expected": [
+      "确定"
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 400,
+    "next": [
+      "134编队_确定",
+      "134编队_返回地图"
+    ]
+  },
+  "134编队_返回地图": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      33,
+      0,
+      156,
+      166
+    ],
+    "template": "combat/levelUp/13-4/back2map.png",
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 1500,
+    "next": [
+      "134战斗_开始作战前初始化",
+      "[JumpBack]134部署_部署梯队",
+      "134编队_返回地图",
+      "[JumpBack]134地图初始化_拖到右上角"
+    ]
+  }
 }

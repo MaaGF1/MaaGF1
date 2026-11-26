@@ -1,159 +1,275 @@
 {
-	"134重置_提前再次作战": {
-		"recognition": "OCR",
-		"roi": [68, 667, 75, 45],
-		"expected": ["20"],
-		"post_delay": 1,
-		"pre_delay": 1,
-		"rate_limit": 500,
-		"timeout": 600000,
-		"next": [
-			"134重置_WD_Loop_Feed"
-		]
-	},
-	"134重置_WD_Loop_Feed": {
-		"post_delay": 1,
-		"pre_delay": 1,
-		"recognition": "DirectHit",
-		"action": "DoNothing",
-		"next": [
-			"134重置_再战连点2"
-		]
-	},
-	"134重置_第二回合提前再次作战": {
-		"recognition": "OCR",
-		"roi": [397, 21, 110, 80],
-		"expected": ["02"],
-		"post_delay": 6000,
-		"pre_delay": 1,
-		"rate_limit": 500,
-		"timeout": 600000,
-		"next": [
-			"134重置_再战连点2"
-		]
-	},
-	"134重置_再次作战": {
-		"recognition": "OCR",
-		"roi": [277, 572, 188, 73],
-		"expected": ["再次作战"],
-		"post_delay": 1,
-		"pre_delay": 1,
-		"rate_limit": 500,
-		"timeout": 600000,
-		"next": [
-			"134重置_再战连点1"
-		]
-	},
-	"134重置_再战连点1": {
-		"recognition": "OCR",
-		"roi": [277, 572, 188, 73],
-		"expected": ["再次作战"],
-		"target": [375, 618, 70, 12],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 1,
-		"pre_delay": 1,
-		"next": [
-			"134重置_再战连点2"
-		],
-		"timeout": 600000
-	},
-	"134重置_再战连点2": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"pre_delay": 1,
-		"next": [
-			"134重置_再战连点3"
-		]
-	},
-	"134重置_再战连点3": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"pre_delay": 1,
-		"next": [
-			"134重置_再战连点4"
-		]
-	},
-	"134重置_再战连点4": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"pre_delay": 1,
-		"next": [
-			"134重置_再战连点5"
-		]
-	},
-	"134重置_再战连点5": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"next": [
-			"134重置_再战连点6"
-		]
-	},
-	"134重置_再战连点6": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"next": [
-			"134重置_再战连点7"
-		]
-	},
-	"134重置_再战连点7": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"next": [
-			"134重置_再战连点8"
-		]
-	},
-	"134重置_再战连点8": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 10,
-		"next": [
-			"134重置_再战连点9"
-		]
-	},
-	"134重置_再战连点9": {
-		"target": [400, 624, 1, 1],
-		"action": "LongPress",
-		"duration": 100,
-		"post_delay": 200
-	},
-	"134重置_点击获得角色": {
-		"recognition": "TemplateMatch",
-		"roi": [866, 2, 413, 619],
-		"target": [400, 624, 1, 1],
-		"template": [
-			"combat/levelUp/13-4/doll_get0.png",
-			"combat/levelUp/13-4/doll_get2.png",
-			"combat/levelUp/13-4/doll_get3.png",
-			"combat/levelUp/13-4/doll_get4.png"
-		],
-		"action": "LongPress",
-		"duration": 20,
-		"post_delay": 500,
-		"rate_limit": 100,
-		"threshold": 0.65,
-		"timeout": 40000
-	},
-	"134重置_单击再次作战": {
-		"recognition": "OCR",
-		"target": [375, 618, 70, 12],
-		"roi": [277, 572, 188, 73],
-		"action": "LongPress",
-		"duration": 20,
-		"expected": ["再次作战"],
-		"rate_limit": 1000
-	}
+  "134重置_提前再次作战": {
+    "recognition": "OCR",
+    "roi": [
+      68,
+      667,
+      75,
+      45
+    ],
+    "expected": [
+      "20"
+    ],
+    "post_delay": 1,
+    "pre_delay": 1,
+    "rate_limit": 500,
+    "timeout": 600000,
+    "next": [
+      "134重置_WD_Loop_Feed"
+    ]
+  },
+  "134重置_WD_Loop_Feed": {
+    "post_delay": 1,
+    "pre_delay": 1,
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [
+      "134重置_再战连点2"
+    ]
+  },
+  "134重置_第二回合提前再次作战": {
+    "recognition": "OCR",
+    "roi": [
+      397,
+      21,
+      110,
+      80
+    ],
+    "expected": [
+      "02"
+    ],
+    "post_delay": 6000,
+    "pre_delay": 1,
+    "rate_limit": 500,
+    "timeout": 600000,
+    "next": [
+      "134重置_再战连点2"
+    ]
+  },
+  "134重置_再次作战": {
+    "recognition": "OCR",
+    "roi": [
+      277,
+      572,
+      188,
+      73
+    ],
+    "expected": [
+      "再次作战"
+    ],
+    "post_delay": 1,
+    "pre_delay": 1,
+    "rate_limit": 500,
+    "timeout": 600000,
+    "next": [
+      "134重置_再战连点1"
+    ]
+  },
+  "134重置_再战连点1": {
+    "recognition": "OCR",
+    "roi": [
+      277,
+      572,
+      188,
+      73
+    ],
+    "expected": [
+      "再次作战"
+    ],
+    "target": [
+      375,
+      618,
+      70,
+      12
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 1,
+    "pre_delay": 1,
+    "next": [
+      "134重置_再战连点2"
+    ],
+    "timeout": 600000
+  },
+  "134重置_再战连点2": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "pre_delay": 1,
+    "next": [
+      "134重置_再战连点3"
+    ]
+  },
+  "134重置_再战连点3": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "pre_delay": 1,
+    "next": [
+      "134重置_再战连点4"
+    ]
+  },
+  "134重置_再战连点4": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "pre_delay": 1,
+    "next": [
+      "134重置_再战连点5"
+    ]
+  },
+  "134重置_再战连点5": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "next": [
+      "134重置_再战连点6"
+    ]
+  },
+  "134重置_再战连点6": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "next": [
+      "134重置_再战连点7"
+    ]
+  },
+  "134重置_再战连点7": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "next": [
+      "134重置_再战连点8"
+    ]
+  },
+  "134重置_再战连点8": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 10,
+    "next": [
+      "134重置_再战连点9"
+    ]
+  },
+  "134重置_再战连点9": {
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "action": "LongPress",
+    "duration": 100,
+    "post_delay": 200
+  },
+  "134重置_点击获得角色": {
+    "recognition": "TemplateMatch",
+    "roi": [
+      866,
+      2,
+      413,
+      619
+    ],
+    "target": [
+      400,
+      624,
+      1,
+      1
+    ],
+    "template": [
+      "combat/levelUp/13-4/doll_get0.png",
+      "combat/levelUp/13-4/doll_get2.png",
+      "combat/levelUp/13-4/doll_get3.png",
+      "combat/levelUp/13-4/doll_get4.png"
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "post_delay": 500,
+    "rate_limit": 100,
+    "threshold": 0.65,
+    "timeout": 40000
+  },
+  "134重置_单击再次作战": {
+    "recognition": "OCR",
+    "target": [
+      375,
+      618,
+      70,
+      12
+    ],
+    "roi": [
+      277,
+      572,
+      188,
+      73
+    ],
+    "action": "LongPress",
+    "duration": 20,
+    "expected": [
+      "再次作战"
+    ],
+    "rate_limit": 1000
+  },
+  "134重置_满仓停止_人形回收检测": {
+    "recognition": "OCR",
+    "roi": [
+      194,
+      264,
+      897,
+      155
+    ],
+    "expected": [
+      "人形回收"
+    ],
+    "action": "DoNothing",
+    "next": [
+      "134重置_满仓停止_结束"
+    ]
+  },
+  "134重置_满仓停止_结束": {
+    "recognition": "DirectHit",
+    "action": "StopTask",
+    "next": []
+  }
 }

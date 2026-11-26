@@ -39,11 +39,13 @@
 			"GrayZone/进入灰域2.png",
 			"GrayZone/进入灰域3.png"
 		],
+		"threshold": 0.8,
+		"order_by": "Score",
 		"action": "LongPress",
 		"duration": 10,
 		"next": [
-			"灰域_战斗页探查识图",
-			"灰域_灰域检测"
+			"灰域_灰域检测",
+			"灰域_战斗页探查识图"
 		]
 	},
 	"灰域_灰域检测": {

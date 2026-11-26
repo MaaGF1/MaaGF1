@@ -2,7 +2,7 @@
 	"public_关卡结算点击1": {
 		"action": "LongPress",
 		"duration": 10,
-		"target": [332, 591, 1, 1],
+		"target": [400, 623, 1, 1],
 		"pre_delay": 1,
 		"post_delay": 15,
 		"next": [
@@ -12,7 +12,7 @@
 	"public_关卡结算点击2": {
 		"action": "LongPress",
 		"duration": 10,
-		"target": [332, 591, 1, 1],
+		"target": [400, 623, 1, 1],
 		"pre_delay": 1,
 		"post_delay": 15,
 		"next": [
@@ -22,7 +22,7 @@
 	"public_关卡结算点击3": {
 		"action": "LongPress",
 		"duration": 10,
-		"target": [332, 591, 1, 1],
+		"target": [400, 623, 1, 1],
 		"pre_delay": 1,
 		"post_delay": 15,
 		"next": [
@@ -32,7 +32,7 @@
 	"public_关卡结算点击4": {
 		"action": "LongPress",
 		"duration": 10,
-		"target": [332, 591, 1, 1],
+		"target": [400, 623, 1, 1],
 		"pre_delay": 10,
 		"post_delay": 100,
 		"next": [
@@ -43,7 +43,7 @@
 	"public_关卡结算点击5": {
 		"action": "LongPress",
 		"duration": 10,
-		"target": [332, 591, 1, 1],
+		"target": [400, 623, 1, 1],
 		"post_delay": 1500,
 		"next": []
 	}
