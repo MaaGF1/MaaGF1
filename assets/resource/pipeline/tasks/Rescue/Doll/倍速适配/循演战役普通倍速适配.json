@@ -1,0 +1,9 @@
+{
+	"!循演战役普通倍速适配": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"!循演战役普通打捞"
+		]
+	}
+}

@@ -25,7 +25,7 @@
 	},
 	"81N_选择装备处理方式": {
 		"recognition": "OCR",
-		"roi": [775, 290, 169, 82],
+		"roi": [630, 260, 400, 180],
 		"expected": ["装备强化"],
 		"next": [
 			"81N进入_点击8-1N"
@@ -125,18 +125,17 @@
 		"action": "LongPress",
 		"target": [338, 193, 13, 12],
 		"duration": 20,
+		"post_delay": 2000,
 		"next": [
 			"81N战斗_执行计划",
 			"81N战斗_炸狗点2"
 		]
 	},
 	"81N战斗_执行计划": {
-		"recognition": "TemplateMatch",
-		"roi": [961, 606, 126, 113],
-		"template": "combat/levelUp/8-1N/Gap1.png",
-		"threshold": 0.7,
-		"green_mask": true,
-		"rate_limit": 200,
+		"recognition": "OCR",
+		"roi": [1005, 665, 35, 35],
+		"only_rec": true,
+		"expected": ["1"],
 		"action": "LongPress",
 		"duration": 20,
 		"target": [1111, 633, 69, 43],

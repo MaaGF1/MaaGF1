@@ -155,5 +155,19 @@
 		"duration": 20,
 		"expected": ["再次作战"],
 		"rate_limit": 1000
+	},
+	"134重置_满仓停止_人形回收检测": {
+		"recognition": "OCR",
+		"roi": [194, 264, 897, 155],
+		"expected": ["人形回收"],
+		"action": "DoNothing",
+		"next": [
+			"134重置_满仓停止_结束"
+		]
+	},
+	"134重置_满仓停止_结束": {
+		"recognition": "DirectHit",
+		"action": "StopTask",
+		"next": []
 	}
 }

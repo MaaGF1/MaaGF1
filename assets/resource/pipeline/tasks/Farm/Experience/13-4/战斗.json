@@ -1,14 +1,31 @@
 {
 	"134战斗_开始作战前初始化": {
-		"recognition": "TemplateMatch",
-		"timeout": 600000,
-		"roi": [70, 468, 157, 108],
-		"threshold": 0.4,
-		"template": "combat/levelUp/13-4/map_team2.png",
+		"recognition": "And",
+		"all_of": [
+			{
+				"sub_name": "team2",
+				"recognition": "TemplateMatch",
+				"roi": [70, 468, 157, 108],
+				"threshold": 0.4,
+				"template": "combat/levelUp/13-4/map_team2.png"
+			},
+			{
+				"recognition": "OCR",
+				"roi": "team2",
+				"roi_offset": [-4, -4, 8, 8],
+				"expected": ["2"],
+				"only_rec": true
+			}
+		],
+		"box_index": 0,
 		"next": [
 			"134战斗_开始作战",
 			"[JumpBack]134地图初始化_拖到右上角"
-		]
+		],
+		"on_error": [
+			"134部署_部署梯队"
+		],
+		"timeout": 600000
 	},
 	"134战斗_开始作战": {
 		"recognition": "OCR",
@@ -68,9 +85,10 @@
 		"action": "LongPress",
 		"duration": 20,
 		"post_wait_freezes": 1,
-		"post_delay": 800,
+		"post_delay": 1000,
 		"rate_limit": 200,
 		"next": [
+			"134战斗_1队选中判定",
 			"134战斗_出现妖精技能释放",
 			"134战斗_点击1队取消",
 			"134战斗_点击1队图标",
@@ -79,7 +97,7 @@
 	},
 	"134战斗_出现妖精技能释放": {
 		"recognition": "OCR",
-		"expected": ["释放"],
+		"expected": ["释放", "取消"],
 		"roi": [1075, 156, 204, 437],
 		"post_delay": 500,
 		"next": [
@@ -92,6 +110,19 @@
 		"expected": ["取消"],
 		"action": "LongPress",
 		"duration": 20,
+		"next": [
+			"134战斗_取消后校验释放或取消"
+		],
+		"timeout": 3000,
+		"on_error": [
+			"134战斗_点击1队图标"
+		]
+	},
+	"134战斗_取消后校验释放或取消": {
+		"recognition": "OCR",
+		"expected": ["释放", "取消"],
+		"roi": [1075, 156, 204, 437],
+		"action": "DoNothing",
 		"next": [
 			"134战斗_点击计划模式"
 		]
@@ -227,6 +258,15 @@
 			"134重置_提前再次作战",
 			"134重置_再次作战",
 			"[JumpBack]public_不中断计划"
+		]
+	},
+	"134战斗_1队选中判定": {
+		"recognition": "OCR",
+		"roi": [1140, 110, 140, 100],
+		"expected": ["妖精", "指令", "妖精指令"],
+		"action": "DoNothing",
+		"next": [
+			"134战斗_出现妖精技能释放"
 		]
 	}
 }

@@ -198,28 +198,25 @@
 	},
 	"循演战役普通打捞_下一回合": {
 		"recognition": "OCR",
-		"roi": [1000, 660, 50, 50],
-		"expected": ["0", "o", "O"],
-		"replace": ["C", "0"],
+		"roi": [1059, 478, 221, 144],
+		"expected": ["下一回合", "下", "回"],
 		"action": "LongPress",
-		"duration": 20,
-		"target": [1165, 550, 10, 15],
+		"duration": 15,
+		"post_delay": 500,
 		"next": [
 			"循演战役普通打捞_执行计划",
 			"循演战役普通打捞_下一回合"
 		]
 	},
 	"循演战役普通打捞_执行计划": {
-		"recognition": "OCR",
-		"roi": [962, 520, 122, 62],
-		"expected": "取消",
+		"recognition": "DirectHit",
 		"action": "LongPress",
-		"duration": 20,
 		"target": [1152, 644, 53, 30],
-		"timeout": 200000,
+		"duration": 15,
+		"timeout": 300000,
+		"rate_limit": 2000,
 		"next": [
-			"循演战役普通打捞_再次作战",
-			"循演战役普通打捞_执行计划"
+			"循演战役普通打捞_再次作战"
 		]
 	},
 	"循演战役普通打捞_再次作战": {

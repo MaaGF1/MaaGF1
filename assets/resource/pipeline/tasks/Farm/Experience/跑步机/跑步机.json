@@ -122,6 +122,41 @@
 		"begin": [312, 660, 1, 1],
 		"end": [1223, 660, 1, 1],
 		"next": [
+			"跑步机_识别CHAP3",
+			"跑步机_点击跑步机关卡",
+			"跑步机_滑动到跑步机地图"
+		]
+	},
+	"跑步机_识别CHAP3": {
+		"recognition": "OCR",
+		"roi": [12, 261, 99, 56],
+		"expected": "CHAP3",
+		"action": "DoNothing",
+		"next": [
+			"跑步机_确认困难难度",
+			"跑步机_切换困难难度"
+		]
+	},
+	"跑步机_确认困难难度": {
+		"recognition": "OCR",
+		"roi": [18, 672, 220, 44],
+		"expected": ["困难"],
+		"action": "DoNothing",
+		"next": [
+			"跑步机_点击跑步机关卡",
+			"跑步机_滑动到跑步机地图"
+		]
+	},
+	"跑步机_切换困难难度": {
+		"recognition": "OCR",
+		"roi": [18, 672, 220, 44],
+		"expected": ["困难"],
+		"inverse": true,
+		"action": "Click",
+		"target": [18, 672, 220, 44],
+		"post_delay": 1000,
+		"next": [
+			"跑步机_确认困难难度",
 			"跑步机_点击跑步机关卡",
 			"跑步机_滑动到跑步机地图"
 		]
@@ -174,7 +209,34 @@
 		"post_delay": 500,
 		"next": [
 			"跑步机_梯队部署完成",
+			"跑步机_已部署跳过部署",
 			"跑步机_部署第一梯队"
+		]
+	},
+	"跑步机_已部署跳过部署": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [1005, 607, 259, 101],
+				"expected": ["开始作战"]
+			},
+			{
+				"recognition": "OCR",
+				"roi": [470, 325, 80, 90],
+				"expected": ["1"],
+				"only_rec": true
+			},
+			{
+				"recognition": "OCR",
+				"roi": [575, 288, 55, 45],
+				"expected": ["2"],
+				"only_rec": true
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"跑步机_开始作战"
 		]
 	},
 	"跑步机_梯队部署完成": {
@@ -291,7 +353,7 @@
 		"recognition": "DirectHit",
 		"action": "LongPress",
 		"duration": 50,
-		"target": [503, 451, 38, 39],
+		"target": [522, 470, 1, 1],
 		"post_delay": 500,
 		"next": [
 			"跑步机_计划检测1",
@@ -335,7 +397,7 @@
 		"recognition": "DirectHit",
 		"action": "LongPress",
 		"duration": 50,
-		"target": [809, 327, 26, 32],
+		"target": [822, 343, 1, 1],
 		"post_delay": 500,
 		"next": [
 			"跑步机_计划检测2",
@@ -633,9 +695,10 @@
 		]
 	},
 	"跑步机_第二回合计划3": {
-		"recognition": "OCR",
-		"roi": [1002, 656, 45, 52],
-		"expected": "2",
+		"recognition": "TemplateMatch",
+		"roi": [1005, 665, 35, 35],
+		"template": "combat/levelUp/跑步机/行动点数2.png",
+		"threshold": 0.75,
 		"action": "LongPress",
 		"post_delay": 500,
 		"duration": 50,
@@ -648,7 +711,7 @@
 	"跑步机_下一回合2": {
 		"recognition": "OCR",
 		"roi": [996, 659, 57, 47],
-		"expected": ["o", "0"],
+		"expected": ["[oO0]"],
 		"action": "LongPress",
 		"post_delay": 500,
 		"duration": 50,
@@ -835,6 +898,7 @@
 		"post_delay": 500,
 		"duration": 50,
 		"target": [1118, 639, 128, 52],
+		"timeout": 600000,
 		"next": [
 			"跑步机_执行计划3",
 			"跑步机_计划结束3"
@@ -846,6 +910,7 @@
 		"roi": [373, 575, 379, 134],
 		"action": "DoNothing",
 		"post_delay": 500,
+		"timeout": 600000,
 		"next": [
 			"跑步机_跳过战斗3"
 		]
@@ -891,6 +956,7 @@
 		"roi": [131, 225, 127, 66],
 		"expected": "机动",
 		"action": "LongPress",
+		"target": [170, 255, 40, 30],
 		"post_delay": 500,
 		"duration": 50,
 		"next": [
@@ -903,6 +969,7 @@
 		"roi": [337, 266, 135, 36],
 		"expected": "坦克",
 		"action": "LongPress",
+		"target": [370, 265, 60, 30],
 		"post_delay": 500,
 		"duration": 50,
 		"next": [
@@ -915,6 +982,7 @@
 		"roi": [1106, 613, 112, 65],
 		"expected": "部署",
 		"action": "LongPress",
+		"target": [1145, 620, 50, 30],
 		"duration": 50,
 		"post_delay": 1000,
 		"next": [
@@ -938,7 +1006,7 @@
 	},
 	"跑步机_关闭火力支援": {
 		"recognition": "OCR",
-		"roi": [820, 580, 152, 126],
+		"roi": [870, 583, 70, 85],
 		"expected": "N",
 		"action": "LongPress",
 		"duration": 50,
@@ -961,12 +1029,27 @@
 	},
 	"跑步机_关闭面板": {
 		"recognition": "OCR",
-		"roi": [640, 553, 58, 166],
-		"expected": "60/60",
+		"roi": [646, 562, 50, 21],
+		"expected": [
+			"60/60",
+			"60\\\\60",
+			"60／60",
+			"60⁄60",
+			"60∕60",
+			"60\\|60",
+			"60丨60",
+			"60＼60",
+			"60╱60",
+			"60╲60"
+		],
 		"action": "LongPress",
 		"duration": 50,
 		"target": [913, 467, 61, 37],
 		"post_delay": 500,
+		"timeout": 30000,
+		"on_error": [
+			"跑步机_补充能源"
+		],
 		"next": [
 			"跑步机_计划模式4",
 			"跑步机_关闭面板"
@@ -1240,16 +1323,44 @@
 			"跑步机_跳过战斗"
 		]
 	},
+	"跑步机_地图开始作战状态": {
+		"recognition": "OCR",
+		"roi": [1020, 590, 260, 130],
+		"expected": ["开始作战"],
+		"action": "DoNothing",
+		"next": [
+			"跑步机_地图1队标记"
+		]
+	},
+	"跑步机_地图1队标记": {
+		"recognition": "OCR",
+		"roi": [488, 338, 36, 46],
+		"expected": ["1"],
+		"only_rec": true,
+		"action": "DoNothing",
+		"next": [
+			"跑步机_地图2队标记"
+		]
+	},
+	"跑步机_地图2队标记": {
+		"recognition": "OCR",
+		"roi": [575, 288, 55, 45],
+		"expected": ["2"],
+		"only_rec": true,
+		"action": "DoNothing",
+		"next": []
+	},
 	"跑步机_再次作战": {
 		"recognition": "OCR",
 		"roi": [314, 597, 181, 56],
 		"expected": "再次作战",
 		"action": "Click",
 		"post_delay": 500,
-		"timeout": 1000,
+		"timeout": 5000,
 		"next": [
 			"跑步机_再次作战",
-			"[JumpBack]public拆人形_人形回收"
+			"public拆人形_人形回收",
+			"跑步机_地图开始作战状态"
 		]
 	}
 }

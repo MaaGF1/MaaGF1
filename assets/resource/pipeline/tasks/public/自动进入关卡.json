@@ -1,0 +1,383 @@
+{
+	"!自动进入关卡": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_点击战斗"
+		]
+	},
+	"自动进入关卡_点击战斗": {
+		"recognition": "OCR",
+		"roi": [790, 380, 280, 110],
+		"expected": ["战斗"],
+		"action": "Click",
+		"post_delay": 1000,
+		"next": [
+			"自动进入关卡_通用_进入战役"
+		]
+	},
+	"自动进入关卡_选项3": {
+		"enabled": false,
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"自动进入关卡_选项4": {
+		"enabled": false,
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"自动进入关卡_选项5": {
+		"enabled": false,
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"自动进入关卡_通用_进入战役": {
+		"enabled": true,
+		"recognition": "OCR",
+		"roi": [0, 120, 190, 115],
+		"expected": ["作战任务"],
+		"action": "Click",
+		"next": [
+			"自动进入关卡_通用_检查作战任务选中",
+			"自动进入关卡_通用_进入战役"
+		],
+		"post_delay": 500
+	},
+	"自动进入关卡_通用_下拖战役列表": {
+		"recognition": "DirectHit",
+		"action": "Swipe",
+		"begin": [205, 180, 2, 2],
+		"end": [205, 650, 2, 2],
+		"duration": 500,
+		"repeat": 4,
+		"repeat_delay": 300,
+		"next": [
+			"自动进入关卡_关卡选项"
+		]
+	},
+	"自动进入关卡_8-1N_滑动到第八战役": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["第八战役", "8"],
+		"inverse": true,
+		"action": "Swipe",
+		"duration": 500,
+		"begin": [250, 655, 1, 1],
+		"end": [250, 500, 1, 1],
+		"post_wait_freezes": 500,
+		"next": [
+			"自动进入关卡_8-1N_点击第八战役_标题",
+			"自动进入关卡_8-1N_点击第八战役_数字",
+			"自动进入关卡_8-1N_滑动到第八战役"
+		]
+	},
+	"自动进入关卡_8-1N_选择夜战": {
+		"recognition": "OCR",
+		"roi": [1120, 120, 160, 130],
+		"expected": ["夜战", "MIDNIGHT"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_8-1N_选择81"
+		]
+	},
+	"自动进入关卡_8-1N_选择81": {
+		"recognition": "OCR",
+		"roi": [620, 220, 320, 180],
+		"expected": ["8-1"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_8-1N_普通作战"
+		]
+	},
+	"自动进入关卡_8-1N_普通作战": {
+		"recognition": "OCR",
+		"roi": [820, 540, 300, 160],
+		"expected": ["普通作战"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_装备回收检测",
+			"自动进入关卡_结束"
+		]
+	},
+	"自动进入关卡_通用_检查作战任务选中": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [0, 120, 190, 115],
+				"expected": ["作战任务"]
+			},
+			{
+				"recognition": "ColorMatch",
+				"roi": [20, 140, 100, 50],
+				"method": 4,
+				"lower": [180, 130, 0],
+				"upper": [255, 220, 80],
+				"count": 100
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_通用_下拖战役列表"
+		]
+	},
+	"自动进入关卡_8-1N_点击第八战役_标题": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["第八战役"],
+		"action": "Click",
+		"post_delay": 500,
+		"rate_limit": 1000,
+		"next": [
+			"自动进入关卡_8-1N_检查第八战役选中_标题",
+			"自动进入关卡_8-1N_点击第八战役_标题"
+		],
+		"target_offset": [50, 0, 0, 0]
+	},
+	"自动进入关卡_8-1N_点击第八战役_数字": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["8"],
+		"action": "Click",
+		"target_offset": [50, -20, 0, 0],
+		"post_delay": 500,
+		"rate_limit": 1000,
+		"next": [
+			"自动进入关卡_8-1N_检查第八战役选中_数字",
+			"自动进入关卡_8-1N_点击第八战役_数字"
+		]
+	},
+	"自动进入关卡_8-1N_检查第八战役选中_标题": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [175, 140, 110, 570],
+				"expected": ["第八战役"]
+			},
+			{
+				"recognition": "ColorMatch",
+				"roi": "自动进入关卡_8-1N_点击第八战役_标题",
+				"roi_offset": [-5, -5, 10, 10],
+				"method": 4,
+				"lower": [180, 130, 0],
+				"upper": [255, 220, 80],
+				"count": 300
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_8-1N_选择夜战"
+		]
+	},
+	"自动进入关卡_8-1N_检查第八战役选中_数字": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [175, 140, 110, 570],
+				"expected": ["8"]
+			},
+			{
+				"recognition": "ColorMatch",
+				"roi": "自动进入关卡_8-1N_点击第八战役_数字",
+				"roi_offset": [-5, -5, 10, 10],
+				"method": 4,
+				"lower": [180, 130, 0],
+				"upper": [255, 220, 80],
+				"count": 300
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_8-1N_选择夜战"
+		]
+	},
+	"自动进入关卡_13-4_人形回收检测": {
+		"recognition": "OCR",
+		"roi": [194, 264, 897, 155],
+		"expected": ["人形回收"],
+		"action": "DoNothing",
+		"timeout": 5000,
+		"next": [
+			"[JumpBack]public拆人形_人形回收",
+			"自动进入关卡_通用_进入战役"
+		],
+		"on_error": [
+			"自动进入关卡_结束"
+		]
+	},
+	"自动进入关卡_装备回收检测": {
+		"recognition": "OCR",
+		"roi": [194, 264, 897, 155],
+		"expected": "装备回收",
+		"action": "DoNothing",
+		"timeout": 5000,
+		"next": [
+			"[JumpBack]public拆装备_装备回收",
+			"自动进入关卡_通用_进入战役"
+		],
+		"on_error": [
+			"自动进入关卡_结束"
+		]
+	},
+	"自动进入关卡_结束": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"自动进入关卡_关卡选项": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": []
+	},
+	"自动进入关卡_13-4_滑动到第十三战役": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["第十三战役", "13"],
+		"inverse": true,
+		"action": "Swipe",
+		"duration": 500,
+		"begin": [250, 655, 1, 1],
+		"end": [250, 500, 1, 1],
+		"post_wait_freezes": 500,
+		"next": [
+			"自动进入关卡_13-4_点击第十三战役_标题",
+			"自动进入关卡_13-4_点击第十三战役_数字",
+			"自动进入关卡_13-4_滑动到第十三战役"
+		]
+	},
+	"自动进入关卡_13-4_选择普通": {
+		"recognition": "OCR",
+		"roi": [860, 120, 200, 130],
+		"expected": ["普通", "NORMAL"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_13-4_选择134"
+		]
+	},
+	"自动进入关卡_13-4_选择134": {
+		"recognition": "OCR",
+		"roi": [620, 560, 320, 150],
+		"expected": ["13-4"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_13-4_普通作战"
+		]
+	},
+	"自动进入关卡_13-4_普通作战": {
+		"recognition": "OCR",
+		"roi": [820, 540, 300, 160],
+		"expected": ["普通作战"],
+		"action": "Click",
+		"post_delay": 1000,
+		"timeout": 600000,
+		"next": [
+			"自动进入关卡_13-4_人形回收检测",
+			"自动进入关卡_结束"
+		]
+	},
+	"自动进入关卡_13-4_点击第十三战役_标题": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["第十三战役", "第十三战"],
+		"action": "Click",
+		"post_delay": 500,
+		"rate_limit": 1000,
+		"next": [
+			"自动进入关卡_13-4_检查第十三战役选中_标题",
+			"自动进入关卡_13-4_点击第十三战役_标题"
+		],
+		"target_offset": [50, 0, 0, 0]
+	},
+	"自动进入关卡_13-4_点击第十三战役_数字": {
+		"recognition": "OCR",
+		"roi": [175, 140, 110, 570],
+		"expected": ["13"],
+		"action": "Click",
+		"target_offset": [50, -20, 0, 0],
+		"post_delay": 500,
+		"rate_limit": 1000,
+		"next": [
+			"自动进入关卡_13-4_检查第十三战役选中_数字",
+			"自动进入关卡_13-4_点击第十三战役_数字"
+		]
+	},
+	"自动进入关卡_13-4_检查第十三战役选中_标题": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [175, 140, 110, 570],
+				"expected": ["第十三战役", "第十三战"]
+			},
+			{
+				"recognition": "ColorMatch",
+				"roi": "自动进入关卡_13-4_点击第十三战役_标题",
+				"roi_offset": [-5, -5, 10, 10],
+				"method": 4,
+				"lower": [180, 130, 0],
+				"upper": [255, 220, 80],
+				"count": 300
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_13-4_选择普通"
+		]
+	},
+	"自动进入关卡_13-4_检查第十三战役选中_数字": {
+		"recognition": "And",
+		"all_of": [
+			{
+				"recognition": "OCR",
+				"roi": [175, 140, 110, 570],
+				"expected": ["13"]
+			},
+			{
+				"recognition": "ColorMatch",
+				"roi": "自动进入关卡_13-4_点击第十三战役_数字",
+				"roi_offset": [-5, -5, 10, 10],
+				"method": 4,
+				"lower": [180, 130, 0],
+				"upper": [255, 220, 80],
+				"count": 300
+			}
+		],
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_13-4_选择普通"
+		]
+	},
+	"自动进入关卡_8-1N_开始": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_8-1N_点击第八战役_标题",
+			"自动进入关卡_8-1N_点击第八战役_数字",
+			"自动进入关卡_8-1N_滑动到第八战役"
+		]
+	},
+	"自动进入关卡_13-4_开始": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"自动进入关卡_13-4_点击第十三战役_标题",
+			"自动进入关卡_13-4_点击第十三战役_数字",
+			"自动进入关卡_13-4_滑动到第十三战役"
+		]
+	}
+}

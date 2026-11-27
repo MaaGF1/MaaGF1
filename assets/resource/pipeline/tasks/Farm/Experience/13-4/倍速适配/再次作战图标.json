@@ -1,0 +1,18 @@
+{
+	"134倍速适配_新角色图标": {
+		"recognition": "TemplateMatch",
+		"roi": [30, 0, 150, 110],
+		"template": "combat/levelUp/13-4/new_doll_icon.png",
+		"threshold": 0.75,
+		"action": "LongPress",
+		"target": [375, 618, 70, 12],
+		"duration": 20,
+		"post_delay": 500,
+		"rate_limit": 1000,
+		"next": [
+			"134重置_单击再次作战"
+		],
+		"repeat": 2,
+		"repeat_delay": 0
+	}
+}

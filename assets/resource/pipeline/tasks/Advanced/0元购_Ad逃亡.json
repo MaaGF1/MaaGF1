@@ -1,12 +1,17 @@
 {
 	"!莫比乌斯带上的ad逃亡": {
 		"recognition": "DirectHit",
-		"action": "DoNothing",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count = 0"
+		},
 		"pre_delay": 1,
 		"post_delay": 1,
 		"next": [
 			"ad逃亡_计算时间",
-			"ad逃亡_桌面点击战斗"
+			"ad逃亡_桌面点击战斗",
+			"后勤"
 		]
 	},
 	"ad逃亡_桌面点击战斗": {
@@ -65,6 +70,7 @@
 		"expected": "积核",
 		"action": "LongPress",
 		"duration": 20,
+		"target_offset": [20, 8, -40, -16],
 		"post_delay": 1000,
 		"next": [
 			"ad逃亡_识别卷积核",
@@ -94,7 +100,7 @@
 		"pre_delay": 1,
 		"post_delay": 1000,
 		"next": [
-			"ad逃亡_识别假打捞关",
+			"ad_retry_scheduler",
 			"ad逃亡_进入卷积核",
 			"ad逃亡_滑动1"
 		]
@@ -120,7 +126,7 @@
 		"action": "Swipe",
 		"begin": [181, 460, 1, 1],
 		"end": [1269, 706, 1, 1],
-		"duration": 100,
+		"duration": 600,
 		"post_delay": 1000,
 		"next": [
 			"ad逃亡_滑动3"
@@ -130,18 +136,19 @@
 	"ad逃亡_滑动3": {
 		"action": "Swipe",
 		"begin": [1142, 634, 1, 1],
-		"end": [951, 681, 1, 1],
-		"duration": 50,
-		"post_delay": 400,
+		"end": [650, 681, 1, 1],
+		"duration": 600,
+		"post_delay": 800,
 		"next": [
 			"ad逃亡_识别假打捞关",
-			"ad逃亡_滑动3"
+			"ad_retry_slide_tick"
 		]
 	},
 	"ad逃亡_识别假打捞关": {
 		"recognition": "TemplateMatch",
-		"roi": [410, 670, 571, 50],
+		"roi": [400, 640, 800, 80],
 		"template": "combat/resourceRecovery/卷积核/卷积核打捞图.png",
+		"threshold": 0.7,
 		"duration": 20,
 		"action": "LongPress",
 		"target_offset": [173, -138, 0, 0],
@@ -149,7 +156,104 @@
 		"next": [
 			"[JumpBack]ad逃亡_切换难度",
 			"ad逃亡_进入卷积核关卡",
-			"ad逃亡_识别假打捞关"
+			"ad_retry_inc"
+		]
+	},
+	"ad_retry_scheduler": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"ad逃亡_识别假打捞关",
+			"ad逃亡_进入卷积核关卡",
+			"ad_retry_inc"
+		]
+	},
+	"ad_retry_inc": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count = ad_entry_fail_count + 1"
+		},
+		"pre_delay": 1,
+		"post_delay": 1000,
+		"next": [
+			"ad_retry_check"
+		]
+	},
+	"ad_retry_check": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count >= 10",
+			"true": "ad_retry_esc",
+			"false": "ad_retry_fallback"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
+	},
+	"ad_retry_fallback": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"ad逃亡_进入卷积核",
+			"ad逃亡_滑动1",
+			"ad_retry_scheduler"
+		]
+	},
+	"ad_retry_slide_tick": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count = ad_entry_fail_count + 1"
+		},
+		"pre_delay": 1,
+		"post_delay": 300,
+		"next": [
+			"ad_retry_slide_check"
+		]
+	},
+	"ad_retry_slide_check": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count >= 10",
+			"true": "ad_retry_esc",
+			"false": "ad逃亡_滑动3"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
+	},
+	"ad_retry_reset": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count = 0"
+		},
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"ad逃亡_战斗Spot缩放",
+			"ad逃亡_进入卷积核关卡"
+		]
+	},
+	"ad_retry_esc": {
+		"recognition": "DirectHit",
+		"action": "ClickKey",
+		"key": 27,
+		"repeat": 10,
+		"repeat_delay": 300,
+		"post_delay": 5000,
+		"next": [
+			"后勤"
 		]
 	},
 	"ad逃亡_切换难度": {
@@ -169,8 +273,7 @@
 		"target": [1120, 391, 92, 38],
 		"post_delay": 1500,
 		"next": [
-			"ad逃亡_战斗Spot缩放",
-			"ad逃亡_进入卷积核关卡"
+			"ad_retry_reset"
 		]
 	},
 	// 战斗Spot缩放
@@ -271,6 +374,31 @@
 		"next": []
 	},
 	"ad逃亡_结束回合": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count = ad_entry_fail_count + 1"
+		},
+		"pre_delay": 1,
+		"post_delay": 1,
+		"next": [
+			"ad逃亡_结束回合_检查"
+		]
+	},
+	"ad逃亡_结束回合_检查": {
+		"recognition": "DirectHit",
+		"action": "Custom",
+		"custom_action": "matlab_calculate",
+		"custom_action_param": {
+			"syntax": "ad_entry_fail_count >= 60",
+			"true": "ad_retry_esc",
+			"false": "ad逃亡_结束回合_点击"
+		},
+		"pre_delay": 1,
+		"post_delay": 1
+	},
+	"ad逃亡_结束回合_点击": {
 		"recognition": "DirectHit",
 		"action": "LongPress",
 		"target": [1120, 660, 0, 0],

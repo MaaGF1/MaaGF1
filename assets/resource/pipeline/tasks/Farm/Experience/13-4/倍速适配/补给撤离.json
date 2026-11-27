@@ -1,0 +1,114 @@
+{
+	"134倍速适配_点击2队单VV准备撤离": {
+		"target": [76, 533, 2, 20],
+		"action": "LongPress",
+		"duration": 20,
+		"pre_delay": 1000,
+		"next": [
+			"134倍速适配_点击撤离"
+		],
+		"timeout": 3000,
+		"on_error": [
+			"134战斗_点击补给"
+		]
+	},
+	"134倍速适配_检测补给成功入口": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"timeout": 3000,
+		"next": [
+			"134倍速适配_检测补给成功"
+		],
+		"on_error": [
+			"134战斗_点击补给"
+		]
+	},
+	"134倍速适配_点击撤离": {
+		"recognition": "OCR",
+		"roi": [870, 600, 220, 90],
+		"expected": ["撤离"],
+		"action": "LongPress",
+		"target": [980, 640, 1, 1],
+		"duration": 20,
+		"post_delay": 500,
+		"rate_limit": 500,
+		"next": [
+			"134倍速适配_点击撤离",
+			"134倍速适配_等待确认撤离"
+		]
+	},
+	"134倍速适配_检测2队弹药满": {
+		"recognition": "OCR",
+		"roi": [220, 495, 130, 65],
+		"expected": [
+			"25/25",
+			"25 / 25",
+			"25／25",
+			"40/40",
+			"40 / 40",
+			"40／40",
+			"55/55",
+			"55 / 55",
+			"55／55",
+			"70/70",
+			"70 / 70",
+			"70／70",
+			"85/85",
+			"85 / 85",
+			"85／85"
+		],
+		"action": "DoNothing",
+		"rate_limit": 500,
+		"next": [
+			"134倍速适配_点击撤离"
+		]
+	},
+	"134倍速适配_等待确认撤离": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"timeout": 5000,
+		"next": [
+			"134倍速适配_点击确认撤离"
+		],
+		"on_error": [
+			"134倍速适配_点击撤离"
+		]
+	},
+	"134倍速适配_点击确认撤离": {
+		"recognition": "OCR",
+		"roi": [600, 430, 300, 140],
+		"expected": ["确定"],
+		"action": "LongPress",
+		"target": [750, 525, 1, 1],
+		"duration": 20,
+		"post_delay": 500,
+		"rate_limit": 500,
+		"next": [
+			"134倍速适配_点击确认撤离",
+			"134倍速适配_撤离完成"
+		]
+	},
+	"134倍速适配_撤离完成": {
+		"recognition": "DirectHit",
+		"action": "DoNothing",
+		"next": [
+			"134战斗_点击1队图标"
+		]
+	},
+	"134倍速适配_检测补给成功": {
+		"recognition": "TemplateMatch",
+		"roi": [80, 480, 220, 100],
+		"template": [
+			"combat/levelUp/13-4/supply_success_hud.png"
+		],
+		"threshold": 0.8,
+		"action": "DoNothing",
+		"timeout": 3000,
+		"next": [
+			"134倍速适配_点击2队单VV准备撤离"
+		],
+		"on_error": [
+			"134战斗_点击补给"
+		]
+	}
+}
